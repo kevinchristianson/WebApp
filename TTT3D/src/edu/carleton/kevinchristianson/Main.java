@@ -1,4 +1,4 @@
-package edu.carleton.jeffondich;
+package edu.carleton.kevinchristianson;
 
 public class Main {
 

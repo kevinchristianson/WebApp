@@ -53,6 +53,13 @@ public class TTT3DMover {
      * in a single turn to avoid losing.
      */
     public List<TTT3DMove> forcingMoves(TTT3DBoard board) {
+
+        /*
+        For each empty square:
+            Create a board with that square filled
+            Check if there are 2+ winning moves
+        */
+
         return new ArrayList<TTT3DMove>();
     }
 

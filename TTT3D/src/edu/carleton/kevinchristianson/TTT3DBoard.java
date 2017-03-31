@@ -97,7 +97,7 @@ public class TTT3DBoard {
             throw new IllegalArgumentException("Its not " + move.player + "s turn");
         }
 
-        this.squareValues[indexForPosition(move.row, move.column, move.level)] = this.whoseTurn;
+        this.squareValues[indexForPosition(move.level, move.row, move.column)] = this.whoseTurn;
         this.whoseTurn = (this.whoseTurn == 'X' ? 'O' : 'X');
     }
 

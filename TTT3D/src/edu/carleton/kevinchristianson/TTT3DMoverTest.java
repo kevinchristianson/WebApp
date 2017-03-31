@@ -16,6 +16,9 @@ class TTT3DMoverTest {
 
     @org.junit.jupiter.api.Test
     void winningMoves() {
+        Character[] array0 = new Character[64];
+        TTT3DBoard vertical = createBoardstate(array0);
+
         /* Cases:
             Vertical, horizontal, diagonal in 2D
             Vertical, horizontal, diagonal in 3D

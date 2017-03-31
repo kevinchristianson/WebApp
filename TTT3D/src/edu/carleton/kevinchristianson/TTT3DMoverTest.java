@@ -42,4 +42,11 @@ class TTT3DMoverTest {
     void bestMove() {
     }
 
+    TTT3DBoard createBoardstate(Character[] input){
+        TTT3DBoard board = new TTT3DBoard();
+        for(int i = 0; i < input.length; i++){
+            if(input[i] == 'X' || input[i] == 'O') board.makeMove(new TTT3DMove(((int)i/16), ((int)i/4),(i % 4), input[i]));
+        }
+        return board;
+    }
 }

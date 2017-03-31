@@ -19,8 +19,7 @@ class TTT3DMoverTest {
      */
     @org.junit.jupiter.api.Test
     void winningMoves() {
-        Character[] array0 = new Character[64];
-        TTT3DBoard vertical = createBoardstate(array0);
+        TTT3DBoard vertical = createBoardstate(new int[] {0, 4, 8}, new int[] {});
 
         /* Cases:
             Vertical, horizontal, diagonal in 2D
@@ -39,17 +38,19 @@ class TTT3DMoverTest {
 
     @org.junit.jupiter.api.Test
     void forcingMoves() {
-
     }
 
     @org.junit.jupiter.api.Test
     void bestMove() {
     }
 
-    TTT3DBoard createBoardstate(Character[] input){
+    TTT3DBoard createBoardstate(int[] xs, int[] os) {
         TTT3DBoard board = new TTT3DBoard();
-        for(int i = 0; i < input.length; i++){
-            if(input[i] == 'X' || input[i] == 'O') board.makeMove(new TTT3DMove(((int)i/16), ((int)i/4),(i % 4), input[i]));
+        for (int i = 0; i < xs.length; i++) {
+            board.makeMove(new TTT3DMove((xs[i]/16), ((xs[i] % 16) / 4),  (xs[i] % 4), 'X'));
+        }
+        for (int i = 0; i < os.length; i++) {
+            board.makeMove(new TTT3DMove((os[i]/16), ((os[i] % 16) / 4),  (os[i] % 4), 'O'));
         }
         return board;
     }

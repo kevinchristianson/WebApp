@@ -26,6 +26,9 @@ class TTT3DMoverTest {
 
     @org.junit.jupiter.api.Test
     void blockingMoves() {
+        /*
+            Same as winningMoves
+        */
     }
 
     @org.junit.jupiter.api.Test

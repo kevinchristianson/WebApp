@@ -16,8 +16,8 @@
       <file leaf-file-name="TTT3DMoverTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/carleton/kevinchristianson/TTT3DMoverTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+            <state relative-caret-position="272">
+              <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -61,8 +61,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/edu/carleton/kevinchristianson/TTT3DBoard.java" />
-        <option value="$PROJECT_DIR$/src/edu/carleton/kevinchristianson/TTT3DMoverTest.java" />
         <option value="$PROJECT_DIR$/src/edu/carleton/kevinchristianson/TTT3DMover.java" />
+        <option value="$PROJECT_DIR$/src/edu/carleton/kevinchristianson/TTT3DMoverTest.java" />
       </list>
     </option>
   </component>
@@ -534,8 +534,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/carleton/kevinchristianson/TTT3DMoverTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="13" column="21" lean-forward="true" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+        <state relative-caret-position="272">
+          <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding />
         </state>
       </provider>

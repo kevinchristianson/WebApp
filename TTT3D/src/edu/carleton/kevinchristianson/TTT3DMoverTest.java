@@ -3,7 +3,7 @@ package edu.carleton.kevinchristianson;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Created by kevinchristianson on 3/30/17.
+ * @author Kevin Christianson & Isaac Haseley
  */
 class TTT3DMoverTest {
     @org.junit.jupiter.api.BeforeEach
@@ -42,6 +42,20 @@ class TTT3DMoverTest {
             One winning move, completes two different 4-in-a-rows
             Multiple options
         */
+
+        /* TO DO:
+        Set whose turn it is
+        Consider whether we need board states to be valid/possible
+        Add empty board case
+        Add full board case
+        Move cases to instance variable for class
+
+            In Board:
+        Initialize whoseTurn with a constructor argument
+        Has somebody won yet?
+        What should makeMove do if move is illegal? -> Maybe add another throws
+        Adjust documentation
+         */
     }
 
     @org.junit.jupiter.api.Test

@@ -20,11 +20,26 @@ class TTT3DMoverTest {
     @org.junit.jupiter.api.Test
     void winningMoves() {
         TTT3DBoard vertical = createBoardstate(new int[] {0, 4, 8}, new int[] {});
+        TTT3DBoard vertical_blocked = createBoardstate(new int[] {0, 4, 8}, new int[] {12});
+        TTT3DBoard horizontal = createBoardstate(new int[] {0, 1, 2}, new int[] {});
+        TTT3DBoard horizontal_blocked = createBoardstate(new int[] {0, 1, 2}, new int[] {3});
+        TTT3DBoard diagonal = createBoardstate(new int[] {0, 5, 10}, new int[] {});
+        TTT3DBoard diagonal_blocked = createBoardstate(new int[] {0, 5, 10}, new int[] {15});
+        TTT3DBoard vertical3D = createBoardstate(new int[] {0, 16, 32}, new int[] {});
+        TTT3DBoard vertical3d_blocked = createBoardstate(new int[] {0, 16, 32}, new int[] {48});
+        TTT3DBoard horizontal3D = createBoardstate(new int[] {0, 17, 34}, new int[] {});
+        TTT3DBoard horizontal3d_blocked = createBoardstate(new int[] {0, 17, 34}, new int[] {51});
+        TTT3DBoard diagonal3D = createBoardstate(new int[] {0, 21, 42}, new int[] {});
+        TTT3DBoard diagonal3d_blocked = createBoardstate(new int[] {0, 21, 42}, new int[] {63});
+
+        //boards where there are more than one option available
+        TTT3DBoard vertical_diagonal = createBoardstate(new int[] {0, 4, 8, 3, 6, 9}, new int[] {});
+        TTT3DBoard vertical_diagonal_blocked = createBoardstate(new int[] {0, 4, 8, 3, 6, 9}, new int[] {12});
 
         /* Cases:
             Vertical, horizontal, diagonal in 2D
             Vertical, horizontal, diagonal in 3D
-            One winning move, completes two different 3-in-a-rows
+            One winning move, completes two different 4-in-a-rows
             Multiple options
         */
     }

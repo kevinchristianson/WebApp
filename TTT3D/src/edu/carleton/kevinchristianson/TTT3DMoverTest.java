@@ -84,4 +84,17 @@ class TTT3DMoverTest {
         }
         return board;
     }
+
+    boolean movesAreEqual(ArrayList<TTT3DMove> moves1, ArrayList<TTT3DMove> moves2) {
+        if (moves1.size() != moves2.size()) {
+            // level, row, column, player (ints, Character)
+            int level = moves1[i].level;
+            
+            return false;
+        }
+        for (int i = 0; i < moves1.size(); i++) {
+
+        }
+        return true;
+    }
 }

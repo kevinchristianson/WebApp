@@ -35,26 +35,84 @@ class TTT3DMoverTest {
         TTT3DBoard diagonal = createBoardstate(new int[] {0, 1, 5, 2, 10, 3}, startPlayer);
         TTT3DBoard diagonal_blocked = createBoardstate(new int[] {0, 1, 5, 2, 10, 15}, startPlayer);
         TTT3DBoard vertical3D = createBoardstate(new int[] {0, 1, 16, 2, 32,3 }, startPlayer);
-        TTT3DBoard vertical3d_blocked = createBoardstate(new int[] {0, 1, 16, 2, 32, 48}, startPlayer);
+        TTT3DBoard vertical3D_blocked = createBoardstate(new int[] {0, 1, 16, 2, 32, 48}, startPlayer);
         TTT3DBoard horizontal3D = createBoardstate(new int[] {0, 1, 17, 2, 34, 3}, startPlayer);
-        TTT3DBoard horizontal3d_blocked = createBoardstate(new int[] {0, 1, 17, 2, 34, 51}, startPlayer);
+        TTT3DBoard horizontal3D_blocked = createBoardstate(new int[] {0, 1, 17, 2, 34, 51}, startPlayer);
         TTT3DBoard diagonal3D = createBoardstate(new int[] {0, 1, 21, 2, 42, 3}, startPlayer);
-        TTT3DBoard diagonal3d_blocked = createBoardstate(new int[] {0, 1, 21, 2, 42, 63}, startPlayer);
+        TTT3DBoard diagonal3D_blocked = createBoardstate(new int[] {0, 1, 21, 2, 42, 63}, startPlayer);
 
         // Intersecting options, blocked version
         TTT3DBoard vertical_diagonal = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 2}, startPlayer);
         TTT3DBoard vertical_diagonal_blocked = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 12}, startPlayer);
 
+        //create instance of TTT3DMover
         TTT3DMover player = new TTT3DMover();
+
+        // test empty board
         assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(empty)), true);
+
+        // test vertical board
         ArrayList<TTT3DMove> expected = new ArrayList<>();
         expected.add(new TTT3DMove(0,3,0,'X'));
         assertEquals(movesAreEqual(expected, player.winningMoves(vertical)), true);
+
+        //test blocked vertical board
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(vertical_blocked)), true);
+
+        //test horizontal board
+        expected = new ArrayList<>();
+        expected.add(new TTT3DMove(0, 0, 3, 'X'));
+        assertEquals(movesAreEqual(expected, player.winningMoves(horizontal)), true);
+
+        //test blocked horizontal board
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(horizontal_blocked)), true);
+
+        //test diagonal board
+        expected = new ArrayList<>();
+        expected.add(new TTT3DMove(0, 3, 3, 'X'));
+        assertEquals(movesAreEqual(expected, player.winningMoves(diagonal)), true);
+
+        //test blocked diagonal board
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(diagonal_blocked)), true);
+
+        //test 3D vertical board
+        expected = new ArrayList<>();
+        expected.add(new TTT3DMove(3, 0, 0, 'X'));
+        assertEquals(movesAreEqual(expected, player.winningMoves(vertical3D)), true);
+
+        //test blocked 3D vertical board
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(vertical3D_blocked)), true);
+
+        //test 3D horizontal board
+        expected = new ArrayList<>();
+        expected.add(new TTT3DMove(3, 0, 3, 'X'));
+        assertEquals(movesAreEqual(expected, player.winningMoves(horizontal3D)), true);
+
+        //test blocked 3D horizontal board
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(horizontal3D_blocked)), true);
+
+        //test 3D diagonal board
+        expected = new ArrayList<>();
+        expected.add(new TTT3DMove(3, 3, 3, 'X'));
+        assertEquals(movesAreEqual(expected, player.winningMoves(diagonal3D)), true);
+
+        //test blocked 3D diagonal board
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(diagonal3D_blocked)), true);
+
+        //test vertical and diagonal board
+        expected = new ArrayList<>();
+        expected.add(new TTT3DMove(0, 3, 0, 'X'));
+        assertEquals(movesAreEqual(expected, player.winningMoves(vertical_diagonal)), true);
+
+
+        //test both vertical and diagonal blocked board
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(vertical_diagonal_blocked)), true);
 
         /*
         Boards for:
             A move or two total
             Multiple winning moves
+            Full board
          */
     }
 
@@ -102,17 +160,10 @@ class TTT3DMoverTest {
             return false;
         }
         for (int i = 0; i < moves1.size(); i++) {
-            int level = moves1.get(i).level;
-            int row = moves1.get(i).row;
-            int col = moves1.get(i).column;
-            char player = moves1.get(i).player;
             boolean foundMatch = false;
             for (int j = 0; j < moves2.size(); j++) {
-                int level2 = moves2.get(j).level;
-                int row2 = moves2.get(j).row;
-                int col2 = moves2.get(j).column;
-                char player2 = moves2.get(j).player;
-                if (level == level2 && row == row2 && col == col2 && player == player2) {
+                if(moves1.get(i).level == moves2.get(j).level && moves1.get(i).row == moves2.get(j).row &&
+                        moves1.get(i).column == moves2.get(j).column && moves1.get(i).player == moves2.get(j).player){
                     foundMatch = true;
                 }
             }

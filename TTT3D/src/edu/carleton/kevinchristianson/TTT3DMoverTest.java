@@ -26,24 +26,41 @@ class TTT3DMoverTest {
      */
     @org.junit.jupiter.api.Test
     void winningMoves() {
-        char startPlayer = 'X';
-        TTT3DBoard empty = createBoardstate(new int[] {}, startPlayer);
-        TTT3DBoard vertical = createBoardstate(new int[] {0, 1, 4, 2, 8, 3}, startPlayer);
-        TTT3DBoard vertical_blocked = createBoardstate(new int[] {0, 2, 4, 6, 8, 12},  startPlayer);
-        TTT3DBoard horizontal = createBoardstate(new int[] {0, 4, 1, 5, 2, 6}, startPlayer);
-        TTT3DBoard horizontal_blocked = createBoardstate(new int[] {0, 4, 1, 5, 2, 3}, startPlayer);
-        TTT3DBoard diagonal = createBoardstate(new int[] {0, 1, 5, 2, 10, 3}, startPlayer);
-        TTT3DBoard diagonal_blocked = createBoardstate(new int[] {0, 1, 5, 2, 10, 15}, startPlayer);
-        TTT3DBoard vertical3D = createBoardstate(new int[] {0, 1, 16, 2, 32,3 }, startPlayer);
-        TTT3DBoard vertical3D_blocked = createBoardstate(new int[] {0, 1, 16, 2, 32, 48}, startPlayer);
-        TTT3DBoard horizontal3D = createBoardstate(new int[] {0, 1, 17, 2, 34, 3}, startPlayer);
-        TTT3DBoard horizontal3D_blocked = createBoardstate(new int[] {0, 1, 17, 2, 34, 51}, startPlayer);
-        TTT3DBoard diagonal3D = createBoardstate(new int[] {0, 1, 21, 2, 42, 3}, startPlayer);
-        TTT3DBoard diagonal3D_blocked = createBoardstate(new int[] {0, 1, 21, 2, 42, 63}, startPlayer);
+        winningAndBlockingTester('X');
+    }
+
+    @org.junit.jupiter.api.Test
+    void blockingMoves() {
+        winningAndBlockingTester('O');
+    }
+
+    @org.junit.jupiter.api.Test
+    void forcingMoves() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void bestMove() {
+    }
+
+
+    void winningAndBlockingTester(char curPlayer){
+        TTT3DBoard empty = createBoardstate(new int[] {});
+        TTT3DBoard vertical = createBoardstate(new int[] {0, 1, 4, 2, 8, 3});
+        TTT3DBoard vertical_blocked = createBoardstate(new int[] {0, 2, 4, 6, 8, 12});
+        TTT3DBoard horizontal = createBoardstate(new int[] {0, 4, 1, 5, 2, 6});
+        TTT3DBoard horizontal_blocked = createBoardstate(new int[] {0, 4, 1, 5, 2, 3});
+        TTT3DBoard diagonal = createBoardstate(new int[] {0, 1, 5, 2, 10, 3});
+        TTT3DBoard diagonal_blocked = createBoardstate(new int[] {0, 1, 5, 2, 10, 15});
+        TTT3DBoard vertical3D = createBoardstate(new int[] {0, 1, 16, 2, 32,3 });
+        TTT3DBoard vertical3D_blocked = createBoardstate(new int[] {0, 1, 16, 2, 32, 48});
+        TTT3DBoard horizontal3D = createBoardstate(new int[] {0, 1, 17, 2, 34, 3});
+        TTT3DBoard horizontal3D_blocked = createBoardstate(new int[] {0, 1, 17, 2, 34, 51});
+        TTT3DBoard diagonal3D = createBoardstate(new int[] {0, 1, 21, 2, 42, 3});
+        TTT3DBoard diagonal3D_blocked = createBoardstate(new int[] {0, 1, 21, 2, 42, 63});
 
         // Intersecting options, blocked version
-        TTT3DBoard vertical_diagonal = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 2}, startPlayer);
-        TTT3DBoard vertical_diagonal_blocked = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 12}, startPlayer);
+        TTT3DBoard vertical_diagonal = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 2});
+        TTT3DBoard vertical_diagonal_blocked = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 12});
 
         //create instance of TTT3DMover
         TTT3DMover player = new TTT3DMover();
@@ -53,7 +70,7 @@ class TTT3DMoverTest {
 
         // test vertical board
         ArrayList<TTT3DMove> expected = new ArrayList<>();
-        expected.add(new TTT3DMove(0,3,0,'X'));
+        expected.add(new TTT3DMove(0,3,0,curPlayer));
         assertEquals(movesAreEqual(expected, player.winningMoves(vertical)), true);
 
         //test blocked vertical board
@@ -61,7 +78,7 @@ class TTT3DMoverTest {
 
         //test horizontal board
         expected = new ArrayList<>();
-        expected.add(new TTT3DMove(0, 0, 3, 'X'));
+        expected.add(new TTT3DMove(0, 0, 3, curPlayer));
         assertEquals(movesAreEqual(expected, player.winningMoves(horizontal)), true);
 
         //test blocked horizontal board
@@ -69,7 +86,7 @@ class TTT3DMoverTest {
 
         //test diagonal board
         expected = new ArrayList<>();
-        expected.add(new TTT3DMove(0, 3, 3, 'X'));
+        expected.add(new TTT3DMove(0, 3, 3, curPlayer));
         assertEquals(movesAreEqual(expected, player.winningMoves(diagonal)), true);
 
         //test blocked diagonal board
@@ -77,7 +94,7 @@ class TTT3DMoverTest {
 
         //test 3D vertical board
         expected = new ArrayList<>();
-        expected.add(new TTT3DMove(3, 0, 0, 'X'));
+        expected.add(new TTT3DMove(3, 0, 0, curPlayer));
         assertEquals(movesAreEqual(expected, player.winningMoves(vertical3D)), true);
 
         //test blocked 3D vertical board
@@ -85,7 +102,7 @@ class TTT3DMoverTest {
 
         //test 3D horizontal board
         expected = new ArrayList<>();
-        expected.add(new TTT3DMove(3, 0, 3, 'X'));
+        expected.add(new TTT3DMove(3, 0, 3, curPlayer));
         assertEquals(movesAreEqual(expected, player.winningMoves(horizontal3D)), true);
 
         //test blocked 3D horizontal board
@@ -93,7 +110,7 @@ class TTT3DMoverTest {
 
         //test 3D diagonal board
         expected = new ArrayList<>();
-        expected.add(new TTT3DMove(3, 3, 3, 'X'));
+        expected.add(new TTT3DMove(3, 3, 3, curPlayer));
         assertEquals(movesAreEqual(expected, player.winningMoves(diagonal3D)), true);
 
         //test blocked 3D diagonal board
@@ -101,7 +118,7 @@ class TTT3DMoverTest {
 
         //test vertical and diagonal board
         expected = new ArrayList<>();
-        expected.add(new TTT3DMove(0, 3, 0, 'X'));
+        expected.add(new TTT3DMove(0, 3, 0, curPlayer));
         assertEquals(movesAreEqual(expected, player.winningMoves(vertical_diagonal)), true);
 
 
@@ -116,29 +133,13 @@ class TTT3DMoverTest {
          */
     }
 
-    @org.junit.jupiter.api.Test
-    void blockingMoves() {
-        /*
-        Same as winningMoves
-        */
-    }
-
-    @org.junit.jupiter.api.Test
-    void forcingMoves() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void bestMove() {
-    }
-
     /**
      * @param moves a list of coordinates of moves to be made for alternating players
-     * @param firstPlayer character of which player moves first
      * @return The completed board
      */
-    TTT3DBoard createBoardstate(int[] moves, char firstPlayer) {
+    TTT3DBoard createBoardstate(int[] moves) {
         TTT3DBoard board = new TTT3DBoard();
-        char currentPlayer = firstPlayer;
+        char currentPlayer = 'X';
         for (int i = 0; i < moves.length; i++) {
             board.makeMove(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4), currentPlayer));
             if (currentPlayer == 'X') {
@@ -149,6 +150,7 @@ class TTT3DMoverTest {
         }
         return board;
     }
+
 
     /**
      * @param moves1 a list of moves

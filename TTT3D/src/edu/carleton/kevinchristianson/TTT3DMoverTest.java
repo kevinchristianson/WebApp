@@ -7,7 +7,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
-* @author kevinchristianson and Isaac Haseley
+* @author Kevin Christianson and Isaac Haseley
 */
 class TTT3DMoverTest {
 
@@ -20,7 +20,7 @@ class TTT3DMoverTest {
     }
 
     /**
-     * creates boards with the following criteria and checks that the winningMoves method returns correct options:
+     * Creates boards with the following criteria and checks that winningMoves returns correct options:
      * win by 2D horizontal, 2D vertical, 2D diagonal, 3D vertical, 3D diagonal, only one option, multiple options,
      * intersecting options, empty board, full board, no winning moves
      */

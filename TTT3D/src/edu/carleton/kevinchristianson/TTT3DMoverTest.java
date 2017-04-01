@@ -1,5 +1,6 @@
 package edu.carleton.kevinchristianson;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,8 +45,10 @@ class TTT3DMoverTest {
         TTT3DBoard vertical_diagonal_blocked = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 12}, startPlayer);
 
         TTT3DMover player = new TTT3DMover();
-        assertEquals(new ArrayList<TTT3DMove>(), player.winningMoves(empty));
-
+        assertEquals(movesAreEqual(new ArrayList<TTT3DMove>(), player.winningMoves(empty)), true);
+        ArrayList<TTT3DMove> expected = new ArrayList<>();
+        expected.add(new TTT3DMove(0,3,0,'X'));
+        assertEquals(movesAreEqual(expected, player.winningMoves(vertical)), true);
         /* TO DO:
         Set whose turn it is
         Consider whether we need board states to be valid/possible
@@ -71,6 +74,15 @@ class TTT3DMoverTest {
     void bestMove() {
     }
 
+    /**
+     @param moves a list of coordinates of moves to be made in order
+     @param firstPlayer character of which player moves first
+
+     Creates a TTT3DBoard object with specified firstPlayer starting, and iterates through the passed in array making
+     all specified moves in order, switching off between X and Yc
+
+     @return TTT3DBoard returns the completed board of the moves made
+    */
     TTT3DBoard createBoardstate(int[] moves, char firstPlayer) {
         TTT3DBoard board = new TTT3DBoard();
         char currentPlayer = firstPlayer;
@@ -85,7 +97,7 @@ class TTT3DMoverTest {
         return board;
     }
 
-    boolean movesAreEqual(ArrayList<TTT3DMove> moves1, ArrayList<TTT3DMove> moves2) {
+    boolean movesAreEqual(ArrayList<TTT3DMove> moves1, List<TTT3DMove> moves2) {
         if (moves1.size() != moves2.size()) {
             // level, row, column, player (ints, Character)
             int level = moves1[i].level;

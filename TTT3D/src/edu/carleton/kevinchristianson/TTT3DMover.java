@@ -30,7 +30,9 @@ public class TTT3DMover {
      * @return a (possibly empty) list of moves that the current player can take
      * to win the game in a single turn.
      */
-
+    public List<TTT3DMove> winningMoves(TTT3DBoard board) {
+        return new ArrayList<TTT3DMove>();
+    }
     /**
      * @param board a 3D tic-tac-toe board, including existing X and O positions
      *              as well as a marker for whose turn comes next

@@ -28,7 +28,7 @@ class TTT3DMoverTest {
     void winningMoves() {
         char startPlayer = 'X';
         TTT3DBoard empty = createBoardstate(new int[] {}, startPlayer);
-        TTT3DBoard vertical = createBoardstate(new int[] {0, 4, 8}, startPlayer);
+        TTT3DBoard vertical = createBoardstate(new int[] {0, 1, 4, 2, 8, 3}, startPlayer);
         TTT3DBoard vertical_blocked = createBoardstate(new int[] {0, 2, 4, 6, 8, 12},  startPlayer);
         TTT3DBoard horizontal = createBoardstate(new int[] {0, 4, 1, 5, 2, 6}, startPlayer);
         TTT3DBoard horizontal_blocked = createBoardstate(new int[] {0, 4, 1, 5, 2, 3}, startPlayer);

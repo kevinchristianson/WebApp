@@ -21,14 +21,14 @@ class TTT3DMoverTest {
 
     /**
      * Creates boards with the following criteria and checks that winningMoves returns correct options:
-     * win by 2D horizontal, 2D vertical, 2D diagonal, 3D vertical, 3D diagonal, only one option, multiple options,
-     * intersecting options, empty board, full board, no winning moves
+     * win by 2D horizontal, 2D vertical, 2D diagonal, 3D vertical, 3D diagonal, blocked versions of these,
+     * multiple options, intersecting options, empty board, full board
      */
     @org.junit.jupiter.api.Test
     void winningMoves() {
         char startPlayer = 'X';
         TTT3DBoard empty = createBoardstate(new int[] {}, startPlayer);
-        TTT3DBoard vertical = createBoardstate(new int[] {0, 4, 8}, startPlayer);
+        TTT3DBoard vertical = createBoardstate(new int[] {0, 1, 4, 2, 8, 3}, startPlayer);
         TTT3DBoard vertical_blocked = createBoardstate(new int[] {0, 2, 4, 6, 8, 12},  startPlayer);
         TTT3DBoard horizontal = createBoardstate(new int[] {0, 4, 1, 5, 2, 6}, startPlayer);
         TTT3DBoard horizontal_blocked = createBoardstate(new int[] {0, 4, 1, 5, 2, 3}, startPlayer);
@@ -41,7 +41,7 @@ class TTT3DMoverTest {
         TTT3DBoard diagonal3D = createBoardstate(new int[] {0, 1, 21, 2, 42, 3}, startPlayer);
         TTT3DBoard diagonal3d_blocked = createBoardstate(new int[] {0, 1, 21, 2, 42, 63}, startPlayer);
 
-        //boards where there are more than one option available
+        // Intersecting options, blocked version
         TTT3DBoard vertical_diagonal = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 2}, startPlayer);
         TTT3DBoard vertical_diagonal_blocked = createBoardstate(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 12}, startPlayer);
 
@@ -50,13 +50,11 @@ class TTT3DMoverTest {
         ArrayList<TTT3DMove> expected = new ArrayList<>();
         expected.add(new TTT3DMove(0,3,0,'X'));
         assertEquals(movesAreEqual(expected, player.winningMoves(vertical)), true);
-        /* TO DO:
-        Set whose turn it is
-        Consider whether we need board states to be valid/possible
-        Add empty board case
-        Add full board case
-        Move cases to instance variable for class
 
+        /*
+        Boards for:
+            A move or two total
+            Multiple winning moves
          */
     }
 
@@ -76,15 +74,10 @@ class TTT3DMoverTest {
     }
 
     /**
-<<<<<<< HEAD
-     @param moves a list of coordinates of moves to be made in order
-     @param firstPlayer character of which player moves first
-
-     Creates a TTT3DBoard object with specified firstPlayer starting, and iterates through the passed in array making
-     all specified moves in order, switching off between X and Yc
-
-     @return TTT3DBoard returns the completed board of the moves made
-    */
+     * @param moves a list of coordinates of moves to be made for alternating players
+     * @param firstPlayer character of which player moves first
+     * @return The completed board
+     */
     TTT3DBoard createBoardstate(int[] moves, char firstPlayer) {
         TTT3DBoard board = new TTT3DBoard();
         char currentPlayer = firstPlayer;
@@ -99,6 +92,11 @@ class TTT3DMoverTest {
         return board;
     }
 
+    /**
+     * @param moves1 a list of moves
+     * @param moves2 a list of moves
+     * @return true if the lists of moves are equal, false otherwise
+     */
     boolean movesAreEqual(List<TTT3DMove> moves1, List<TTT3DMove> moves2) {
         if (moves1.size() != moves2.size()) {
             return false;

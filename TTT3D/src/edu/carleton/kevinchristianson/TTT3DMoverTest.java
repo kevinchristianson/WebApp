@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by kevinchristianson on 3/30/17.
+ * @author kevinchristianson and Isaac Haseley
  */
 class TTT3DMoverTest {
     @org.junit.jupiter.api.BeforeEach
@@ -19,6 +20,7 @@ class TTT3DMoverTest {
      */
     @org.junit.jupiter.api.Test
     void winningMoves() {
+        TTT3DBoard empty = createBoardstate(new int[] {}, new int[] {});
         TTT3DBoard vertical = createBoardstate(new int[] {0, 4, 8}, new int[] {});
         TTT3DBoard vertical_blocked = createBoardstate(new int[] {0, 4, 8}, new int[] {12});
         TTT3DBoard horizontal = createBoardstate(new int[] {0, 1, 2}, new int[] {});

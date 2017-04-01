@@ -76,7 +76,6 @@ class TTT3DMoverTest {
     }
 
     /**
-<<<<<<< HEAD
      @param moves a list of coordinates of moves to be made in order
      @param firstPlayer character of which player moves first
 

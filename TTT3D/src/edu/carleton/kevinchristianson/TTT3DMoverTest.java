@@ -3,14 +3,12 @@ package edu.carleton.kevinchristianson;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
-<<<<<<< HEAD
- * Created by kevinchristianson on 3/30/17.
- * @author kevinchristianson and Isaac Haseley
-=======
- * @author Kevin Christianson & Isaac Haseley
->>>>>>> origin/master
- */
+* @author kevinchristianson and Isaac Haseley
+*/
 class TTT3DMoverTest {
+
+    private TTT3DBoard vertical = createBoardstate(new int[] {0, 4, 8}, new int[] {});
+
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
     }
@@ -18,13 +16,15 @@ class TTT3DMoverTest {
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
     }
+
     /**
-     creates boards with the following criteria and checks that the winningMoves method returns correct options:
-     win by 2D horizontal, 2D vertical, 2D diagonal, 3D vertical, 3D diagonal, only one option, multiple options, intersecting options
+     * creates boards with the following criteria and checks that the winningMoves method returns correct options:
+     * win by 2D horizontal, 2D vertical, 2D diagonal, 3D vertical, 3D diagonal, only one option, multiple options,
+     * intersecting options, empty board, full board, no winning moves
      */
     @org.junit.jupiter.api.Test
     void winningMoves() {
-        TTT3DBoard empty = createBoardstate(new int[] {}, new int[] {});
+
         TTT3DBoard vertical = createBoardstate(new int[] {0, 4, 8}, new int[] {});
         TTT3DBoard vertical_blocked = createBoardstate(new int[] {0, 4, 8}, new int[] {12});
         TTT3DBoard horizontal = createBoardstate(new int[] {0, 1, 2}, new int[] {});
@@ -38,16 +38,12 @@ class TTT3DMoverTest {
         TTT3DBoard diagonal3D = createBoardstate(new int[] {0, 21, 42}, new int[] {});
         TTT3DBoard diagonal3d_blocked = createBoardstate(new int[] {0, 21, 42}, new int[] {63});
 
-        //boards where there are more than one option available
+        // Boards where there are more than one option available
         TTT3DBoard vertical_diagonal = createBoardstate(new int[] {0, 4, 8, 3, 6, 9}, new int[] {});
         TTT3DBoard vertical_diagonal_blocked = createBoardstate(new int[] {0, 4, 8, 3, 6, 9}, new int[] {12});
 
-        /* Cases:
-            Vertical, horizontal, diagonal in 2D
-            Vertical, horizontal, diagonal in 3D
-            One winning move, completes two different 4-in-a-rows
-            Multiple options
-        */
+        // Empty and Full boards
+        TTT3DBoard empty = createBoardstate(new int[] {}, new int[] {});
 
         /* TO DO:
         Set whose turn it is
@@ -56,11 +52,6 @@ class TTT3DMoverTest {
         Add full board case
         Move cases to instance variable for class
 
-            In Board:
-        Initialize whoseTurn with a constructor argument
-        Has somebody won yet?
-        What should makeMove do if move is illegal? -> Maybe add another throws
-        Adjust documentation
          */
     }
 
@@ -79,13 +70,16 @@ class TTT3DMoverTest {
     void bestMove() {
     }
 
-    TTT3DBoard createBoardstate(int[] xs, int[] os) {
+    TTT3DBoard createBoardstate(int[] moves, char firstPlayer) {
         TTT3DBoard board = new TTT3DBoard();
-        for (int i = 0; i < xs.length; i++) {
-            board.makeMove(new TTT3DMove((xs[i]/16), ((xs[i] % 16) / 4),  (xs[i] % 4), 'X'));
+        char currentPlayer = firstPlayer;
+        for (int i = 0; i < moves.length; i++) {
+            board.makeMove(new TTT3DMove((moves[i]/16), ((moves[i] % 16) / 4),  (moves[i] % 4), currentPlayer));
         }
-        for (int i = 0; i < os.length; i++) {
-            board.makeMove(new TTT3DMove((os[i]/16), ((os[i] % 16) / 4),  (os[i] % 4), 'O'));
+        if (currentPlayer == 'X') {
+            currentPlayer = 'O';
+        } else {
+            currentPlayer = 'X';
         }
         return board;
     }

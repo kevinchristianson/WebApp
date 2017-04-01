@@ -1,6 +1,7 @@
 package edu.carleton.kevinchristianson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,6 +72,12 @@ class TTT3DMoverTest {
     void bestMove() {
     }
 
+    /**
+     *
+     * @param moves
+     * @param firstPlayer
+     * @return
+     */
     TTT3DBoard createBoardstate(int[] moves, char firstPlayer) {
         TTT3DBoard board = new TTT3DBoard();
         char currentPlayer = firstPlayer;
@@ -85,15 +92,34 @@ class TTT3DMoverTest {
         return board;
     }
 
-    boolean movesAreEqual(ArrayList<TTT3DMove> moves1, ArrayList<TTT3DMove> moves2) {
+    /**
+     *
+     * @param moves1
+     * @param moves2
+     * @return
+     */
+    boolean movesAreEqual(List<TTT3DMove> moves1, List<TTT3DMove> moves2) {
         if (moves1.size() != moves2.size()) {
-            // level, row, column, player (ints, Character)
-            int level = moves1[i].level;
-            
             return false;
         }
         for (int i = 0; i < moves1.size(); i++) {
-
+            int level = moves1.get(i).level;
+            int row = moves1.get(i).row;
+            int col = moves1.get(i).column;
+            char player = moves1.get(i).player;
+            boolean foundMatch = false;
+            for (int j = 0; j < moves2.size(); j++) {
+                int level2 = moves2.get(j).level;
+                int row2 = moves2.get(j).row;
+                int col2 = moves2.get(j).column;
+                char player2 = moves2.get(j).player;
+                if (level == level2 && row == row2 && col == col2 && player == player2) {
+                    foundMatch = true;
+                }
+            }
+            if (!foundMatch) {
+                return false;
+            }
         }
         return true;
     }

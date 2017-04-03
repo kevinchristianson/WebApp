@@ -97,10 +97,10 @@ class TTT3DMoverTest {
      */
     @org.junit.jupiter.api.Test
     void bestMove() {
+        TTT3DMover player = new TTT3DMover();
         /* Cases:
         Empty
         Full board
-        No moves in hierarchy
         Only winning move
         Only blocking move
         Only forcing move
@@ -109,6 +109,19 @@ class TTT3DMoverTest {
         Blocking and forcing
         All three
          */
+
+        TTT3DBoard win_block = createBoardState(new int[] {0, 16, 1, 20, 2, 24});
+        TTT3DBoard win_force = createBoardState(new int[] {0, 16, 1, 20, 2, 29, 4, 30, 13, 26, 14, 22});
+        TTT3DBoard block_force = createBoardState(new int[] {0, 16, 1, 17, 7, 18, 11, 22});
+        TTT3DBoard win_block_force = createBoardState(new int[] {0, 48, 1, 49, 2, 50, 4, 9, 13, 10, 14, 6});
+        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(0,0,3,'X')),
+                     new ArrayList<TTT3DMove>().add(player.bestMove(win_block)));
+        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(0,0,3,'X')),
+                     new ArrayList<TTT3DMove>().add(player.bestMove(win_force)));
+        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(1,0,3,'X')),
+                     new ArrayList<TTT3DMove>().add(player.bestMove(block_force)));
+        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(0,0,3,'X')),
+                     new ArrayList<TTT3DMove>().add(player.bestMove(win_block_force)));
     }
 
     /**

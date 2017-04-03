@@ -97,18 +97,57 @@ class TTT3DMoverTest {
      */
     @org.junit.jupiter.api.Test
     void bestMove() {
-        /* Cases:
-        Empty
-        Full board
-        No moves in hierarchy
-        Only winning move
-        Only blocking move
-        Only forcing move
-        Winning and blocking
-        Winning and forcing
-        Blocking and forcing
-        All three
-         */
+
+        // ******BOARDS******
+
+        TTT3DBoard empty = createBoardState(new int[] {});
+        TTT3DBoard verticalWin = createBoardState(new int[] {0, 1, 4, 2, 8, 3});
+        TTT3DBoard verticalBlock = createBoardState(new int[] {1, 0, 2, 4, 3, 8});
+        TTT3DBoard oneForce2D = createBoardState(new int[] {12, 8, 9, 5, 11, 13, 7, 14});
+
+        // Full board
+        int[] full_board = new int[64];
+        for (int i = 0; i < 64; i++) {
+            full_board[i] = i;
+        }
+        TTT3DBoard full = createBoardState(full_board);
+
+        // ******TESTS******
+
+        // Create instance of TTT3DMover
+        TTT3DMover player = new TTT3DMover();
+
+        // Test empty board
+        ArrayList<TTT3DMove> expected = new ArrayList<>();
+        ArrayList<TTT3DMove> actual = new ArrayList<>();
+        actual.add(player.bestMove(empty));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // Test full board
+        actual.clear();
+        actual.add(player.bestMove(full));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // Test case with one winning move
+        expected.add(new TTT3DMove(0, 3, 0, 'X'));
+        actual.clear();
+        actual.add(player.bestMove(verticalWin));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // Test case with one blocking move
+        expected.clear();
+        expected.add(new TTT3DMove(0, 3, 0, 'X'));
+        actual.clear();
+        actual.add(player.bestMove(verticalBlock));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // Test case with one forcing move
+        expected.clear();
+        expected.add(new TTT3DMove(0, 0, 3, 'X'));
+        actual.clear();
+        actual.add(player.bestMove(oneForce2D));
+        assertEquals(movesAreEqual(expected, actual), true);
+        
     }
 
     /**

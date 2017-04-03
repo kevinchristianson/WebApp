@@ -67,6 +67,12 @@ class TTT3DMoverTest {
         ArrayList<TTT3DMove> expected = new ArrayList<>();
         assertEquals(movesAreEqual(expected, player.forcingMoves(empty)), true);
 
+        // Test full board
+        assertEquals(movesAreEqual(expected, player.forcingMoves(full)), true);
+
+        // Test early board
+        assertEquals(movesAreEqual(expected, player.forcingMoves(early)), true);
+
         // Test 2D board with one forcing move
         expected.clear();
         expected.add(new TTT3DMove(0, 0, 3, 'X'));

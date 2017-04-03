@@ -92,9 +92,23 @@ class TTT3DMoverTest {
 
     /**
      * Tests bestMove method in mover
+     * bestMove should exhibit the following choice hierarchy: winningMove, blockingMove, forcingMove
+     * This test ensures that this hierarchy is intact
      */
     @org.junit.jupiter.api.Test
     void bestMove() {
+        /* Cases:
+        Empty
+        Full board
+        No moves in hierarchy
+        Only winning move
+        Only blocking move
+        Only forcing move
+        Winning and blocking
+        Winning and forcing
+        Blocking and forcing
+        All three
+         */
     }
 
     /**

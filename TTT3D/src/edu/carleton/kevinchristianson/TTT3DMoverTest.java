@@ -110,18 +110,41 @@ class TTT3DMoverTest {
         All three
          */
 
+        //boards
         TTT3DBoard win_block = createBoardState(new int[] {0, 16, 1, 20, 2, 24});
         TTT3DBoard win_force = createBoardState(new int[] {0, 16, 1, 20, 2, 29, 4, 30, 13, 26, 14, 22});
         TTT3DBoard block_force = createBoardState(new int[] {0, 16, 1, 17, 7, 18, 11, 22});
         TTT3DBoard win_block_force = createBoardState(new int[] {0, 48, 1, 49, 2, 50, 4, 9, 13, 10, 14, 6});
-        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(0,0,3,'X')),
-                     new ArrayList<TTT3DMove>().add(player.bestMove(win_block)));
-        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(0,0,3,'X')),
-                     new ArrayList<TTT3DMove>().add(player.bestMove(win_force)));
-        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(1,0,3,'X')),
-                     new ArrayList<TTT3DMove>().add(player.bestMove(block_force)));
-        assertEquals(new ArrayList<TTT3DMove>().add(new TTT3DMove(0,0,3,'X')),
-                     new ArrayList<TTT3DMove>().add(player.bestMove(win_block_force)));
+
+        //tests
+        ArrayList<TTT3DMove> expected = new ArrayList<>();
+        ArrayList<TTT3DMove> actual = new ArrayList<>();
+
+        //win and block
+        expected.add(new TTT3DMove(0,0,3,'X'));
+        actual.add(player.bestMove(win_block));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        //win and force
+        expected = new ArrayList<>();
+        actual = new ArrayList<>();
+        expected.add(new TTT3DMove(0,0,3,'X'));
+        actual.add(player.bestMove(win_force));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // block and force
+        expected = new ArrayList<>();
+        actual = new ArrayList<>();
+        expected.add(new TTT3DMove(1,0,3,'X'));
+        actual.add(player.bestMove(block_force));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // all three
+        expected = new ArrayList<>();
+        actual = new ArrayList<>();
+        expected.add(new TTT3DMove(0,0,3,'X'));
+        actual.add(player.bestMove(win_block_force));
+        assertEquals(movesAreEqual(expected, actual), true);
     }
 
     /**

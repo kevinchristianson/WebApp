@@ -104,6 +104,10 @@ class TTT3DMoverTest {
         TTT3DBoard verticalWin = createBoardState(new int[] {0, 1, 4, 2, 8, 3});
         TTT3DBoard verticalBlock = createBoardState(new int[] {1, 0, 2, 4, 3, 8});
         TTT3DBoard oneForce2D = createBoardState(new int[] {12, 8, 9, 5, 11, 13, 7, 14});
+        TTT3DBoard win_block = createBoardState(new int[] {0, 16, 1, 20, 2, 24});
+        TTT3DBoard win_force = createBoardState(new int[] {0, 16, 1, 20, 2, 29, 4, 30, 13, 26, 14, 22});
+        TTT3DBoard block_force = createBoardState(new int[] {0, 16, 1, 17, 7, 18, 11, 22});
+        TTT3DBoard win_block_force = createBoardState(new int[] {0, 48, 1, 49, 2, 50, 4, 9, 13, 10, 14, 6});
 
         // Full board
         int[] full_board = new int[64];
@@ -147,7 +151,34 @@ class TTT3DMoverTest {
         actual.clear();
         actual.add(player.bestMove(oneForce2D));
         assertEquals(movesAreEqual(expected, actual), true);
-        
+
+        // Win and block
+        expected.clear();
+        actual.clear();
+        expected.add(new TTT3DMove(0,0,3,'X'));
+        actual.add(player.bestMove(win_block));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // Win and force
+        expected.clear();
+        actual.clear();
+        expected.add(new TTT3DMove(0,0,3,'X'));
+        actual.add(player.bestMove(win_force));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // Block and force
+        expected.clear();
+        actual.clear();
+        expected.add(new TTT3DMove(1,0,3,'X'));
+        actual.add(player.bestMove(block_force));
+        assertEquals(movesAreEqual(expected, actual), true);
+
+        // All three
+        expected.clear();
+        actual.clear();
+        expected.add(new TTT3DMove(0,0,3,'X'));
+        actual.add(player.bestMove(win_block_force));
+        assertEquals(movesAreEqual(expected, actual), true);
     }
 
     /**

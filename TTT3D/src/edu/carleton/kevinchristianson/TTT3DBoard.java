@@ -71,6 +71,10 @@ public class TTT3DBoard {
         System.arraycopy(otherBoard.squareValues, 0, this.squareValues, 0, squareArrayLength);
     }
 
+    public Character[] getSquareValues() {
+        return this.squareValues;
+    }
+
     /**
      * Initializes this board from the contents of the specified file.
      *

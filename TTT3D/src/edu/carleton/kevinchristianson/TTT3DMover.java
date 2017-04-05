@@ -1,7 +1,10 @@
 package edu.carleton.kevinchristianson;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
 
 /**
  * TTT3DMover's job is to analyze a TTT3DBoard and make choices about what move
@@ -24,12 +27,42 @@ public class TTT3DMover {
     public TTT3DMover() {
     }
 
-    public static void main (String[] args){
+    public static void main (String[] args) throws IOException, InvalidArgumentException {
+        TTT3DMover player = new TTT3DMover();
         TTT3DBoard board = new TTT3DBoard();
-        board.loadFromFile(args[0]);
-        board.makeMove(this.bestMove(board));
+        board.loadFromFile(args[1]);
+        String method = args[0];
+        if(method.contains("win")){
+            printResult(board, player.winningMoves(board));
+        }else if(method.contains("block")){
+            printResult(board, player.blockingMoves(board));
+        }else if(method.contains("force")) {
+            printResult(board, player.forcingMoves(board));
+        }else if(method.contains("best")){
+            List<TTT3DMove> move_made = new ArrayList<>();
+            move_made.add(player.bestMove(board));
+            printResult(board, move_made);
+        }else{
+            throw new InvalidArgumentException(args);
+        }
     }
 
+    static void printResult(TTT3DBoard board, List<TTT3DMove> moves){
+        Character[] squareValues = board.getSquareValues();
+        for (TTT3DMove move : moves) {
+            int index = 16 * move.level + 4 * move.row + move.column;
+            squareValues[index] = '*';
+        }
+        for (int row = 0; row < 4; row++) {
+            for (int level = 0; level < 4; level++) {
+                for (int column = 0; column < 4; column++) {
+                    System.out.print(squareValues[16 * level + 4 * row + column]);
+                }
+                System.out.print(" ");
+            }
+        }
+        System.out.println();
+    }
 
     /**
      * @param board a 3D tic-tac-toe board, including existing X and O positions

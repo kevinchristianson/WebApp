@@ -2,6 +2,7 @@ package edu.carleton.kevinchristianson;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import java.io.IOException;
  * @version 30 March 2017
  */
 public class TTT3DMover {
+
+    Character playerChar;
     /**
      * Because we currently have no implementation of TTT3DMover, a default
      * constructor should suffice.
@@ -31,6 +34,7 @@ public class TTT3DMover {
         TTT3DMover player = new TTT3DMover();
         TTT3DBoard board = new TTT3DBoard();
         board.loadFromFile(args[1]);
+        player.playerChar = board.getWhoseTurn();
         String method = args[0];
         if(method.contains("win")){
             printResult(board, player.winningMoves(board));
@@ -38,16 +42,12 @@ public class TTT3DMover {
             printResult(board, player.blockingMoves(board));
         }else if(method.contains("force")) {
             printResult(board, player.forcingMoves(board));
-        }else if(method.contains("best")){
-            List<TTT3DMove> move_made = new ArrayList<>();
-            move_made.add(player.bestMove(board));
-            printResult(board, move_made);
         }else{
             throw new InvalidArgumentException(args);
         }
     }
 
-    static void printResult(TTT3DBoard board, List<TTT3DMove> moves){
+    private static void printResult(TTT3DBoard board, List<TTT3DMove> moves){
         Character[] squareValues = board.getSquareValues();
         for (TTT3DMove move : moves) {
             int index = 16 * move.level + 4 * move.row + move.column;
@@ -60,6 +60,7 @@ public class TTT3DMover {
                 }
                 System.out.print(" ");
             }
+            System.out.println();
         }
         System.out.println();
     }

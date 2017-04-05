@@ -49,11 +49,11 @@ class TTT3DMoverTest {
         TTT3DBoard twoForce3D = createBoardState(new int[] {4, 5, 8, 6, 21, 29, 42, 30, 55, 45, 59, 46});
 
         // Full board
-        int[] full_board = new int[64];
+        int[] fullBoard = new int[64];
         for (int i = 0; i < 64; i++) {
-            full_board[i] = i;
+            fullBoard[i] = i;
         }
-        TTT3DBoard full = createBoardState(full_board);
+        TTT3DBoard full = createBoardState(fullBoard);
 
         // Board representing the early stages of a game
         TTT3DBoard early = createBoardState(new int[] {0, 5, 7, 2});
@@ -116,11 +116,11 @@ class TTT3DMoverTest {
         TTT3DBoard win_block_force = createBoardState(new int[] {0, 48, 1, 49, 2, 50, 4, 9, 13, 10, 14, 6});
 
         // Full board
-        int[] full_board = new int[64];
+        int[] fullBoard = new int[64];
         for (int i = 0; i < 64; i++) {
-            full_board[i] = i;
+            fullBoard[i] = i;
         }
-        TTT3DBoard full = createBoardState(full_board);
+        TTT3DBoard full = createBoardState(fullBoard);
 
         // ******TESTS******
 
@@ -216,11 +216,11 @@ class TTT3DMoverTest {
         TTT3DBoard multiple = createBoardState(new int[] {0, 16, 1, 26, 2, 30, 4, 32, 8, 48, 5, 24, 10, 29});
 
         // Full board
-        int[] full_board = new int[64];
+        int[] fullBoard = new int[64];
         for (int i = 0; i < 64; i++) {
-            full_board[i] = i;
+            fullBoard[i] = i;
         }
-        TTT3DBoard full = createBoardState(full_board);
+        TTT3DBoard full = createBoardState(fullBoard);
 
         // Board with intersecting options, blocked version
         TTT3DBoard vertical_diagonal = createBoardState(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 2});

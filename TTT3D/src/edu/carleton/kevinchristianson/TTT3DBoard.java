@@ -30,7 +30,7 @@ import java.util.Scanner;
  * (4) What do you think about my use of the "ternary operator" (?:) in
  * the second constructor and at the bottom of makeMove?
  *
- * @author Jeff Ondich
+ * @author Jeff Ondich, Kevin Christianson, Isaac Haseley
  * @version 30 March 2017
  */
 public class TTT3DBoard {
@@ -74,6 +74,8 @@ public class TTT3DBoard {
     public Character[] getSquareValues() {
         return this.squareValues;
     }
+
+    public Character getSquareValue(int index) { return this.squareValues[index]; }
 
     /**
      * Initializes this board from the contents of the specified file.

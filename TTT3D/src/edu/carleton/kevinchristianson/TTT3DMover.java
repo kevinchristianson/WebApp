@@ -39,9 +39,9 @@ public class TTT3DMover {
         }else if(method.contains("force")) {
             printResult(board, player.forcingMoves(board));
         }else if(method.contains("best")){
-            List<TTT3DMove> move_made = new ArrayList<>();
-            move_made.add(player.bestMove(board));
-            printResult(board, move_made);
+            List<TTT3DMove> moveList = new ArrayList<>();
+            moveList.add(player.bestMove(board));
+            printResult(board, moveList);
         }else{
             throw new InvalidArgumentException(args);
         }
@@ -71,8 +71,24 @@ public class TTT3DMover {
      * to win the game in a single turn.
      */
     public List<TTT3DMove> winningMoves(TTT3DBoard board) {
-        return new ArrayList<TTT3DMove>();
+        List<TTT3DMove> moveList = new ArrayList<>();
+        int[][] winConditions = {{}};
+        for (int[] streak : winConditions) {
+            int moveCount = 0;
+            boolean blocked = false;
+            for (int i : streak) {
+                if (board.getSquareValue(i).equals(this.playerChar)) {
+                    moveCount++;
+                }
+                else if (!board.getSquareValue(i).equals('-')) {
+                    blocked = true;
+                }
+            }
+            
+        }
+        return moveList;
     }
+
     /**
      * @param board a 3D tic-tac-toe board, including existing X and O positions
      *              as well as a marker for whose turn comes next

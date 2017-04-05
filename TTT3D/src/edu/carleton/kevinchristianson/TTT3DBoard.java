@@ -1,6 +1,11 @@
 package edu.carleton.kevinchristianson;
 
+
+import java.io.IOException;
 import java.util.Arrays;
+import java.io.File;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /**
  * TTT3DBoard represents a simple 4x4x4 3D tic-tac-toe game. Each instance
@@ -64,6 +69,58 @@ public class TTT3DBoard {
         int squareArrayLength = BOARD_SIZE * BOARD_SIZE * BOARD_SIZE;
         this.squareValues = new Character[squareArrayLength];
         System.arraycopy(otherBoard.squareValues, 0, this.squareValues, 0, squareArrayLength);
+    }
+
+    /**
+     * Initializes this board from the contents of the specified file.
+     *
+     * The file format for a board consists of five lines of text. The first four lines
+     * represent the four rows of the 3D tic-tac-toe board, with X's, O's, hyphens (to
+     * represent empty squares), and space characters as needed for human readability.
+     * The fifth line should contain only an X or an O, to indicate whose turn it is.
+     * For example:<br><br>
+     *     <pre>
+     *     XO-- X--- X--- ----
+     *     X--- ---- ---- ----
+     *     ---- -O-- ---- -O--
+     *     XO-- ---- ---- ----
+     *     O
+     *     </pre>
+     *
+     *     represents a board where X has taken 5 turns, O has taken four turns, and
+     *     it's X's turn now. You may use space characters in any way you wish. Any
+     *     characters other than X, O, -, space, or newline should cause loadFromFile
+     *     to throw an exception.
+     *     @param fileName the file containing the board to be loaded.
+     */
+    public void loadFromFile(String fileName) throws IOException {
+        Scanner input = new Scanner(new File(fileName));
+        String line;
+        int row = -1;
+        String characters = "XO-";
+        while (input.hasNextLine()) {
+            line = input.nextLine();
+            row++;
+            if(row == 4){
+                whoseTurn = line.charAt(0);
+                return;
+            }
+            int level = 0;
+            int column = 0;
+
+            for (int i = 0; i < line.length(); i++) {
+                if (line.charAt(i) == ' ') {
+                    level++;
+                    column = 0;
+                } else if(characters.indexOf(line.charAt(i)) >= 0){
+                    squareValues[column + (16 * level) + (4 * row)] = line.charAt(i);
+                    column++;
+                }else{
+                    throw new InputMismatchException();
+                }
+            }
+        }
+        throw new InputMismatchException();
     }
 
     /**

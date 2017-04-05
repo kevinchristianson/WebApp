@@ -24,6 +24,13 @@ public class TTT3DMover {
     public TTT3DMover() {
     }
 
+    public static void main (String[] args){
+        TTT3DBoard board = new TTT3DBoard();
+        board.loadFromFile(args[0]);
+        board.makeMove(this.bestMove(board));
+    }
+
+
     /**
      * @param board a 3D tic-tac-toe board, including existing X and O positions
      *              as well as a marker for whose turn comes next

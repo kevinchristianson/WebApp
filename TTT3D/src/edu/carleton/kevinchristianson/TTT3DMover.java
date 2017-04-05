@@ -121,7 +121,16 @@ public class TTT3DMover {
      * player should play to avoid losing on the opponent's next turn.
      */
     public List<TTT3DMove> blockingMoves(TTT3DBoard board) {
-        return new ArrayList<TTT3DMove>();
+
+        charSwitch();
+        List<TTT3DMove> results = winningMoves(board);
+        charSwitch();
+        return results;
+    }
+
+    private void charSwitch(){
+        if(playerChar == 'X') playerChar = 'O';
+        else playerChar = 'X';
     }
 
     /**
@@ -134,14 +143,17 @@ public class TTT3DMover {
      * in a single turn to avoid losing.
      */
     public List<TTT3DMove> forcingMoves(TTT3DBoard board) {
-
-        /*
-        For each empty square:
-            Create a board with that square filled
-            Check if there are 2+ winning moves
-        */
-
-        return new ArrayList<TTT3DMove>();
+        List<TTT3DMove> results = new ArrayList<>();
+        Character[] moves = board.getSquareValues();
+        TTT3DBoard tempBoard;
+        for (int i = 0; i < 64; i++){
+            if(moves[i].equals('-')){
+                tempBoard = new TTT3DBoard(board);
+                tempBoard.makeMove(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4), playerChar));
+                if(winningMoves(tempBoard).size() > 1) results.add(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4), playerChar));
+            }
+        }
+        return results;
     }
 
     /**

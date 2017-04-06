@@ -36,18 +36,18 @@ public class TTT3DMover {
         board.loadFromFile(args[1]);
         player.playerChar = board.getWhoseTurn();
         String method = args[0];
-        if(method.contains("win")){
+        if (method.contains("win")) {
             printResult(board, player.winningMoves(board));
-        }else if(method.contains("block")){
+        } else if (method.contains("block")) {
             printResult(board, player.blockingMoves(board));
-        }else if(method.contains("force")) {
+        } else if (method.contains("force")) {
             printResult(board, player.forcingMoves(board));
-        }else{
+        } else {
             throw new InvalidArgumentException(args);
         }
     }
 
-    private static void printResult(TTT3DBoard board, List<TTT3DMove> moves){
+    private static void printResult(TTT3DBoard board, List<TTT3DMove> moves) {
         Character[] squareValues = board.getSquareValues();
         for (TTT3DMove move : moves) {
             int index = 16 * move.level + 4 * move.row + move.column;
@@ -83,20 +83,22 @@ public class TTT3DMover {
             {20, 21, 22, 23}, {24, 25, 26, 27}, {28, 29, 30, 31}, {32, 33, 34, 35}, {36, 37, 38, 39},
             {40, 41, 42, 43}, {44, 45, 46, 47}, {48, 49, 50, 51}, {52, 53, 54, 55}, {56, 57, 58, 59},
             {60, 61, 62, 63},
+            // 2D Diagonals
+            {0, 5, 10, 15}, {3, 6, 9, 12}, {16, 21, 26, 31}, {19, 22, 25, 28}, {32, 37, 42, 47},
+            {35, 38, 41, 44}, {48, 53, 58, 63}, {51, 54, 57, 60},
             // 3D Verticals
             {0, 16, 32, 48}, {1, 17, 33, 49}, {2, 18, 34, 50}, {3, 19, 35, 51}, {4, 20, 36, 52},
             {5, 21, 37, 53}, {6, 22, 38, 54}, {7, 23, 39, 55}, {8, 24, 40, 56}, {9, 25, 41, 57},
             {10, 26, 42, 58}, {11, 27, 43, 59}, {12, 28, 44, 60}, {13, 29, 45, 61}, {14, 30, 46, 62},
             {15, 31, 47, 63},
-            // 2D Diagonals
-            {0, 5, 10, 15}, {3, 6, 9, 12}, {16, 21, 26, 31}, {19, 22, 25, 28}, {32, 37, 42, 47},
-            {35, 38, 41, 44}, {48, 53, 58, 63}, {51, 54, 57, 60},
             // 3D Short Diagonals
             {0, 17, 34, 51}, {4, 21, 38, 55}, {8, 25, 42, 59}, {12, 29, 46, 63},
-            {0, 20, 40, 60}, {1, 21, 41, 61}, {2, 22, 42, 62}, {3, 23, 43, 63},
+            {0, 20, 40, 60}, {1, 21, 41, 61}, {2, 22, 42, 62}, {3, 23, 43, 63}, {12, 24, 36, 48},
+            {13, 25, 37, 49}, {14, 26, 38, 50}, {15, 27, 39, 51}, {15, 30, 45, 60}, {11, 26, 41, 56},
+            {7, 22, 37, 52}, {3, 18, 33, 48},
             // 3D Long Diagonals
             {0, 21, 42, 63}, {3, 22, 41, 60}, {12, 25, 38, 51}, {15, 26, 37, 48}};
-        List<TTT3DMove> moveList = new ArrayList<>();
+        List<TTT3DMove> results = new ArrayList<>();
         for (int[] streak : winConditions) {
             int moveCount = 0;
             boolean blocked = false;
@@ -116,10 +118,10 @@ public class TTT3DMover {
                     }
                 }
                 TTT3DMove winningMove = new TTT3DMove(winLoc / 16, (winLoc % 16) / 4, winLoc % 4, this.playerChar);
-                moveList.add(winningMove);
+                results.add(winningMove);
             }
         }
-        return moveList;
+        return results;
     }
 
     /**
@@ -130,7 +132,6 @@ public class TTT3DMover {
      * player should play to avoid losing on the opponent's next turn.
      */
     public List<TTT3DMove> blockingMoves(TTT3DBoard board) {
-
         charSwitch();
         List<TTT3DMove> results = winningMoves(board);
         charSwitch();
@@ -138,8 +139,12 @@ public class TTT3DMover {
     }
 
     private void charSwitch(){
-        if(playerChar == 'X') playerChar = 'O';
-        else playerChar = 'X';
+        if (playerChar == 'X') {
+            playerChar = 'O';
+        }
+        else {
+            playerChar = 'X';
+        }
     }
 
     /**
@@ -155,11 +160,14 @@ public class TTT3DMover {
         List<TTT3DMove> results = new ArrayList<>();
         Character[] moves = board.getSquareValues();
         TTT3DBoard tempBoard;
-        for (int i = 0; i < 64; i++){
-            if(moves[i].equals('-')){
+        for (int i = 0; i < 64; i++) {
+            if (moves[i].equals('-')) {
                 tempBoard = new TTT3DBoard(board);
-                tempBoard.makeMove(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4), playerChar));
-                if(winningMoves(tempBoard).size() > 1) results.add(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4), playerChar));
+                tempBoard.makeMove(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4),
+                        this.playerChar));
+                if (winningMoves(tempBoard).size() > 1) {
+                    results.add(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4), this.playerChar));
+                }
             }
         }
         return results;

@@ -110,21 +110,20 @@ public class TTT3DBoard {
         while (input.hasNextLine()) {
             line = input.nextLine();
             row++;
-            if(row == 4){
+            if (row == 4) {
                 whoseTurn = line.charAt(0);
                 return;
             }
             int level = 0;
             int column = 0;
-
             for (int i = 0; i < line.length(); i++) {
                 if (line.charAt(i) == ' ') {
                     level++;
                     column = 0;
-                } else if(characters.indexOf(line.charAt(i)) >= 0){
+                } else if (characters.indexOf(line.charAt(i)) >= 0) {
                     squareValues[column + (16 * level) + (4 * row)] = line.charAt(i);
                     column++;
-                }else{
+                } else {
                     throw new InputMismatchException();
                 }
             }

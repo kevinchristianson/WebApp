@@ -161,28 +161,28 @@ class TTT3DMoverTest {
         // Win and block
         expected.clear();
         actual.clear();
-        expected.add(new TTT3DMove(0,0,3,'X'));
+        expected.add(new TTT3DMove(0, 0, 3, 'X'));
         actual.add(player.bestMove(win_block));
         assertEquals(movesAreEqual(expected, actual), true);
 
         // Win and force
         expected.clear();
         actual.clear();
-        expected.add(new TTT3DMove(0,0,3,'X'));
+        expected.add(new TTT3DMove(0, 0, 3, 'X'));
         actual.add(player.bestMove(win_force));
         assertEquals(movesAreEqual(expected, actual), true);
 
         // Block and force
         expected.clear();
         actual.clear();
-        expected.add(new TTT3DMove(1,0,3,'X'));
+        expected.add(new TTT3DMove(1, 0, 3, 'X'));
         actual.add(player.bestMove(block_force));
         assertEquals(movesAreEqual(expected, actual), true);
 
         // All three
         expected.clear();
         actual.clear();
-        expected.add(new TTT3DMove(0,0,3,'X'));
+        expected.add(new TTT3DMove(0, 0, 3, 'X'));
         actual.add(player.bestMove(win_block_force));
         assertEquals(movesAreEqual(expected, actual), true);
     }

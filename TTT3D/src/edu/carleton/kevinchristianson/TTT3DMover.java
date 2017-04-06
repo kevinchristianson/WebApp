@@ -100,15 +100,24 @@ public class TTT3DMover {
         for (int[] streak : winConditions) {
             int moveCount = 0;
             boolean blocked = false;
-            for (int i : streak) {
-                if (board.getSquareValue(i).equals(this.playerChar)) {
+            for (int index : streak) {
+                if (board.getSquareValue(index).equals(this.playerChar)) {
                     moveCount++;
                 }
-                else if (!board.getSquareValue(i).equals('-')) {
+                else if (!board.getSquareValue(index).equals('-')) {
                     blocked = true;
                 }
             }
-            
+            if (moveCount == 3 && !blocked) {
+                int winLoc = streak[0];
+                for (int index : streak) {
+                    if (board.getSquareValue(index).equals('-')) {
+                        winLoc = index;
+                    }
+                }
+                TTT3DMove winningMove = new TTT3DMove(winLoc / 16, (winLoc % 16) / 4, winLoc % 4, this.playerChar);
+                moveList.add(winningMove);
+            }
         }
         return moveList;
     }

@@ -61,7 +61,7 @@ class TTT3DMoverTest {
         // ******TESTS******
 
         // Create instance of TTT3DMover
-        TTT3DMover player = new TTT3DMover();
+        TTT3DMover player = new TTT3DMover('X');
 
         // Test empty board
         ArrayList<TTT3DMove> expected = new ArrayList<>();
@@ -125,20 +125,19 @@ class TTT3DMoverTest {
         // ******TESTS******
 
         // Create instance of TTT3DMover
-        TTT3DMover player = new TTT3DMover();
+        TTT3DMover player = new TTT3DMover('X');
 
-        // Test empty board
         ArrayList<TTT3DMove> expected = new ArrayList<>();
         ArrayList<TTT3DMove> actual = new ArrayList<>();
-        actual.add(player.bestMove(empty));
-        assertEquals(movesAreEqual(expected, actual), true);
 
         // Test full board
         actual.clear();
         actual.add(player.bestMove(full));
+        expected.add(new TTT3DMove(0,0,0,'-'));
         assertEquals(movesAreEqual(expected, actual), true);
 
         // Test case with one winning move
+        expected.clear();
         expected.add(new TTT3DMove(0, 3, 0, 'X'));
         actual.clear();
         actual.add(player.bestMove(verticalWin));
@@ -229,7 +228,7 @@ class TTT3DMoverTest {
         // ******TESTS******
 
         // Create instance of TTT3DMover
-        TTT3DMover player = new TTT3DMover();
+        TTT3DMover player = new TTT3DMover(curPlayer);
 
         // Test empty board
         assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, empty, curPlayer)), true);

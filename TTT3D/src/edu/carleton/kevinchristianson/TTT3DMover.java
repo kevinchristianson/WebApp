@@ -117,8 +117,17 @@ public class TTT3DMover {
                         winLoc = index;
                     }
                 }
-                TTT3DMove winningMove = new TTT3DMove(winLoc / 16, (winLoc % 16) / 4, winLoc % 4, this.playerChar);
-                results.add(winningMove);
+                TTT3DMove newMove = new TTT3DMove(winLoc / 16, (winLoc % 16) / 4, winLoc % 4, this.playerChar);
+                boolean duplicateMove = false;
+                for (TTT3DMove move : results) {
+                    if (newMove.level == move.level && newMove.row == move.row && newMove.column == move.column
+                            && newMove.player == move.player) {
+                        duplicateMove = true;
+                    }
+                }
+                if (!duplicateMove) {
+                    results.add(newMove);
+                }
             }
         }
         return results;

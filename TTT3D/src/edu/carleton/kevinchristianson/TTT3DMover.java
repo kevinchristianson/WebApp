@@ -22,19 +22,19 @@ import java.io.IOException;
  */
 public class TTT3DMover {
 
-    private Character playerChar;
+    Character playerChar;
     /**
      * Because we currently have no implementation of TTT3DMover, a default
      * constructor should suffice.
      */
-    public TTT3DMover(Character playerChar) {
-        this.playerChar = playerChar;
+    public TTT3DMover() {
     }
 
     public static void main (String[] args) throws IOException, InvalidArgumentException {
+        TTT3DMover player = new TTT3DMover();
         TTT3DBoard board = new TTT3DBoard();
         board.loadFromFile(args[1]);
-        TTT3DMover player = new TTT3DMover(board.getWhoseTurn());
+        player.playerChar = board.getWhoseTurn();
         String method = args[0];
         if (method.contains("win")) {
             printResult(board, player.winningMoves(board));
@@ -132,23 +132,19 @@ public class TTT3DMover {
      * player should play to avoid losing on the opponent's next turn.
      */
     public List<TTT3DMove> blockingMoves(TTT3DBoard board) {
-        this.playerChar = charSwitch(this.playerChar);
+        charSwitch();
         List<TTT3DMove> results = winningMoves(board);
-        this.playerChar = charSwitch(this.playerChar);
-        for (TTT3DMove move : results){
-            move.player = charSwitch(move.player);
-        }
+        charSwitch();
         return results;
     }
 
-    private char charSwitch(char player){
-        if (player == 'X') {
-            player = 'O';
+    private void charSwitch(){
+        if (playerChar == 'X') {
+            playerChar = 'O';
         }
         else {
-            player = 'X';
+            playerChar = 'X';
         }
-        return player;
     }
 
     /**
@@ -167,9 +163,10 @@ public class TTT3DMover {
         for (int i = 0; i < 64; i++) {
             if (moves[i].equals('-')) {
                 tempBoard = new TTT3DBoard(board);
-                tempBoard.makeMove(new TTT3DMove((i / 16), ((i % 16) / 4), (i % 4), this.playerChar));
+                tempBoard.makeMove(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4),
+                        this.playerChar));
                 if (winningMoves(tempBoard).size() > 1) {
-                    results.add(new TTT3DMove((i / 16), ((i % 16) / 4), (i % 4), this.playerChar));
+                    results.add(new TTT3DMove((moves[i] / 16), ((moves[i] % 16) / 4), (moves[i] % 4), this.playerChar));
                 }
             }
         }
@@ -183,15 +180,6 @@ public class TTT3DMover {
      * board's current player.
      */
     public TTT3DMove bestMove(TTT3DBoard board) {
-        if(winningMoves(board).size() > 0) return winningMoves(board).get(0);
-        else if (blockingMoves(board).size() > 0) return blockingMoves(board).get(0);
-        else if (forcingMoves(board).size() > 0) return forcingMoves(board).get(0);
-        else{
-            Character[] moves = board.getSquareValues();
-            for (int i = 0; i < 64; i++){
-                if(moves[i] == '-') return new TTT3DMove((i / 16), ((i % 16) / 4), (i % 4), this.playerChar);
-            }
-        }
-        return new TTT3DMove(0,0,0,'-');
+        return new TTT3DMove(0, 0, 0, board.getWhoseTurn());
     }
 }

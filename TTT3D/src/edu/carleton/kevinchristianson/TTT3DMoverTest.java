@@ -46,7 +46,7 @@ class TTT3DMoverTest {
         TTT3DBoard oneForce2D = createBoardState(new int[] {12, 8, 9, 5, 11, 13, 7, 14});
         TTT3DBoard twoForce2D = createBoardState(new int[] {4, 1, 8, 2, 9, 5, 6, 10, 7, 13, 11, 14});
         TTT3DBoard oneForce3D = createBoardState(new int[] {0, 1, 21, 2, 55, 3, 59, 7});
-        TTT3DBoard twoForce3D = createBoardState(new int[] {4, 5, 8, 6, 21, 29, 42, 30, 55, 45, 59, 46});
+        TTT3DBoard twoForce3D = createBoardState(new int[] {0, 5, 17, 6, 63, 29, 59, 30, 48, 45, 52, 46, 12, 13, 44, 35});
 
         // Full board
         int[] fullBoard = new int[64];
@@ -91,8 +91,8 @@ class TTT3DMoverTest {
 
         // Test 3D board with two forcing moves
         expected.clear();
-        expected.add(new TTT3DMove(0, 0, 0, 'X'));
-        expected.add(new TTT3DMove(3, 3, 3, 'X'));
+        expected.add(new TTT3DMove(3, 0, 3, 'X'));
+        expected.add(new TTT3DMove(3, 3, 0, 'X'));
         assertEquals(movesAreEqual(expected, player.forcingMoves(twoForce3D)), true);
     }
 

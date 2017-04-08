@@ -106,14 +106,13 @@ class TTT3DMoverTest {
 
         // ******BOARDS******
 
-        TTT3DBoard empty = createBoardState(new int[] {});
         TTT3DBoard verticalWin = createBoardState(new int[] {0, 1, 4, 2, 8, 3});
         TTT3DBoard verticalBlock = createBoardState(new int[] {1, 0, 2, 4, 3, 8});
         TTT3DBoard oneForce2D = createBoardState(new int[] {12, 8, 9, 5, 11, 13, 7, 14});
-        TTT3DBoard win_block = createBoardState(new int[] {0, 16, 1, 20, 2, 24});
-        TTT3DBoard win_force = createBoardState(new int[] {0, 16, 1, 20, 2, 29, 4, 30, 13, 26, 14, 22});
-        TTT3DBoard block_force = createBoardState(new int[] {0, 16, 1, 17, 7, 18, 11, 22});
-        TTT3DBoard win_block_force = createBoardState(new int[] {0, 48, 1, 49, 2, 50, 4, 9, 13, 10, 14, 6});
+        TTT3DBoard winBlock = createBoardState(new int[] {0, 16, 1, 20, 2, 24});
+        TTT3DBoard winForce = createBoardState(new int[] {0, 16, 1, 20, 2, 29, 4, 30, 13, 26, 14, 22});
+        TTT3DBoard blockForce = createBoardState(new int[] {0, 16, 1, 17, 7, 18, 11, 22});
+        TTT3DBoard winBlockForce = createBoardState(new int[] {0, 48, 1, 49, 2, 50, 4, 9, 13, 10, 14, 6});
 
         // Full board
         int[] fullBoard = new int[64];
@@ -161,28 +160,28 @@ class TTT3DMoverTest {
         expected.clear();
         actual.clear();
         expected.add(new TTT3DMove(0, 0, 3, 'X'));
-        actual.add(player.bestMove(win_block));
+        actual.add(player.bestMove(winBlock));
         assertEquals(movesAreEqual(expected, actual), true);
 
         // Win and force
         expected.clear();
         actual.clear();
         expected.add(new TTT3DMove(0, 0, 3, 'X'));
-        actual.add(player.bestMove(win_force));
+        actual.add(player.bestMove(winForce));
         assertEquals(movesAreEqual(expected, actual), true);
 
         // Block and force
         expected.clear();
         actual.clear();
         expected.add(new TTT3DMove(1, 0, 3, 'X'));
-        actual.add(player.bestMove(block_force));
+        actual.add(player.bestMove(blockForce));
         assertEquals(movesAreEqual(expected, actual), true);
 
         // All three
         expected.clear();
         actual.clear();
         expected.add(new TTT3DMove(0, 0, 3, 'X'));
-        actual.add(player.bestMove(win_block_force));
+        actual.add(player.bestMove(winBlockForce));
         assertEquals(movesAreEqual(expected, actual), true);
     }
 
@@ -196,17 +195,17 @@ class TTT3DMoverTest {
 
         TTT3DBoard empty = createBoardState(new int[] {});
         TTT3DBoard vertical = createBoardState(new int[] {0, 1, 4, 2, 8, 3});
-        TTT3DBoard vertical_blocked = createBoardState(new int[] {0, 2, 4, 6, 8, 12});
+        TTT3DBoard verticalBlocked = createBoardState(new int[] {0, 2, 4, 6, 8, 12});
         TTT3DBoard horizontal = createBoardState(new int[] {0, 4, 1, 5, 2, 6});
-        TTT3DBoard horizontal_blocked = createBoardState(new int[] {0, 4, 1, 5, 2, 3});
+        TTT3DBoard horizontalBlocked = createBoardState(new int[] {0, 4, 1, 5, 2, 3});
         TTT3DBoard diagonal = createBoardState(new int[] {0, 1, 5, 2, 10, 3});
-        TTT3DBoard diagonal_blocked = createBoardState(new int[] {0, 1, 5, 2, 10, 15});
+        TTT3DBoard diagonalBlocked = createBoardState(new int[] {0, 1, 5, 2, 10, 15});
         TTT3DBoard vertical3D = createBoardState(new int[] {0, 1, 16, 2, 32,3 });
-        TTT3DBoard vertical3D_blocked = createBoardState(new int[] {0, 1, 16, 2, 32, 48});
+        TTT3DBoard vertical3DBlocked = createBoardState(new int[] {0, 1, 16, 2, 32, 48});
         TTT3DBoard horizontal3D = createBoardState(new int[] {0, 1, 17, 2, 34, 3});
-        TTT3DBoard horizontal3D_blocked = createBoardState(new int[] {0, 1, 17, 2, 34, 51});
+        TTT3DBoard horizontal3DBlocked = createBoardState(new int[] {0, 1, 17, 2, 34, 51});
         TTT3DBoard diagonal3D = createBoardState(new int[] {0, 1, 21, 2, 42, 3});
-        TTT3DBoard diagonal3D_blocked = createBoardState(new int[] {0, 1, 21, 2, 42, 63});
+        TTT3DBoard diagonal3DBlocked = createBoardState(new int[] {0, 1, 21, 2, 42, 63});
 
         // Board representing the early stages of a game
         TTT3DBoard early = createBoardState(new int[] {0, 5, 7, 2});
@@ -239,7 +238,7 @@ class TTT3DMoverTest {
         assertEquals(movesAreEqual(expected, blockOrWin(player, vertical, curPlayer)), true);
 
         // Test blocked vertical board
-        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, vertical_blocked, curPlayer)), true);
+        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, verticalBlocked, curPlayer)), true);
 
         // Test horizontal board
         expected.clear();
@@ -247,7 +246,7 @@ class TTT3DMoverTest {
         assertEquals(movesAreEqual(expected, blockOrWin(player, horizontal, curPlayer)), true);
 
         // Test blocked horizontal board
-        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, horizontal_blocked, curPlayer)), true);
+        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, horizontalBlocked, curPlayer)), true);
 
         // Test diagonal board
         expected.clear();
@@ -255,7 +254,7 @@ class TTT3DMoverTest {
         assertEquals(movesAreEqual(expected, blockOrWin(player, diagonal, curPlayer)), true);
 
         // Test blocked diagonal board
-        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, diagonal_blocked, curPlayer)), true);
+        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, diagonalBlocked, curPlayer)), true);
 
         // Test 3D vertical board
         expected.clear();
@@ -263,7 +262,7 @@ class TTT3DMoverTest {
         assertEquals(movesAreEqual(expected, blockOrWin(player, vertical3D, curPlayer)), true);
 
         // Test blocked 3D vertical board
-        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, vertical3D_blocked, curPlayer)), true);
+        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, vertical3DBlocked, curPlayer)), true);
 
         // Test 3D horizontal board
         expected.clear();
@@ -271,7 +270,7 @@ class TTT3DMoverTest {
         assertEquals(movesAreEqual(expected, blockOrWin(player, horizontal3D, curPlayer)), true);
 
         // Test blocked 3D horizontal board
-        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, horizontal3D_blocked, curPlayer)), true);
+        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, horizontal3DBlocked, curPlayer)), true);
 
         // Test 3D diagonal board
         expected.clear();
@@ -279,7 +278,7 @@ class TTT3DMoverTest {
         assertEquals(movesAreEqual(expected, blockOrWin(player, diagonal3D, curPlayer)), true);
 
         // Test blocked 3D diagonal board
-        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, diagonal3D_blocked, curPlayer)), true);
+        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, diagonal3DBlocked, curPlayer)), true);
 
         // Test vertical and diagonal board
         expected.clear();

@@ -221,8 +221,8 @@ class TTT3DMoverTest {
         TTT3DBoard full = createBoardState(fullBoard);
 
         // Board with intersecting options, blocked version
-        TTT3DBoard vertical_diagonal = createBoardState(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 2});
-        TTT3DBoard vertical_diagonal_blocked = createBoardState(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 12});
+        TTT3DBoard verticalDiagonal = createBoardState(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 2});
+        TTT3DBoard verticalDiagonalBlocked = createBoardState(new int[] {0, 10, 4, 11, 8, 14, 3, 15, 6, 1, 9, 12});
 
         // ******TESTS******
 
@@ -283,11 +283,11 @@ class TTT3DMoverTest {
         // Test vertical and diagonal board
         expected.clear();
         expected.add(new TTT3DMove(0, 3, 0, curPlayer));
-        assertEquals(movesAreEqual(expected, blockOrWin(player, vertical_diagonal, curPlayer)), true);
+        assertEquals(movesAreEqual(expected, blockOrWin(player, verticalDiagonal, curPlayer)), true);
 
 
         // Test both vertical and diagonal blocked board
-        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, vertical_diagonal_blocked, curPlayer)), true);
+        assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, verticalDiagonalBlocked, curPlayer)), true);
 
         // Test early board
         assertEquals(movesAreEqual(new ArrayList<>(), blockOrWin(player, early, curPlayer)), true);

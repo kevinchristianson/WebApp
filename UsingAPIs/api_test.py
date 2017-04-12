@@ -54,16 +54,17 @@ def get_college_data(college):
     '''
    commments. Woo!
     '''
-    base_url = 'api.data.gov/ed/collegescorecard/v1/schools?school.name={0}&api_key=T1gcLItns6RaFOZsvGdmfn0hrZwrVjxd3PsAx0Zp'
+    base_url = 'https://api.data.gov/ed/collegescorecard/v1/schools?school.name={0}&api_key=T1gcLItns6RaFOZsvGdmfn0hrZwrVjxd3PsAx0Zp'
     college = college.lower()
     while ' ' in college:
         college = college[:college.index(' ')] + '%20' + college[college.index(' ')+1:]
     print(college)
     url = base_url.format(college)
-    print(college)
+    print(url)
     data_from_server = urllib.request.urlopen(url).read()
     string_from_server = data_from_server.decode('utf-8')
     root_word_list = json.loads(string_from_server)
+    print(root_word_list)
     return root_word_list
 
 def get_conjugations(verb, language):

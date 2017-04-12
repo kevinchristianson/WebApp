@@ -201,6 +201,6 @@ public class TTT3DMover {
                 if(moves[i] == '-') return new TTT3DMove((i / 16), ((i % 16) / 4), (i % 4), this.playerChar);
             }
         }
-        return new TTT3DMove(0,0,0,'-');
+        return new TTT3DMove(0, 0, 0, '-');
     }
 }

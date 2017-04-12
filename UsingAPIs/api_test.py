@@ -50,6 +50,18 @@ def get_root_words(word, language):
         result_list.append({'root': root, 'partofspeech': part_of_speech})
     return result_list
 
+def get_college_data(college):
+    '''
+   commments. Woo!
+    '''
+    base_url = 'api.data.gov/ed/collegescorecard/v1/schools?school.name={0}&api_key=T1gcLItns6RaFOZsvGdmfn0hrZwrVjxd3PsAx0Zp'
+    while ' ' in college:
+        college[college.index(' ')] = '%20'
+    url = base_url.format(college)
+    data_from_server = urllib.request.urlopen(url).read()
+    string_from_server = data_from_server.decode('utf-8')
+    root_word_list = json.loads(string_from_server)
+    return root_word_list
 
 def get_conjugations(verb, language):
     '''

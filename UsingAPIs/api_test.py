@@ -57,8 +57,10 @@ def get_college_data(college):
     base_url = 'api.data.gov/ed/collegescorecard/v1/schools?school.name={0}&api_key=T1gcLItns6RaFOZsvGdmfn0hrZwrVjxd3PsAx0Zp'
     college = college.lower()
     while ' ' in college:
-        college[college.index(' ')] = '%20'
+        college = college[:college.index(' ')] + '%20' + college[college.index(' ')+1:]
+    print(college)
     url = base_url.format(college)
+    print(college)
     data_from_server = urllib.request.urlopen(url).read()
     string_from_server = data_from_server.decode('utf-8')
     root_word_list = json.loads(string_from_server)

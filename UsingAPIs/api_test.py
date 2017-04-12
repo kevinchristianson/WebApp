@@ -55,6 +55,7 @@ def get_college_data(college):
    commments. Woo!
     '''
     base_url = 'api.data.gov/ed/collegescorecard/v1/schools?school.name={0}&api_key=T1gcLItns6RaFOZsvGdmfn0hrZwrVjxd3PsAx0Zp'
+    college = college.lower()
     while ' ' in college:
         college[college.index(' ')] = '%20'
     url = base_url.format(college)
@@ -134,6 +135,8 @@ if __name__ == '__main__':
     # put the argparse setup here in the global code, and then
     # call a function called main to do the actual work of
     # the program.
+    '''
+    Jeff's code
     parser = argparse.ArgumentParser(description='Get word info from the Ultralingua API')
 
     parser.add_argument('action',
@@ -147,6 +150,11 @@ if __name__ == '__main__':
                         choices=['eng', 'fra', 'spa', 'deu', 'ita', 'por'])
 
     parser.add_argument('word', help='the word you want to act on')
+'''
 
+    parser = argparse.ArgumentParser(description='Get college info from the College Scorecard API')
+    parser.add_argument('name',
+                        metavar='name',
+                        help='name of school to search')
     args = parser.parse_args()
-    main(args)
+    get_college_data(args.name)

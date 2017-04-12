@@ -49,6 +49,6 @@ TTT3D/.idea/workspace.xml
 
 *.class
 
-*.xml
+**/.xml
 
-*.iml
+**/.iml

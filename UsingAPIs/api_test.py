@@ -84,13 +84,22 @@ def get_college_data(college):
     act = dictionary['2014.admissions.act_scores.midpoint.cumulative']
     state = dictionary['school.state']
     rate = dictionary['2014.admissions.admission_rate.overall']
-    print(name + ' is in ' + state)
-    print('Size: ', size)
-    print('Tuition: ', 'In State: ', tuition_in_state, ' Out of State: ', tuition_out_state)
-    print('Admission Rate: ', '%.2f' % (rate * 100), '%')
-    print('Midpoint ACT Score: ', act)
-    print('Midpoint SAT Math Score: ', math)
-    print('Midpoint SAT Writing Score ', writing)
+    print(name , end = '')
+    if state != None:
+        print(' is in ' + state)
+    else:
+        print()
+    if size != None:
+        print('Size: ', size)
+    if tuition_in_state != None and tuition_out_state != None:
+        print('Tuition: ', 'In State: ', tuition_in_state, ' Out of State: ', tuition_out_state)
+    if rate != None:
+        print('Admission Rate: ', '%.2f' % (rate * 100), '%')
+    if act != None:
+        print('Midpoint ACT Score: ', act)
+    if math != None and writing != None:
+        print('Midpoint SAT Math Score: ', math)
+        print('Midpoint SAT Writing Score ', writing)
 
 
 

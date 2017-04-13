@@ -124,7 +124,6 @@ if __name__ == '__main__':
             college_name = college_name + sys.argv[i] + ' '
         college_name = college_name[:-1]
         if (college_name != None):
-            print(college_name)
             get_college_data(college_name)
         else:
             print('Please specify a college to search for')

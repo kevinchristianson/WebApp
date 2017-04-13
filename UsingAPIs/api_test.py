@@ -72,6 +72,22 @@ def get_college_data(college):
         print('Midpoint SAT Writing Score:', sat_writing)
 
 
+def get_college_list():
+        for page_number in range(78):
+            base_url = 'https://api.data.gov/ed/collegescorecard/v1/schools.json?&_fields=school.name,' \
+                       'school.state&_sort=school.name&_page={0}&_per_page=100&api_key=T1gcLItns6RaFOZsv' \
+                       'Gdmfn0hrZwrVjxd3PsAx0Zp'
+            url = base_url.format(page_number)
+            data_from_server = urllib.request.urlopen(url).read()
+            string_from_server = data_from_server.decode('utf-8')
+            data = json.loads(string_from_server)
+            for college in range(len(data['results'])):
+                dictionary = data['results'][college]
+                name = dictionary['school.name']
+                state = dictionary['school.state']
+                print(name, '---', state)
+
+
 def main(args):
     if args.action == 'root':
         root_words = get_root_words(args.word, args.language)
@@ -113,4 +129,4 @@ if __name__ == '__main__':
                         metavar='name',
                         help='name of school to search')
     args = parser.parse_args()
-    get_college_data(args.name)
+    get_college_list()

@@ -109,8 +109,20 @@ if __name__ == '__main__':
     '''
 
     parser = argparse.ArgumentParser(description='Get college info from the College Scorecard API')
+    parser.add_argument('action',
+                        metavar = 'action',
+                        help = 'action to perform on data ("list" or "search")',
+                        choices = ['list', 'search'])
     parser.add_argument('name',
                         metavar='name',
                         help='name of school to search')
     args = parser.parse_args()
-    get_college_data(args.name)
+    if(args.action == 'list'):
+        get_college_list()
+    elif args.action == 'search':
+        if(args.name != None):
+            get_college_data(args.name)
+        else:
+            print('please specify a college to search for')
+else:
+    print("invalid action")

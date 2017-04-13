@@ -107,26 +107,21 @@ def main(args):
 
 
 if __name__ == '__main__':
-    '''
-    Jeff's code
-    parser = argparse.ArgumentParser(description='Get word info from the Ultralingua API')
-
-    parser.add_argument('action',
-                        metavar='action',
-                        help='action to perform on the word ("root" or "conjugate")',
-                        choices=['root', 'conjugate'])
-
-    parser.add_argument('language',
-                        metavar='language',
-                        help='the language as a 3-character ISO code',
-                        choices=['eng', 'fra', 'spa', 'deu', 'ita', 'por'])
-
-    parser.add_argument('word', help='the word you want to act on')
-    '''
-
     parser = argparse.ArgumentParser(description='Get college info from the College Scorecard API')
+    parser.add_argument('action',
+                        metavar = 'action',
+                        help = 'action to perform on data ("list" or "search")',
+                        choices = ['list', 'search'])
     parser.add_argument('name',
                         metavar='name',
                         help='name of school to search')
     args = parser.parse_args()
-    get_college_list()
+    if (args.action == 'list'):
+        get_college_list()
+    elif args.action == 'search':
+        if(args.name != None):
+            get_college_data(args.name)
+        else:
+            print('Please specify a college to search for')
+else:
+    print("Invalid action")

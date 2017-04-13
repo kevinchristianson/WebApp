@@ -115,13 +115,19 @@ if __name__ == '__main__':
     parser.add_argument('name',
                         metavar='name',
                         help='name of school to search')
-    args = parser.parse_args()
-    if (args.action == 'list'):
+    parsed, unknown = parser.parse_known_args()
+    if (parsed.action == 'list'):
         get_college_list()
-    elif args.action == 'search':
-        if(args.name != None):
-            get_college_data(args.name)
+    elif (parsed.action == 'search'):
+        for arg in unknown:
+            parser.add_argument('arg')
+        args = parser.parse_args()
+        college_name = ''
+        for i in range(1, len(args)):
+            college_name = college_name + args[i]
+        if (college_name != None):
+            get_college_data(college_name)
         else:
             print('Please specify a college to search for')
 else:
-    print("Invalid action")
+    print("Invalid action - please run file")

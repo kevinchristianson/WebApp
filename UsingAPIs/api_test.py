@@ -112,9 +112,6 @@ if __name__ == '__main__':
                         metavar = 'action',
                         help = 'action to perform on data ("list" or "search")',
                         choices = ['list', 'search'])
-    parser.add_argument('name',
-                        metavar='name',
-                        help='name of school to search')
     parsed, unknown = parser.parse_known_args()
     if (parsed.action == 'list'):
         get_college_list()
@@ -123,9 +120,11 @@ if __name__ == '__main__':
             parser.add_argument('arg')
         args = parser.parse_args()
         college_name = ''
-        for i in range(1, len(args)):
-            college_name = college_name + args[i]
+        for i in range(2, len(sys.argv)):
+            college_name = college_name + sys.argv[i] + ' '
+        college_name = college_name[:-1]
         if (college_name != None):
+            print(college_name)
             get_college_data(college_name)
         else:
             print('Please specify a college to search for')

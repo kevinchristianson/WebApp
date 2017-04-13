@@ -50,49 +50,6 @@ def get_root_words(word, language):
         result_list.append({'root': root, 'partofspeech': part_of_speech})
     return result_list
 
-def get_college_data(college):
-    '''
-   commments. Woo!
-    '''
-    search_name = college;
-    base_url = 'https://api.data.gov/ed/collegescorecard/v1/schools?school.name={0}' \
-               '&_fields=school.name,school.state,2014.admissions.act_scores.midpoint.cumulative,' \
-               '2014.admissions.sat_scores.midpoint.math,2014.admissions.sat_scores.midpoint.writing,' \
-               '2014.admissions.admission_rate.overall,2014.student.size,2014.cost.tuition.in_state,' \
-               '2014.cost.tuition.out_of_state&api_key=T1gcLItns6RaFOZsvGdmfn0hrZwrVjxd3PsAx0Zp'
-    while ' ' in college:
-        college = college[:college.index(' ')] + '%20' + college[college.index(' ')+1:]
-    url = base_url.format(college)
-    data_from_server = urllib.request.urlopen(url).read()
-    string_from_server = data_from_server.decode('utf-8')
-    data = json.loads(string_from_server)
-    i = 0;
-    dictionary = data['results'][i]
-    name = dictionary['school.name']
-    while(name.lower() != search_name.lower() and len(data['results']) > 1):
-        i+=1
-        dictionary = data['results'][i]
-        name = dictionary['school.name']
-    if name.lower() != search_name.lower():
-        print("INVALID INPUT")
-        return
-    tuition_out_state = dictionary['2014.cost.tuition.out_of_state']
-    tuition_in_state = dictionary['2014.cost.tuition.in_state']
-    size = dictionary['2014.student.size']
-    math = dictionary['2014.admissions.sat_scores.midpoint.math']
-    writing = dictionary['2014.admissions.sat_scores.midpoint.writing']
-    act = dictionary['2014.admissions.act_scores.midpoint.cumulative']
-    state = dictionary['school.state']
-    rate = dictionary['2014.admissions.admission_rate.overall']
-    print(name + ' is in ' + state)
-    print('Size: ', size)
-    print('Tuition: ', 'In State: ', tuition_in_state, ' Out of State: ', tuition_out_state)
-    print('Admission Rate: ', '%.2f' % (rate * 100), '%')
-    print('Midpoint ACT Score: ', act)
-    print('Midpoint SAT Math Score: ', math)
-    print('Midpoint SAT Writing Score ', writing)
-
-
 
 def get_conjugations(verb, language):
     '''
@@ -140,6 +97,49 @@ def get_conjugations(verb, language):
         result_list.append({'text': text, 'tense': tense, 'person': person, 'number': number})
 
     return result_list
+
+
+def get_college_data(college):
+    '''
+   commments. Woo!
+    '''
+    search_name = college;
+    base_url = 'https://api.data.gov/ed/collegescorecard/v1/schools?school.name={0}' \
+               '&_fields=school.name,school.state,2014.admissions.act_scores.midpoint.cumulative,' \
+               '2014.admissions.sat_scores.midpoint.math,2014.admissions.sat_scores.midpoint.writing,' \
+               '2014.admissions.admission_rate.overall,2014.student.size,2014.cost.tuition.in_state,' \
+               '2014.cost.tuition.out_of_state&api_key=T1gcLItns6RaFOZsvGdmfn0hrZwrVjxd3PsAx0Zp'
+    while ' ' in college:
+        college = college[:college.index(' ')] + '%20' + college[college.index(' ')+1:]
+    url = base_url.format(college)
+    data_from_server = urllib.request.urlopen(url).read()
+    string_from_server = data_from_server.decode('utf-8')
+    data = json.loads(string_from_server)
+    i = 0;
+    dictionary = data['results'][i]
+    name = dictionary['school.name']
+    while(name.lower() != search_name.lower() and len(data['results']) > 1):
+        i+=1
+        dictionary = data['results'][i]
+        name = dictionary['school.name']
+    if name.lower() != search_name.lower():
+        print("INVALID INPUT")
+        return
+    tuition_out_state = dictionary['2014.cost.tuition.out_of_state']
+    tuition_in_state = dictionary['2014.cost.tuition.in_state']
+    size = dictionary['2014.student.size']
+    math = dictionary['2014.admissions.sat_scores.midpoint.math']
+    writing = dictionary['2014.admissions.sat_scores.midpoint.writing']
+    act = dictionary['2014.admissions.act_scores.midpoint.cumulative']
+    state = dictionary['school.state']
+    rate = dictionary['2014.admissions.admission_rate.overall']
+    print(name + ' is in ' + state)
+    print('Size: ', size)
+    print('Tuition: ', 'In State: ', tuition_in_state, ' Out of State: ', tuition_out_state)
+    print('Admission Rate: ', '%.2f' % (rate * 100), '%')
+    print('Midpoint ACT Score: ', act)
+    print('Midpoint SAT Math Score: ', math)
+    print('Midpoint SAT Writing Score ', writing)
 
 
 def main(args):

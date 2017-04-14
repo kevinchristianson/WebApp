@@ -15,6 +15,8 @@ import json
 import urllib.request
 
 
+# Searches College Scorecard API for requested institution
+# Displays data thereon
 def get_college_data(college):
     search_name = college
     base_url = 'https://api.data.gov/ed/collegescorecard/v1/schools?school.name={0}' \
@@ -72,6 +74,7 @@ def get_college_data(college):
         print('Midpoint SAT Writing Score:', sat_writing)
 
 
+# Displays alphabetical list of all U.S. colleges and universities
 def get_college_list():
         for page_number in range(78):
             base_url = 'https://api.data.gov/ed/collegescorecard/v1/schools.json?&_fields=school.name,' \

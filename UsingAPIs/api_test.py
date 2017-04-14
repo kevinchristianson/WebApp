@@ -2,10 +2,11 @@
     api_test.py
     Kevin Christianson and Isaac Haseley, 12 April 2017
 
-    TO DO
-        Add list feature
-        Print instructions
-        Add functionality explanation to comment here
+    Draws and displays data from the College Scorecard API
+     
+    Instructions for command line arguments:
+        To search for data on a college or university: search <Institution Name>
+        To view an alphabetical list of all U.S. institutions and their locations: list
 '''
 
 import sys
@@ -54,11 +55,10 @@ def get_college_data(college):
     act = dictionary['2014.admissions.act_scores.midpoint.cumulative']
     state = dictionary['school.state']
     rate = dictionary['2014.admissions.admission_rate.overall']
-    print(name , end = '')
     if state != None:
-        print(' is in ' + state)
+        print(name, 'is in', state)
     else:
-        print()
+        print(name)
     if size != None:
         print('Size:', size)
     if tuition_in_state != None and tuition_out_state != None:
@@ -88,22 +88,14 @@ def get_college_list():
                 print(name, '---', state)
 
 
-def main(args):
-    if args.action == 'root':
-        root_words = get_root_words(args.word, args.language)
-        for root_word in root_words:
-            root = root_word['root']
-            part_of_speech = root_word['partofspeech']
-            print('{0} [{1}]'.format(root, part_of_speech))
-
-    elif args.action == 'conjugate':
-        conjugations = get_conjugations(args.word, args.language)
-        for conjugation in conjugations:
-            text = conjugation['text']
-            tense = conjugation['tense']
-            person = conjugation['person']
-            number = conjugation['number']
-            print('{0} [{1} {2} {3}]'.format(text, tense, person, number))
+def main(args, college_name):
+    if (args.action == 'search'):
+        if (college_name != ''):
+            get_college_data(college_name)
+        else:
+            print('Please add an institution name following "search"')
+    elif (args.action == 'list'):
+        get_college_list()
 
 
 if __name__ == '__main__':
@@ -113,19 +105,11 @@ if __name__ == '__main__':
                         help = 'action to perform on data ("list" or "search")',
                         choices = ['list', 'search'])
     parsed, unknown = parser.parse_known_args()
-    if (parsed.action == 'list'):
-        get_college_list()
-    elif (parsed.action == 'search'):
-        for arg in unknown:
-            parser.add_argument('arg')
-        args = parser.parse_args()
-        college_name = ''
-        for i in range(2, len(sys.argv)):
-            college_name = college_name + sys.argv[i] + ' '
-        college_name = college_name[:-1]
-        if (college_name != None):
-            get_college_data(college_name)
-        else:
-            print('Please specify a college to search for')
-else:
-    print("Invalid action - please run file")
+    for arg in unknown:
+        parser.add_argument('arg')
+    args = parser.parse_args()
+    college_name = ''
+    for i in range(2, len(sys.argv)):
+        college_name = college_name + sys.argv[i] + ' '
+    college_name = college_name[:-1]
+    main(args, college_name)

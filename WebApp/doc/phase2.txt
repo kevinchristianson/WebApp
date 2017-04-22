@@ -30,7 +30,7 @@ SYNOPSIS: Get a single school
 
 QUERY (GET): /schools/<school_name>/
 
-RESPONSE: A single dictionary with keys ‘name,’ ‘state,’ ‘in_state,’ ‘out_of_state,’ ‘acceptance_rate,’ ‘designation,’ ‘size,’ ‘midpoint_ACT,’ ‘midpoint_SAT_math,’ and ‘midpoint_SAT_write’ 
+RESPONSE: A list containing a single dictionary with keys ‘name,’ ‘state,’ ‘in_state,’ ‘out_of_state,’ ‘acceptance_rate,’ ‘designation,’ ‘size,’ ‘midpoint_ACT,’ ‘midpoint_SAT_math,’ and ‘midpoint_SAT_write’
 
 EXAMPLE: http://whatever.com/schools/Carleton_College/
 
@@ -39,7 +39,7 @@ EXAMPLE: http://whatever.com/schools/Carleton_College/
 
 SYNOPSIS: Get a list of all schools in a state
 
-QUERY (GET): /states/<state_abreviation>/
+QUERY (GET): /states/<state_abbreviation>/
 
 RESPONSE: A list containing lists with the name and id of all schools in the given state
 

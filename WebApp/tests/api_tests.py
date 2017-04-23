@@ -77,10 +77,8 @@ class APITester(unittest.TestCase):
         if len(array1) != len(array2):
             return False
         else:
-            seen = []
-            for item in array1:
-                seen.append(item)
-                if not item[0] in array2 or item in seen:
+            for i in range(0,len(array1)):
+                if not array1[i] == array2[i]:
                     return False
             return True
 

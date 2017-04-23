@@ -34,75 +34,59 @@ class APITester(unittest.TestCase):
 
     def testNormalCaseUnderscoreCaps(self):
         result = get_school('Carleton_College')
-        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                     'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                     'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        if (result[0] != expectedCarleton):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testNormalCaseUnderscoreLower(self):
         result = get_school('carleton_college')
-        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        if (result[0] != expectedCarleton):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testNormalCaseUnderscoreMixedCaps(self):
         result = get_school('carleton_College')
-        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        if (result[0] != expectedCarleton):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testNormalCaseSpaceCaps(self):
         result = get_school('Carleton College')
-        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        if (result[0] != expectedCarleton):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testNormalCaseSpaceLower(self):
         result = get_school('carleton college')
-        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        if (result[0] != expectedCarleton):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testNormalCaseSpaceMixedCaps(self):
         result = get_school('carleton College')
-        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        if (result[0] != expectedCarleton):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testNormalCaseLongName(self):
         result = get_school('University of Minnesota Duluth')
         expected = {'name': 'University of Minnesota-Duluth', 'state': 'MN', 'in_state': 12802, 'out_of_state': 16467,
                             'acceptance_rate': 76.78, 'designation': 'private', 'size': 9120, 'midpoint_ACT': 24.0,
                             'midpoint_SAT_math': 575.0, 'midpoint_SAT_write': 520.0}
-        if (result[0] != expected):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testPartialNameOneMatch(self):
         result = get_school('Carle')
         expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        if (result[0] != expected):
-            return False
-        return True
+        self.assertEqual(result, expected)
 
     def testPartialNameMultipleMatches(self):
         results = get_school('Carl')

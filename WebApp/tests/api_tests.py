@@ -77,13 +77,18 @@ class APITester(unittest.TestCase):
         pass
 
     def testPartialNameMultipleMatches(self):
-        pass
+        results = api_test.school_search('Carl')
+        expected = ['Carl Albert State College', 'Carl Sandburg College', 'Carleton College']
+        self.assertEqual(len(results), len(expected))
+        if len(results) == len(expected):
+            for i in range(0, len(results)):
+                self.assertEqual(results[i]['name'] in expected, True)
 
     def testInvalidName(self):
-        pass
+        self.assertEqual(array_equal(api_test.school_search('Craleton'), []), true)
 
     def testEmptyName(self):
-        pass
+        self.assertEqual(array_equal(api_test.school_search(''), []), true)
 
     def states_normal(self):
         test_array = ['Casper College', 'Central Wyoming College', 'Eastern Wyoming College', 'Laramie County Community College',

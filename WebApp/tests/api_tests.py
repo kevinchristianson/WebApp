@@ -4,15 +4,27 @@ Isaac Haseley and Kevin Christianson
 
 '''
 
+
+def get_state(self, name):
+    pass
+
+
+def get_school(self, name):
+    pass
+
+def arrays_equal(self, array1, array2):
+    if len(array1) != len(array2):
+        return False
+    else:
+        for i in range(0,len(array1)):
+            if not array1[i] == array2[i]:
+                return False
+        return True
+
+
 import unittest
 
 class APITester(unittest.TestCase):
-
-    def get_state(self, name):
-        pass
-
-    def get_school(self, name):
-        pass
 
     def setUp(self):
         pass
@@ -75,7 +87,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testNormalCaseLongName(self):
-        result = get_college('University of Minnesota Duluth')
+        result = get_school('University of Minnesota Duluth')
         expected = {'name': 'University of Minnesota-Duluth', 'state': 'MN', 'in_state': 12802, 'out_of_state': 16467,
                             'acceptance_rate': 76.78, 'designation': 'private', 'size': 9120, 'midpoint_ACT': 24.0,
                             'midpoint_SAT_math': 575.0, 'midpoint_SAT_write': 520.0}
@@ -84,7 +96,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testPartialNameOneMatch(self):
-        result = get_college('Carle')
+        result = get_school('Carle')
         expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
@@ -93,7 +105,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testPartialNameMultipleMatches(self):
-        results = get_college('Carl')
+        results = get_school('Carl')
         expected = ['Carl Albert State College', 'Carl Sandburg College', 'Carleton College']
         self.assertEqual(len(results), len(expected))
         if len(results) == len(expected):
@@ -129,20 +141,6 @@ class APITester(unittest.TestCase):
     def states_invalid(self):
         self.assertEqual(array_equal(get_state('MX'), []), True)
 
-    def arrays_equal(self, array1, array2):
-        if len(array1) != len(array2):
-            return False
-        else:
-            for i in range(0,len(array1)):
-                if not array1[i] == array2[i]:
-                    return False
-            return True
-
-    def get_school(name):
-        pass
-
-    def get_schools_by_state(state):
-        pass
 
 if __name__ == '__main__':
     unittest.main()

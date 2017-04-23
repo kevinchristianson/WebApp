@@ -17,23 +17,58 @@ class APITester(unittest.TestCase):
         pass
 
     def testNormalCaseUnderscoreCaps(self):
-        result = get_college("Carleton_College")
-        expected
+        result = get_college('Carleton_College')
+        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+                    'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
+                    'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
+        if (result[0] != expectedCarleton):
+            return False
+        return True
 
     def testNormalCaseUnderscoreLower(self):
-        pass
+        result = get_college('carleton_college')
+        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
+                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
+        if (result[0] != expectedCarleton):
+            return False
+        return True
 
     def testNormalCaseUnderscoreMixedCaps(self):
-        pass
+        result = get_college('carleton_College')
+        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
+                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
+        if (result[0] != expectedCarleton):
+            return False
+        return True
 
     def testNormalCaseSpaceCaps(self):
-        pass
+        result = get_college('Carleton College')
+        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
+                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
+        if (result[0] != expectedCarleton):
+            return False
+        return True
 
     def testNormalCaseSpaceLower(self):
-        pass
+        result = get_college('carleton college')
+        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
+                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
+        if (result[0] != expectedCarleton):
+            return False
+        return True
 
     def testNormalCaseSpaceMixedCaps(self):
-        pass
+        result = get_college('carleton College')
+        expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
+                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
+        if (result[0] != expectedCarleton):
+            return False
+        return True
 
     def testNormalCaseLongName(self):
         pass

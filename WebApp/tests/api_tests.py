@@ -113,10 +113,10 @@ class APITester(unittest.TestCase):
                 self.assertEqual(results[i]['name'] in expected, True)
 
     def testInvalidName(self):
-        self.assertEqual(array_equal(get_state('Craleton'), []), True)
+        self.assertEqual(arrays_equal(get_state('Craleton'), []), True)
 
     def testEmptyName(self):
-        self.assertEqual(array_equal(get_state(''), []), True)
+        self.assertEqual(arrays_equal(get_state(''), []), True)
 
     def testStateNormal(self):
         test_array = ['Casper College', 'Central Wyoming College', 'Eastern Wyoming College', 'Laramie County Community College',
@@ -130,16 +130,16 @@ class APITester(unittest.TestCase):
                       'Northwest College', 'Sheridan College', 'University of Phoenix', 'University of Wyoming',
                       'Western Wyoming Community College', 'Wind River Tribal College', 'Wyoming Catholic College',
                       'Wyoming Technical Institute']
-        self.assertEqual(array_equal(get_state('wy'), test_array), True)
+        self.assertEqual(arrays_equal(get_state('wy'), test_array), True)
 
     def states_empty(self):
-        self.assertEqual(array_equal(get_state(''), []), True)
+        self.assertEqual(arrays_equal(get_state(''), []), True)
 
     def states_partial(self):
-        self.assertEqual(array_equal(get_state('M'), []), True)
+        self.assertEqual(arrays_equal(get_state('M'), []), True)
 
     def states_invalid(self):
-        self.assertEqual(array_equal(get_state('MX'), []), True)
+        self.assertEqual(arrays_equal(get_state('MX'), []), True)
 
 
 if __name__ == '__main__':

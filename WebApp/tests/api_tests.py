@@ -17,7 +17,7 @@ def arrays_equal(self, array1, array2):
         return False
     else:
         for i in range(0,len(array1)):
-            if not array1[i] == array2[i]:
+            if not array1[i][0] == array2[i]:
                 return False
         return True
 
@@ -92,9 +92,8 @@ class APITester(unittest.TestCase):
         results = get_school('Carl')
         expected = ['Carl Albert State College', 'Carl Sandburg College', 'Carleton College']
         self.assertEqual(len(results), len(expected))
-        if len(results) == len(expected):
-            for i in range(0, len(results)):
-                self.assertEqual(results[i]['name'] in expected, True)
+        for i in range(0, len(results)):
+            self.assertEqual(results[i]['name'] in expected, True)
 
     def testInvalidName(self):
         self.assertEqual(arrays_equal(get_state('Craleton'), []), True)

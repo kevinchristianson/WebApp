@@ -8,7 +8,10 @@ import unittest
 
 class APITester(unittest.TestCase):
 
-    def get_state(name):
+    def get_state(self, name):
+        pass
+
+    def get_school(self, name):
         pass
 
     def setUp(self):

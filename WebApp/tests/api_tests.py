@@ -110,7 +110,7 @@ class APITester(unittest.TestCase):
         test_array = ['Casper College', 'Central Wyoming College', 'Eastern Wyoming College', 'Laramie County Community College',
                       'Northwest College', 'Sheridan College', 'University of Phoenix', 'University of Wyoming',
                       'Western Wyoming Community College', 'Wind River Tribal College', 'Wyoming Catholic College', 'Wyoming Technical Institute']
-        self.assertEqual(arrays_equal(get_schools_by_state('WY'), test_array), True)
+        self.assertEqual(arrays_equal(get_state('WY'), test_array), True)
 
     def testStateLower(self):
         test_array = ['Casper College', 'Central Wyoming College', 'Eastern Wyoming College',

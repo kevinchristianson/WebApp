@@ -7,8 +7,6 @@ Isaac Haseley and Kevin Christianson
 import unittest
 
 class APITester(unittest.TestCase):
-    def get_college(name):
-        pass
 
     def get_state(name):
         pass
@@ -20,7 +18,7 @@ class APITester(unittest.TestCase):
         pass
 
     def testNormalCaseUnderscoreCaps(self):
-        result = get_college('Carleton_College')
+        result = get_school('Carleton_College')
         expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                     'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                     'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
@@ -29,7 +27,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testNormalCaseUnderscoreLower(self):
-        result = get_college('carleton_college')
+        result = get_school('carleton_college')
         expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
@@ -38,7 +36,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testNormalCaseUnderscoreMixedCaps(self):
-        result = get_college('carleton_College')
+        result = get_school('carleton_College')
         expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
@@ -47,7 +45,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testNormalCaseSpaceCaps(self):
-        result = get_college('Carleton College')
+        result = get_school('Carleton College')
         expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
@@ -56,7 +54,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testNormalCaseSpaceLower(self):
-        result = get_college('carleton college')
+        result = get_school('carleton college')
         expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
@@ -65,7 +63,7 @@ class APITester(unittest.TestCase):
         return True
 
     def testNormalCaseSpaceMixedCaps(self):
-        result = get_college('carleton College')
+        result = get_school('carleton College')
         expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                             'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                             'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
@@ -105,19 +103,19 @@ class APITester(unittest.TestCase):
     def testEmptyName(self):
         self.assertEqual(array_equal(get_state(''), []), true)
 
-    def states_normal(self):
+    def testStateNormal(self):
         test_array = ['Casper College', 'Central Wyoming College', 'Eastern Wyoming College', 'Laramie County Community College',
                       'Northwest College', 'Sheridan College', 'University of Phoenix', 'University of Wyoming',
                       'Western Wyoming Community College', 'Wind River Tribal College', 'Wyoming Catholic College', 'Wyoming Technical Institute']
-        self.assertEqual(array_equal(get_state('MN'), test_array), true)
+        self.assertEqual(arrays_equal(get_schools_by_state('WY'), test_array), True)
 
-    def states_lower_case(self):
+    def testStateLower(self):
         test_array = ['Casper College', 'Central Wyoming College', 'Eastern Wyoming College',
                       'Laramie County Community College',
                       'Northwest College', 'Sheridan College', 'University of Phoenix', 'University of Wyoming',
                       'Western Wyoming Community College', 'Wind River Tribal College', 'Wyoming Catholic College',
                       'Wyoming Technical Institute']
-        self.assertEqual(array_equal(get_state('mn'), test_array), true)
+        self.assertEqual(array_equal(get_state('wy'), test_array), true)
 
     def states_empty(self):
         self.assertEqual(array_equal(get_state(''), []), true)
@@ -128,7 +126,7 @@ class APITester(unittest.TestCase):
     def states_invalid(self):
         self.assertEqual(array_equal(get_state('MX'), []), true)
 
-    def array_equal(self, array1, array2):
+    def arrays_equal(self, array1, array2):
         if len(array1) != len(array2):
             return False
         else:
@@ -136,6 +134,12 @@ class APITester(unittest.TestCase):
                 if not array1[i] == array2[i]:
                     return False
             return True
+
+    def get_school(name):
+        pass
+
+    def get_schools_by_state(state):
+        pass
 
 if __name__ == '__main__':
     unittest.main()

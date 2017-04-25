@@ -4,10 +4,8 @@ Isaac Haseley and Kevin Christianson
 
 '''
 
+def get_school(name):
+    pass
 
-class APICaller:
-    def get_school(name):
-        pass
-
-    def get_state(state):
-        pass
+def get_state(state):
+    pass

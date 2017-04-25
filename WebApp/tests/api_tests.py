@@ -4,7 +4,7 @@ Isaac Haseley and Kevin Christianson
 
 '''
 
-import api_caller
+from tests import api_caller
 import unittest
 
 def arrays_equal(array1, array2):
@@ -20,52 +20,36 @@ def arrays_equal(array1, array2):
 class APITester(unittest.TestCase):
 
     def setUp(self):
-        pass
+        self.expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
+                    'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
+                    'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
 
     def tearDown(self):
         pass
 
     def testNormalCaseUnderscoreCaps(self):
         result = get_school('Carleton_College')
-        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
-                    'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
-                    'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.assertEqual(result, expected)
+        self.assertEqual(result, self.expectedCarleton)
 
     def testNormalCaseUnderscoreLower(self):
         result = get_school('carleton_college')
-        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
-                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
-                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.assertEqual(result, expected)
+        self.assertEqual(result, self.expectedCarleton)
 
     def testNormalCaseUnderscoreMixedCaps(self):
         result = get_school('carleton_College')
-        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
-                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
-                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.assertEqual(result, expected)
+        self.assertEqual(result, self.expectedCarleton)
 
     def testNormalCaseSpaceCaps(self):
         result = get_school('Carleton College')
-        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
-                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
-                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.assertEqual(result, expected)
+        self.assertEqual(result, self.expectedCarleton)
 
     def testNormalCaseSpaceLower(self):
         result = get_school('carleton college')
-        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
-                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
-                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.assertEqual(result, expected)
+        self.assertEqual(result, self.expectedCarleton)
 
     def testNormalCaseSpaceMixedCaps(self):
         result = get_school('carleton College')
-        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
-                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
-                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.assertEqual(result, expected)
+        self.assertEqual(result, self.expectedCarleton)
 
     def testNormalCaseLongName(self):
         result = get_school('University of Minnesota Duluth')
@@ -76,10 +60,7 @@ class APITester(unittest.TestCase):
 
     def testPartialNameOneMatch(self):
         result = get_school('Carle')
-        expected = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
-                            'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
-                            'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.assertEqual(result, expected)
+        self.assertEqual(result, self.expectedCarleton)
 
     def testPartialNameMultipleMatches(self):
         results = get_school('Carl')

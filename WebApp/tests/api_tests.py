@@ -2,11 +2,15 @@
 api_tests.py
 Isaac Haseley and Kevin Christianson
 
+Tests our college metrics API
 '''
 
 from tests import api_caller
 import unittest
 
+
+# param array1, array2: Two arrays of arrays
+# @return True if arrays contain the same items, false otherwise
 def arrays_equal(array1, array2):
     if len(array1) != len(array2):
         return False
@@ -98,7 +102,10 @@ class APITester(unittest.TestCase):
 
     def testStatesInvalid(self):
         self.assertEqual(arrays_equal(api_caller.get_state('MX'), []), True)
-        
+
+    def testStatesTooLong(self):
+        self.assertEqual(arrays_equal(api_caller.get_state('MNO'), []), True)
+
 
 if __name__ == '__main__':
     unittest.main()

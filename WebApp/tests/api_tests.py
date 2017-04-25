@@ -16,8 +16,9 @@ def arrays_equal(array1, array2):
         return False
     else:
         for i in range(0, len(array1)):
-            if not array1[i][0] == array2[i]:
-                return False
+            for j in range(0, 2):
+                if array1[i][j] != array2[i][j]:
+                    return False
         return True
 
 
@@ -27,11 +28,11 @@ class APITester(unittest.TestCase):
         self.expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state': 47736, 'out_of_state': 47736,
                     'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042, 'midpoint_ACT': 32,
                     'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
-        self.expectedWY = ['Casper College', 'Central Wyoming College', 'Eastern Wyoming College',
-                      'Laramie County Community College',
-                      'Northwest College', 'Sheridan College', 'University of Phoenix', 'University of Wyoming',
-                      'Western Wyoming Community College', 'Wind River Tribal College', 'Wyoming Catholic College',
-                      'Wyoming Technical Institute']
+        self.expectedWY = [['Casper College', 3928], ['Central Wyoming College', 7289], ['Eastern Wyoming College', 3929],
+                      ['Laramie County Community College', 9259],['Northwest College', 3931], ['Sheridan College', 3930],
+                      ['Western Wyoming Community College', 3933],
+                      ['Cheeks International Academy of Beauty Culture-Cheyenne', 22119],
+                      ['Wyotech-Laramie', 9157], ['University of Wyoming', 3932]]
 
     def tearDown(self):
         pass

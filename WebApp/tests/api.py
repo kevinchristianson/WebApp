@@ -65,19 +65,16 @@ def get_school(search_text):
 
 
 
-    query = '''SELECT name, in_state_tuition, out_state_tuition, acceptance_rate, designation, size, midpoint_ACT,
+    query = '''SELECT name, state_id, in_state_tuition, out_state_tuition, acceptance_rate, designation, size, midpoint_ACT,
       midpoint_SAT_math, midpoint_SAT_write, FROM schools WHERE name = {0} ORDER BY name'''.format(search_text)
-
     school_list = []
-
     rows = _fetch_all_rows_for_query(query)
     if len(rows) == 0:
-        return []
+        return json.dumps([])
     for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_author_by_id', author_id=row[0], _external=True)
-        author = {'author_id': row[0], 'first_name': row[1], 'last_name': row[2],
-                  'birth_year': row[3], 'death_year': row[4], 'url': url}
-        school_list.append(author)
+        url = flask.url_for('get_school', search_text=row[1], _external=True)
+        school = {'name': row[0], 'state': GET STATE HERE, 'in_state': row[2], 'out_of_state': row[3], ''url': url}
+        school_list.append(school)
 
     return json.dumps(school_list)
 

@@ -70,7 +70,7 @@ def get_authors():
     if sort_argument == 'birth_year':
         query += 'birth_year'
     else:
-        query += 'last_name, first_name' + x
+        query += 'last_name, first_name'
 
     author_list = []
     for row in _fetch_all_rows_for_query(query):
@@ -82,123 +82,23 @@ def get_authors():
     return json.dumps(author_list)
 
 
-@app.route('/authors/<author_last_name>')
-def get_authors_by_last_name(author_last_name):
+@app.route('/schools/by_state/<state_abbreviation>')
+def get_schools_by_state(state):
     '''
-    Returns a list of all the authors with last names equal to
-    (case-insensitive) the specified last name.  See get_author_by_id
-    below for description of the author resource representation.
+    Returns a list of all the schools in the specified state
     '''
-    query = '''SELECT id, first_name, last_name, birth_year, death_year
-               FROM authors
-               WHERE UPPER(last_name) LIKE UPPER('%{0}%')
-               ORDER BY last_name, first_name'''.format(author_last_name)
+    query = '''SELECT schools.id, schools.name, states.id
+               FROM schools, states
+               WHERE states.name = {0) and schools.state = states.id
+               ORDER BY schools.name'''.format(state.lower())
 
-    author_list = []
+    school_list = []
     for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_author_by_id', author_id=row[0], _external=True)
-        author = {'author_id': row[0], 'first_name': row[1], 'last_name': row[2],
-                  'birth_year': row[3], 'death_year': row[4], 'url': url}
-        author_list.append(author)
+        url = flask.url_for('/schools/search/', school_id=row[0], _external=True)
+        school = {'id': row[0], 'name': row[1], 'url': url}
+        school_list.append(school)
 
-    return json.dumps(author_list)
-
-
-@app.route('/author/<author_id>')
-def get_author_by_id(author_id):
-    '''
-    Returns the author resource that has the specified id.
-    An author resource will be represented as a JSON dictionary
-    with keys 'first_name' (string value), 'last_name' (string),
-    'birth_year' (int), 'death_year' (int), 'author_id' (int),
-    and 'url' (string). The value associated with 'url' is a URL
-    you can use to retrieve this same author in the future.
-    '''
-    query = '''SELECT id, first_name, last_name, birth_year, death_year
-               FROM authors WHERE id = {0}'''.format(author_id)
-
-    rows = _fetch_all_rows_for_query(query)
-    if len(rows) > 0:
-        row = rows[0]
-        url = flask.url_for('get_author_by_id', author_id=row[0], _external=True)
-        author = {'author_id': row[0], 'first_name': row[1], 'last_name': row[2],
-                  'birth_year': row[3], 'death_year': row[4], 'url': url}
-        return json.dumps(author)
-
-    return json.dumps({})
-
-
-@app.route('/books/')
-def get_books():
-    '''
-    Returns the list of books in the database. A book resource
-    will be represented by a JSON dictionary with keys 'title' (string),
-    'publication_year' (int), and 'url' (string). The value
-    associated with 'url' is a URL you can use to retrieve this
-    same book in the future.
-    '''
-    query = 'SELECT id, title, publication_year FROM books ORDER BY title'
-    book_list = []
-    for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_book_by_id', book_id=row[0], _external=True)
-        book = {'book_id': row[0], 'title': row[1], 'publication_year': row[2], 'url': url}
-        book_list.append(book)
-
-    return json.dumps(book_list)
-
-
-@app.route('/book/<book_id>')
-def get_book_by_id(book_id):
-    '''
-    Returns the book resource that has the specified id.
-    See get_books for a description of the representation of a book
-    resource.
-    '''
-    query = '''SELECT id, title, publication_year FROM books WHERE id = {0}'''.format(book_id)
-    rows = _fetch_all_rows_for_query(query)
-    if len(rows) > 0:
-        row = rows[0]
-        url = flask.url_for('get_book_by_id', book_id=row[0], _external=True)
-        book = {'book_id': row[0], 'title': row[1], 'publication_year': row[2], 'url': url}
-        return json.dumps(book)
-
-    return json.dumps({})
-
-
-@app.route('/author/<author_id>/books/')
-def get_books_for_author(author_id):
-    query = '''SELECT books.id, books.title, books.publication_year
-               FROM books, authors, books_authors
-               WHERE books.id = books_authors.book_id
-                 AND authors.id = books_authors.author_id
-                 AND authors.id = {0}
-               ORDER BY books.publication_year'''.format(author_id)
-    book_list = []
-    for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_book_by_id', book_id=row[0], _external=True)
-        book = {'book_id': row[0], 'title': row[1], 'publication_year': row[2], 'url': url}
-        book_list.append(book)
-
-    return json.dumps(book_list)
-
-
-@app.route('/book/<book_id>/authors/')
-def get_authors_for_book(book_id):
-    query = '''SELECT authors.id, authors.first_name, authors.last_name,
-                 authors.birth_year, authors.death_year
-               FROM books, authors, books_authors
-               WHERE books.id = books_authors.book_id
-                 AND authors.id = books_authors.author_id
-                 AND books.id = {0}
-               ORDER BY authors.last_name, authors.first_name'''.format(book_id)
-    author_list = []
-    for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_author_by_id', author_id=row[0], _external=True)
-        author = {'author_id': row[0], 'first_name': row[1], 'last_name': row[2],
-                  'birth_year': row[3], 'death_year': row[4], 'url': url}
-        author_list.append(author)
-
-    return json.dumps(author_list)
+    return json.dumps(school_list)
 
 
 @app.route('/help')

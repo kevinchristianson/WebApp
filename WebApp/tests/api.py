@@ -1,5 +1,5 @@
 # api.py
-# kevin christianson and Isaac Haseley
+# Kevin Christianson and Isaac Haseley
 
 # !/usr/bin/env python3
 '''
@@ -50,10 +50,8 @@ def set_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-
-# @ symbol indicates a "python decorator"
-@app.route('/authors/')
-def get_authors():
+@app.route('/schools/search/<search_text>')
+def get_school(search_text):
     '''
     Returns a list of all the authors in our database, in alphabetical
     order by last name, then first_name. See get_author_by_id below
@@ -63,8 +61,8 @@ def get_authors():
         http://.../authors/?sort=birth_year
     '''
 
-    query = '''SELECT id, first_name, last_name, birth_year, death_year
-               FROM authors ORDER BY '''
+    query = '''SELECT name, in_state_tuition, out_state_tuition, acceptance_rate, designation, size, midpoint_ACT,
+         midpoint_SAT_math, midpoint_SAT_write, FROM schools WHERE name = {0} ORDER BY name'''.format(search_text)
 
     sort_argument = flask.request.args.get('sort')
     if sort_argument == 'birth_year':
@@ -72,14 +70,17 @@ def get_authors():
     else:
         query += 'last_name, first_name'
 
-    author_list = []
+    school_list = []
+    rows = _fetch_all_rows_for_query(query)
+    if len(rows) == 0:
+        return []
     for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_author_by_id', author_id=row[0], _external=True)
         author = {'author_id': row[0], 'first_name': row[1], 'last_name': row[2],
                   'birth_year': row[3], 'death_year': row[4], 'url': url}
-        author_list.append(author)
+        school_list.append(author)
 
-    return json.dumps(author_list)
+    return json.dumps(school_list)
 
 
 @app.route('/schools/by_state/<state_abbreviation>')

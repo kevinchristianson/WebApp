@@ -88,7 +88,7 @@ def get_schools_by_state(state):
     '''
     query = '''SELECT schools.id, schools.name, states.id
                    FROM schools, states
-                   WHERE states.name = {0) and schools.state = states.id
+                   WHERE states.name = {0} and schools.state = states.id
                    ORDER BY schools.name'''.format(state.lower())
     school_list = []
     for row in _fetch_all_rows_for_query(query):

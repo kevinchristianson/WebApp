@@ -73,7 +73,8 @@ def get_school(search_text):
         return json.dumps([])
     for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_school', search_text=row[1], _external=True)
-        school = {'name': row[0], 'state': GET STATE HERE, 'in_state': row[2], 'out_of_state': row[3], ''url': url}
+        school = {'name': row[0], 'state': GET STATE HERE, 'in_state': row[2], 'out_of_state': row[3],
+                  'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], '' 'url': url}
         school_list.append(school)
 
     return json.dumps(school_list)

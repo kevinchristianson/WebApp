@@ -25,26 +25,25 @@ CREATE TABLE states(
 
 SYNOPSIS: Get a single school
 
-QUERY (GET): /schools/search/<search_text>
+QUERY (GET): /schools/<school_name>/
 
-RESPONSE: A list containing a dictionary for each school matching the search criteria. Dictionary keys include 
-    'name,' 'state,' 'in_state_tuition,' 'out_state_tuition,' 'acceptance_rate,' 'designation,' 'size,' 'midpoint_ACT,'
-    'midpoint_SAT_math,' 'midpoint_SAT_write,' and 'url'
+RESPONSE: A list containing a single dictionary with keys ‘name,’ ‘state,’ ‘in_state,’ ‘out_of_state,’
+    ‘acceptance_rate,’ ‘designation,’ ‘size,’ ‘midpoint_ACT,’ ‘midpoint_SAT_math,’ ‘midpoint_SAT_write,’ and 'url'
 
-EXAMPLE: http://whatever.com/schools/search/Carleton_College
+EXAMPLE: http://whatever.com/schools/Carleton_College/
 
-[{'name':'Carleton College', 'state':'MN', 'in_state_tuition':47736, 'out_state_tuition':47736, 'acceptance_rate':22.77,
-    'designation':'private', 'size':2042, 'midpoint_ACT':32, 'midpoint_SAT_math':710, 'midpoint_SAT_write':700,
+[{‘name’:’Carleton College’, ‘state’:’MN’, ‘in_state’:47736, ‘out_of_state’:47736, ‘acceptance_rate’:22.77,
+    ‘designation’:’private’, ‘size’:2042, ‘midpoint_ACT’:32, ‘midpoint_SAT_math’:710, ‘midpoint_SAT_write’:700,
     'url':<Flask URL for school here>}]
 
 
 SYNOPSIS: Get a list of all schools in a state
 
-QUERY (GET): /schools/by_state/<state_abbreviation>
+QUERY (GET): /states/<state_abbreviation>/
 
-RESPONSE: A list containing lists with the name and URL of all schools in the given state
+RESPONSE: A list containing lists with the name and id of all schools in the given state
 
-EXAMPLE: http://whatever.com/schools/by_state/MN
+EXAMPLE: http://whatever.com/states/<state_name>/
 
-[['Carleton College', <Flask URL for school here>], ['St. Olaf', <Flask URL for school here>],
-    ['The University of Minnesota: Twin Cities', <Flask URL for school here>], ...]
+[[‘Carleton College’, '<Flask URL for school here>'], [‘St. Olaf’, '<Flask URL for school here>'],
+    [‘The University of Minnesota: Twin Cities’, '<Flask URL for school here>']]

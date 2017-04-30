@@ -6,7 +6,7 @@ CREATE TABLE schools(
     state_id INT,
     in_state_tuition INT,
     out_state_tuition INT,
-    acceptance_rate INT,
+    acceptance_rate FLOAT,
     designation INT,
     size INT,
     midpoint_ACT INT,

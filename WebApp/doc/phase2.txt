@@ -43,6 +43,6 @@ QUERY (GET): /states/<state_abbreviation>/
 
 RESPONSE: A list containing lists with the name and id of all schools in the given state
 
-EXAMPLE: http://whatever.com/states/MN/
+EXAMPLE: http://whatever.com/states/<state_name>/
 
 [[‘Carleton College’, 64591], [‘St. Olaf’, -1], [‘The University of Minnesota: Twin Cities’, 39481]]

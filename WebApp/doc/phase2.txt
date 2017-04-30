@@ -1,0 +1,48 @@
+====== DATA TABLE DESIGN ======
+
+CREATE TABLE schools(
+    id SERIAL,
+    name TEXT,
+    in_state_tuition INT,
+    out_state_tuition INT,
+    acceptance_rate INT,
+    designation TEXT,
+    size INT,
+    midpoint_ACT INT,
+    midpoint_SAT_math INT,
+    midpoint_SAT_write INT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE states(
+    id SERIAL,
+    name TEXT,
+    PRIMARY KEY(id)
+);
+CREATE TABLE schools_states (
+    school_id INT,
+    state_id INT
+);
+
+
+====== QUERY DOCUMENTATION ======
+
+SYNOPSIS: Get a single school
+
+QUERY (GET): /schools/<school_name>/
+
+RESPONSE: A list containing a single dictionary with keys ‘name,’ ‘state,’ ‘in_state,’ ‘out_of_state,’ ‘acceptance_rate,’ ‘designation,’ ‘size,’ ‘midpoint_ACT,’ ‘midpoint_SAT_math,’ and ‘midpoint_SAT_write’
+
+EXAMPLE: http://whatever.com/schools/Carleton_College/
+
+[{‘name’:’Carleton College’, ‘state’:’MN’, ‘in_state’:47736, ‘out_of_state’:47736, ‘acceptance_rate’:22.77, ‘designation’:’private’, ‘size’:2042, ‘midpoint_ACT’:32, ‘midpoint_SAT_math’:710, ‘midpoint_SAT_write’:700}] 
+
+
+SYNOPSIS: Get a list of all schools in a state
+
+QUERY (GET): /states/<state_abbreviation>/
+
+RESPONSE: A list containing lists with the name and id of all schools in the given state
+
+EXAMPLE: http://whatever.com/states/MN/
+
+[[‘Carleton College’, 64591], [‘St. Olaf’, -1], [‘The University of Minnesota: Twin Cities’, 39481]]

@@ -55,7 +55,7 @@ def get_school(search_text):
         search_text = search_text[:search_text.index('_')] + ' ' + search_text[search_text.index('_') + 1:]
     query = '''SELECT schools.name, states.name, schools.in_state_tuition, schools.out_state_tuition, 
                       schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT, 
-                      schools.midpoint_SAT_math, schools.midpoint_SAT_write, schools.state_id
+                      schools.midpoint_SAT, schools.school_site, schools.state_id
                FROM schools, states
                WHERE schools.name LIKE {0} and schools.state_id = states.id
                ORDER BY name'''.format(search_text.title())
@@ -64,7 +64,7 @@ def get_school(search_text):
         url = flask.url_for('get_school', search_text=row[0], _external=True)
         school = {'name': row[0], 'state': row[1], 'in_state_tuition': row[2], 'out_state_tuition': row[3],
                   'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
-                  'midpoint_SAT_math': row[8], 'midpoint_SAT_write': row[9], 'url': url}
+                  'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}
         school_list.append(school)
 
     return json.dumps(school_list)
@@ -76,27 +76,13 @@ def get_schools_by_state(state_abbreviation):
     :param state: A two-character state abbreviation
     :return: A list of all schools in that state
     '''
-    query1 = '''SELECT schools.id, schools.name, states.id
-               FROM schools, states
-               WHERE states.name = {0} and schools.state = states.id
-               ORDER BY schools.name'''.format(state_abbreviation.lower())
-
-    # ====== Different potential query ====== #
-    query2 = '''SELECT schools.state_id, schools.name, states.id, states.name
+    query = '''SELECT schools.state_id, schools.name, states.id, states.name
                FROM schools, states
                WHERE states.name = {0} and schools.state_id = states.id
                ORDER BY schools.name'''.format(state_abbreviation.upper())
 
     school_list = []
-    for row in _fetch_all_rows_for_query(query1):
-        url = flask.url_for('/schools/search/', school_id=row[0], _external=True)
-        school = {'id': row[0], 'name': row[1], 'url': url}
-        school_list.append(school)
-    return json.dumps(school_list)
-
-    # ====== Different potential code ====== #
-    school_list = []
-    for row in _fetch_all_rows_for_query(query2):
+    for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_school', search_text=row[1], _external=True)
         school = [row[1], url]
         school_list.append(school)

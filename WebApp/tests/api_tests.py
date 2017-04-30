@@ -28,13 +28,13 @@ class APITester(unittest.TestCase):
 
     def setUp(self):
         self.expectedCarleton = {'name': 'Carleton College', 'state': 'MN', 'in_state_tuition': 47736,
-                    'out_state_tuition': 47736, 'acceptance_rate': 22.77, 'designation': 'private', 'size': 2042,
-                    'midpoint_ACT': 32, 'midpoint_SAT_math': 710, 'midpoint_SAT_write': 700}
+                                 'out_state_tuition': 47736, 'acceptance_rate': 22.77, 'designation': '2', 'size': 2042,
+                                 'midpoint_ACT': 32, 'midpoint_SAT': 1408, 'school_site':'www.carleton.edu'}
         self.expectedWY = [['Casper College'], ['Central Wyoming College'], ['Eastern Wyoming College'],
-                      ['Laramie County Community College'],['Northwest College'], ['Sheridan College'],
-                      ['Western Wyoming Community College'],
-                      ['Cheeks International Academy of Beauty Culture-Cheyenne'],
-                      ['Wyotech-Laramie'], ['University of Wyoming']]
+                           ['Laramie County Community College'],['Northwest College'], ['Sheridan College'],
+                           ['Western Wyoming Community College'],
+                           ['Cheeks International Academy of Beauty Culture-Cheyenne'],
+                           ['Wyotech-Laramie'], ['University of Wyoming']]
 
     def tearDown(self):
         pass
@@ -55,9 +55,9 @@ class APITester(unittest.TestCase):
 
     def testNormalCaseLongName(self):
         result = api_caller.get_school_helper('University of Minnesota Duluth')
-        expected = {'name': 'University of Minnesota-Duluth', 'state': 'MN', 'in_state': 12802, 'out_of_state': 16467,
-                            'acceptance_rate': 76.78, 'designation': 'public', 'size': 9120, 'midpoint_ACT': 24.0,
-                            'midpoint_SAT_math': 575.0, 'midpoint_SAT_write': 520.0}
+        expected = {'name': 'University of Minnesota-Duluth', 'state': 'MN', 'in_state_tuition': 12802,
+                    'out_state_tuition': 16467, 'acceptance_rate': 76.78, 'designation': '1', 'size': 9120,
+                    'midpoint_ACT': 24.0, 'midpoint_SAT':1110, 'school_site':'www.d.umn.edu/'}
         self.assertEqual(result, expected)
 
     def testPartialNameOneMatch(self):

@@ -7,11 +7,11 @@ CREATE TABLE schools(
     in_state_tuition INT,
     out_state_tuition INT,
     acceptance_rate INT,
-    designation TEXT,
+    designation INT,
     size INT,
     midpoint_ACT INT,
-    midpoint_SAT_math INT,
-    midpoint_SAT_write INT,
+    midpoint_SAT INT,
+    school_site TEXT,
     PRIMARY KEY(id)
 );
 CREATE TABLE states(
@@ -29,12 +29,12 @@ QUERY (GET): /schools/search/<search_text>
 
 RESPONSE: A list containing a dictionary for each school matching the search criteria. Dictionary keys include 
     'name,' 'state,' 'in_state_tuition,' 'out_state_tuition,' 'acceptance_rate,' 'designation,' 'size,' 'midpoint_ACT,'
-    'midpoint_SAT_math,' 'midpoint_SAT_write,' and 'url'
+    'midpoint_SAT,' 'school site,' and 'url'
 
 EXAMPLE: http://whatever.com/schools/search/Carleton_College
 
 [{'name':'Carleton College', 'state':'MN', 'in_state_tuition':47736, 'out_state_tuition':47736, 'acceptance_rate':22.77,
-    'designation':'private', 'size':2042, 'midpoint_ACT':32, 'midpoint_SAT_math':710, 'midpoint_SAT_write':700,
+    'designation':'2', 'size':2042, 'midpoint_ACT':32, 'midpoint_SAT':1408, 'school_site':'www.carleton.edu',
     'url':<Flask URL for school here>}]
 
 

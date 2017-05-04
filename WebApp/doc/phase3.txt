@@ -17,6 +17,7 @@ CREATE TABLE schools(
 CREATE TABLE states(
     id SERIAL,
     name TEXT,
+    abbrev TEXT,
     PRIMARY KEY(id)
 );
 

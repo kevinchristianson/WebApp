@@ -14,7 +14,7 @@ def get_school_helper(name):
     :param name: A name of a U.S. college or university 
     :return: Data on the specified institution
     '''
-    url = 'http://www.whatever.com/schools/search/{0}'
+    url = 'http://thacker.mathcs.carleton.edu:5107/schools/search/{0}'
     url = url.format(name)
     result = get_data(url)
     return result
@@ -27,7 +27,7 @@ def get_schools_by_state_helper(state):
     '''
     if (len(state) > 2):
         return []
-    url = 'http://www.whatever.com/schools/by_state/{0}'
+    url = 'http://thacker.mathcs.carleton.edu:5107/schools/by_state/{0}'
     url = url.format(state)
     result = get_data(url)
     return result

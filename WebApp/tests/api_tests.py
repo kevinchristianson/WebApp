@@ -19,7 +19,7 @@ def arrays_equal(array1, array2):
         return False
     else:
         for i in range(0, len(array1)):
-            if array1[0] != array2[0]:
+            if (array1[0] != array2[0]) or (array1[1] != array2[1]):
                 return False
         return True
 
@@ -30,11 +30,21 @@ class APITester(unittest.TestCase):
         self.expectedCarleton = {'name': 'Carleton College', 'state': 'Minnesota', 'in_state_tuition': 47736,
                                  'out_state_tuition': 47736, 'acceptance_rate': 22.77, 'designation': '2', 'size': 2042,
                                  'midpoint_ACT': 32, 'midpoint_SAT': 1408, 'school_site':'www.carleton.edu'}
-        self.expectedWY = [['Casper College'], ['Central Wyoming College'], ['Eastern Wyoming College'],
-                           ['Laramie County Community College'],['Northwest College'], ['Sheridan College'],
-                           ['Western Wyoming Community College'],
-                           ['Cheeks International Academy of Beauty Culture-Cheyenne'],
-                           ['Wyotech-Laramie'], ['University of Wyoming']]
+        self.expectedWY = [["Casper College", "http://thacker.mathcs.carleton.edu:5107/schools/search/Casper%20College"],
+                           ["Central Wyoming College", "http://thacker.mathcs.carleton.edu:5107/schools/search/Central%"
+                           "20Wyoming%20College"], ["Cheeks International Academy of Beauty Culture-Cheyenne", "http://"
+                           "thacker.mathcs.carleton.edu:5107/schools/search/Cheeks%20International%20Academy%20of%20Bea"
+                           "uty%20Culture-Cheyenne"], ["CollegeAmerica-Cheyenne", "http://thacker.mathcs.carleton.edu:51"
+                           "07/schools/search/CollegeAmerica-Cheyenne"], ["Eastern Wyoming College", "http://thacker.mat"
+                           "hcs.carleton.edu:5107/schools/search/Eastern%20Wyoming%20College"], ["Laramie County Communi"
+                           "ty College", "http://thacker.mathcs.carleton.edu:5107/schools/search/Laramie%20County%20Comm"
+                           "unity%20College"], ["Northwest College", "http://thacker.mathcs.carleton.edu:5107/schools/se"
+                           "arch/Northwest%20College"], ["Sheridan College", "http://thacker.mathcs.carleton.edu:5107/sc"
+                           "hools/search/Sheridan%20College"], ["University of Wyoming", "http://thacker.mathcs.carleton"
+                           ".edu:5107/schools/search/University%20of%20Wyoming"], ["Western Wyoming Community College",
+                           "http://thacker.mathcs.carleton.edu:5107/schools/search/Western%20Wyoming%20Community%20Colle"
+                           "ge"], ["Wyotech-Laramie", "http://thacker.mathcs.carleton.edu:5107/schools/search/Wyotech-La"
+                           "ramie"]]
 
     def tearDown(self):
         pass

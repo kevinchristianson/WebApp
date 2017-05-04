@@ -27,9 +27,10 @@ def arrays_equal(array1, array2):
 class APITester(unittest.TestCase):
 
     def setUp(self):
-        self.expectedCarleton = {'name': 'Carleton College', 'state': 'Minnesota', 'in_state_tuition': 47736,
-                                 'out_state_tuition': 47736, 'acceptance_rate': 22.77, 'designation': '2', 'size': 2042,
-                                 'midpoint_ACT': 32, 'midpoint_SAT': 1408, 'school_site':'www.carleton.edu'}
+        self.expectedCarleton = [{'name': 'Carleton College', 'state': 'Minnesota', 'in_state_tuition': 47736,
+                                 'out_state_tuition': 47736, 'acceptance_rate': .2277, 'designation': 2, 'size': 2042,
+                                 'midpoint_ACT': 32, 'midpoint_SAT': 1408, 'school_site':'www.carleton.edu',
+                                  "url": "http://thacker.mathcs.carleton.edu:5107/schools/search/Carleton%20College"}]
         self.expectedWY = [["Casper College", "http://thacker.mathcs.carleton.edu:5107/schools/search/Casper%20College"],
                            ["Central Wyoming College", "http://thacker.mathcs.carleton.edu:5107/schools/search/Central%"
                            "20Wyoming%20College"], ["Cheeks International Academy of Beauty Culture-Cheyenne", "http://"
@@ -64,10 +65,11 @@ class APITester(unittest.TestCase):
         self.assertEqual(result, self.expectedCarleton)
 
     def testNormalCaseLongName(self):
-        result = api_caller.get_school_helper('University of Minnesota Duluth')
-        expected = {'name': 'University of Minnesota-Duluth', 'state': 'Minnesota', 'in_state_tuition': 12802,
-                    'out_state_tuition': 16467, 'acceptance_rate': 76.78, 'designation': '1', 'size': 9120,
-                    'midpoint_ACT': 24.0, 'midpoint_SAT':1110, 'school_site':'www.d.umn.edu/'}
+        result = api_caller.get_school_helper('University_of_Minnesota-Duluth')
+        expected = [{'name': 'University of Minnesota-Duluth', 'state': 'Minnesota', 'in_state_tuition': 12802,
+                    'out_state_tuition': 16467, 'acceptance_rate': .7678, 'designation': 1, 'size': 9120,
+                    'midpoint_ACT': 24.0, 'midpoint_SAT':1110, 'school_site':'www.d.umn.edu/',
+                    'url': 'http://thacker.mathcs.carleton.edu:5107/schools/search/University%20of%20Minnesota-Duluth'}]
         self.assertEqual(result, expected)
 
     def testPartialNameOneMatch(self):
@@ -75,10 +77,11 @@ class APITester(unittest.TestCase):
         self.assertEqual(result, self.expectedCarleton)
 
     def testPartialNameMultipleMatches(self):
-        results = api_caller.get_school_helper('Carl')
-        expected = ['Carl Albert State College', 'Carl Sandburg College', 'Carleton College']
+        results = api_caller.get_school_helper('mine')
+        expected = ['Colorado School of Mines', 'Mineral Area College', 'Mineral County Vocational Technical Center',
+                    'South Dakota School of Mines and Technology']
         self.assertEqual(len(results), len(expected))
-        for i in range(0, 3):
+        for i in range(0, 4):
             self.assertEqual(results[i]['name'] in expected, True)
 
     def testInvalidName(self):

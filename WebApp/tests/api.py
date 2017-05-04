@@ -44,6 +44,10 @@ def set_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
+@app.route('/schools/search/')
+def no_param_search():
+    return json.dumps([])
+
 
 @app.route('/schools/search/<search_text>')
 def get_school(search_text):
@@ -53,12 +57,19 @@ def get_school(search_text):
     '''
     while '_' in search_text:
         search_text = search_text[:search_text.index('_')] + ' ' + search_text[search_text.index('_') + 1:]
+    word_list = search_text.split()
+    search_text = ''
+    for word in word_list:
+        if (word != 'at' and word != 'of'):
+            word = word.title()
+        search_text += word + ' '
+    search_text = search_text[:-1]
     query = '''SELECT schools.name, states.name, schools.in_state_tuition, schools.out_state_tuition,
-                      schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT,
-                      schools.midpoint_SAT, schools.school_site, schools.state_id
+               schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT,
+               schools.midpoint_SAT, schools.school_site, schools.state_id
                FROM schools, states
                WHERE schools.name LIKE '%{0}%' and schools.state_id = states.id
-               ORDER BY schools.name'''.format(search_text.title())
+               ORDER BY schools.name'''.format(search_text)
     school_list = []
     for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_school', search_text=row[0], _external=True)
@@ -70,7 +81,12 @@ def get_school(search_text):
     return json.dumps(school_list)
 
 
-@app.route('/schools/by_state/<state_abbreviation>')
+@app.route('/schools/by_state/')
+def no_param_state():
+    return json.dumps([])
+
+
+@app.route('/schools/by_state/<state_abbreviation>/')
 def get_schools_by_state(state_abbreviation):
     '''
     :param state: A two-character state abbreviation
@@ -96,6 +112,11 @@ def help():
         rule_text = rule.rule.replace('<', '&lt;').replace('>', '&gt;')
         rule_list.append(rule_text)
     return json.dumps(rule_list)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return json.dumps(['PAGE NOT FOUND, AND YET HERE YOU ARE','SEE HELP FOR MORE INFO: http://thacker.mathcs.carleton.edu:5107/help'])
 
 
 if __name__ == '__main__':

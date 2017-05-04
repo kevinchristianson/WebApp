@@ -41,6 +41,4 @@ def get_data(url):
     data_from_server = urllib.request.urlopen(url).read()
     string_from_server = data_from_server.decode('utf-8')
     data = json.loads(string_from_server)
-    if len(data) == 0:
-        return None
     return data

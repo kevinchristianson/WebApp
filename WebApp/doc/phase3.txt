@@ -34,7 +34,7 @@ RESPONSE: A list containing a dictionary for each school matching the search cri
 
 EXAMPLE: http://whatever.com/schools/search/Carleton_College
 
-[{'name':'Carleton College', 'state':'MN', 'in_state_tuition':47736, 'out_state_tuition':47736, 'acceptance_rate':22.77,
+[{'name':'Carleton College', 'state':'Minnesota', 'in_state_tuition':47736, 'out_state_tuition':47736, 'acceptance_rate':22.77,
     'designation':'2', 'size':2042, 'midpoint_ACT':32, 'midpoint_SAT':1408, 'school_site':'www.carleton.edu',
     'url':<Flask URL for school here>}]
 

@@ -10,7 +10,7 @@ import config
 import psycopg2
 
 
-app = flask.Flask(__name__, static_folder='static', template_folder='templates')
+app = flask.Flask(__name__)
 
 
 def _fetch_all_rows_for_query(query):
@@ -53,12 +53,12 @@ def get_school(search_text):
     '''
     while '_' in search_text:
         search_text = search_text[:search_text.index('_')] + ' ' + search_text[search_text.index('_') + 1:]
-    query = '''SELECT schools.name, states.name, schools.in_state_tuition, schools.out_state_tuition, 
-                      schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT, 
+    query = '''SELECT schools.name, states.name, schools.in_state_tuition, schools.out_state_tuition,
+                      schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT,
                       schools.midpoint_SAT, schools.school_site, schools.state_id
                FROM schools, states
-               WHERE schools.name LIKE {0} and schools.state_id = states.id
-               ORDER BY name'''.format(search_text.title())
+               WHERE schools.name LIKE '%{0}%' and schools.state_id = states.id
+               ORDER BY schools.name'''.format(search_text.title())
     school_list = []
     for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_school', search_text=row[0], _external=True)
@@ -76,9 +76,9 @@ def get_schools_by_state(state_abbreviation):
     :param state: A two-character state abbreviation
     :return: A list of all schools in that state
     '''
-    query = '''SELECT schools.state_id, schools.name, states.id, states.name
+    query = '''SELECT schools.state_id, schools.name, states.id, states.abbrev
                FROM schools, states
-               WHERE states.name = {0} and schools.state_id = states.id
+               WHERE states.abbrev = '{0}' and schools.state_id = states.id
                ORDER BY schools.name'''.format(state_abbreviation.upper())
 
     school_list = []
@@ -99,10 +99,4 @@ def help():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print('Usage: {0} host port'.format(sys.argv[0]), file=sys.stderr)
-        exit()
-
-    host = sys.argv[1]
-    port = sys.argv[2]
-    app.run(host=host, port=int(port), debug=True)
+    app.run(host='thacker.mathcs.carleton.edu', port=5107)

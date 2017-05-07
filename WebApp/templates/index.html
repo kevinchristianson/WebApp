@@ -1,2 +1,33 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='books.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='books-config.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='books.js') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='jeff-favicon.ico') }}" />
+    <title>College Metrics</title>
+</head>
+
+<body data-gr-c-s-loaded="true">
+    <h1>Welcome to College Metrics</h1>
+    <p>We provide stats for colleges and universities around the United States as well as its protectorates.</p>
+
+    <h2>School Search</h2>
+    <form action="/action_page.php">
+        search for a specific school by name:<br>
+        <input type="text" name="" value="">
+        <input type="submit"><br>
+    </form>
+
+    <h2>State Search</h2>
+    <form action="/action_page.php">
+        Search for all schools in a given state:<br>
+        <input type="text" name="" value="">
+         <input type="submit"><br>
+        <a href="http://thacker.mathcs.carleton.edu:5107:/states/options">All possible state acronyms</a>
+    </form>
+
+    <h4><a href="http://thacker.mathcs.carleton.edu:5107/help">Our API</a></h4>
+</body>
+</html>

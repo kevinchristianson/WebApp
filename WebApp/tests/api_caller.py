@@ -32,6 +32,10 @@ def get_schools_by_state_helper(state):
     result = get_data(url)
     return result
 
+def get_states_options():
+    return get_data('http://thacker.mathcs.carleton.edu:5107/states/options/')
+
+
 
 def get_data(url):
     '''

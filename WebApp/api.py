@@ -114,6 +114,17 @@ def help():
     return json.dumps(rule_list)
 
 
+@app.route('/states/options/')
+def options():
+    states_list = []
+    query = '''SELECT states.abbrev, states.name FROM states ORDER BY states.abbrev'''
+    for row in _fetch_all_rows_for_query(query):
+        url = flask.url_for('get_schools_by_state', state_abbreviation=row[0], _external=True)
+        result = [row[0],row[1],url]
+        states_list.append(result)
+    return json.dumps(states_list)
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return json.dumps(['PAGE NOT FOUND, AND YET HERE YOU ARE','SEE HELP FOR MORE INFO: http://thacker.mathcs.carleton.edu:5107/help'])

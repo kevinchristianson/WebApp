@@ -8,25 +8,27 @@
     <title>College Metrics</title>
 </head>
 
-<body data-gr-c-s-loaded="true">
+<body>
     <h1>Welcome to College Metrics</h1>
     <p>We provide stats for colleges and universities around the United States as well as its protectorates.</p>
 
     <h2>School Search</h2>
-    <form action="/action_page.php">
-        search for a specific school by name:<br>
-        <input type="text" name="" value="">
-        <input type="submit"><br>
-    </form>
+    <p>Search for a college or university by name:</p>
+
+    <p>
+        <input id="inputcollege" type="text" />
+        <button onclick="onCollegeSearchButton()">Search</button>
+    </p>
 
     <h2>State Search</h2>
-    <form action="/action_page.php">
-        Search for all schools in a given state:<br>
-        <input type="text" name="" value="">
-         <input type="submit"><br>
-        <a href="http://thacker.mathcs.carleton.edu:5107/states/options">All possible state acronyms</a>
-    </form>
+    <p>Search for a state to view all of its colleges and universities:</p>
 
+    <p>
+        <input id="inputstate" type="text" />
+        <button onclick="onStateSearchButton()">Search</button>
+    </p>
+    
+    <a href="http://thacker.mathcs.carleton.edu:5107/states/options">All possible state acronyms</a>
     <h4><a href="http://thacker.mathcs.carleton.edu:5107/help">Our API</a></h4>
 </body>
 </html>

@@ -39,6 +39,7 @@ EXAMPLE: http://whatever.com/schools/search/Carleton_College
     'url':<Flask URL for school here>}]
 
 
+
 SYNOPSIS: Get a list of all schools in a state
 
 QUERY (GET): /schools/by_state/<state_abbreviation>
@@ -50,12 +51,31 @@ EXAMPLE: http://whatever.com/schools/by_state/MN
 [['Carleton College', <Flask URL for school here>], ['St. Olaf', <Flask URL for school here>],
     ['The University of Minnesota: Twin Cities', <Flask URL for school here>], ...]
 
+
+
 SYNOPSIS: Get a list of all valid states and their abbreviations
 
 QUERY (GET): /states/options
 
-RESPONSE: A list containing 59 lists of 3 elements each: the state abbreviation, name and then url for the search of all schools in that state
+RESPONSE: A list containing 59 lists of 3 elements each: state abbreviation, state name,
+    and URL with which to search for all schools in that state
 
 EXAMPLE: http://whatever.com/states/options
 
-[[["AK", "Alaska", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AK/"], ["AL", "Alabama", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AL/"], ["AR", "Arkansas", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AR/"], ["AS", "American Samoa", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AS/"], ...]
+[[["AK", "Alaska", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AK/"], 
+    ["AL", "Alabama", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AL/"], 
+    ["AR", "Arkansas", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AR/"], 
+    ["AS", "American Samoa", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AS/"], ...]
+
+
+
+SYNOPSIS: Get a list of API routes
+
+QUERY (GET): /help
+
+RESPONSE: A list containing routes with which to query the API
+
+EXAMPLE: http://whatever.com/help
+
+["/schools/by_state/", "/schools/search/", "/states/options/", "/help", "/schools/by_state/<state_abbreviation>/",
+    "/schools/search/<search_text>", "/static/<path:filename>"]

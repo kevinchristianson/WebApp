@@ -69,13 +69,13 @@ EXAMPLE: http://whatever.com/states/options
 
 
 
-SYNOPSIS: Get a list of API routes
+SYNOPSIS: Get a list of API routes we want users to take
 
 QUERY (GET): /help
 
-RESPONSE: A list containing routes with which to query the API
+RESPONSE: A list containing routes with which to query the API ignoring "/states/options/" and "/schools/by_state/" routes which were made to handle edge cases, and the "/static/…" route because it isn't one of our basic queries.
 
 EXAMPLE: http://whatever.com/help
 
-["/schools/by_state/", "/schools/search/", "/states/options/", "/help", "/schools/by_state/<state_abbreviation>/",
-    "/schools/search/<search_text>", "/static/<path:filename>"]
+["/states/options/", "/help", "/schools/by_state/<state_abbreviation>/",
+    "/schools/search/<search_text>"]

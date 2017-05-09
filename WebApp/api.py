@@ -110,7 +110,8 @@ def help():
     rule_list = []
     for rule in app.url_map.iter_rules():
         rule_text = rule.rule.replace('<', '&lt;').replace('>', '&gt;')
-        rule_list.append(rule_text)
+        if rule_text != '/schools/by_state/' and rule_text != '/schools/search/' and not '/static/' in  rule_text:
+            rule_list.append(rule_text)
     return json.dumps(rule_list)
 
 

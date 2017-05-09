@@ -132,4 +132,4 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    app.run(host='thacker.mathcs.carleton.edu', port=5107)
+    app.run(host='localhost', port=8080)

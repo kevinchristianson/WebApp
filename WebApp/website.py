@@ -18,7 +18,7 @@ def get_main_page():
 
 @app.route('/schools/search/<search_text>')
 def get_school_search_page(search_text):
-    return flask.render_template('test.html')
+    return flask.render_template('results_page.html')
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

@@ -1,6 +1,9 @@
 html {
     height: 100%;
 }
+body {
+    background-image: url(college_background.jpg);
+}
 #page_title{
     text-align: center;
     font-size: 250%;

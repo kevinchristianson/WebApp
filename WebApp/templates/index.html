@@ -9,11 +9,16 @@
 </head>
 
 <body>
+    <div class="fullscreen-bg">
+        <video loop muted autoplay poster="../static/videoframe.jpg" class="fullscreen-bg__video">
+            <source src="../static/carleton_footage.mp4" type="video/mp4">
+        </video>
+    </div>
     <h1 id="page_title">Welcome to College Metrics</h1>
     <p id="description">We provide stats for colleges and universities around the United States as well as its protectorates.</p>
 
     <h2 class="search_text">School Search</h2>
-    <p class="search_sub">Search for a college or university by name:</p>
+   <!-- <p class="search_sub">Search for a college or university by name:</p>-->
     <p>
         <input id="input_college" type="text" />
         <button onclick="onCollegeSearchButton()">Search</button>
@@ -21,7 +26,7 @@
     <p id="college_results_element">Result should appear here</p>
 
     <h2 class="search_text">State Search</h2>
-    <p class="search_sub">Search for a state to view all of its colleges and universities:</p>
+    <!--<p class="search_sub">Search for a state to view all of its colleges and universities:</p>-->
     <p>
         <input id="input_state" type="text" />
         <button onclick="onStateSearchButton()">Search</button>
@@ -31,8 +36,11 @@
     <div align="center">
         <a href="http://thacker.mathcs.carleton.edu:5107/states/options">All possible state acronyms</a>
     </div>
-    <div align="center">
-         <h4><a class="link" href="http://thacker.mathcs.carleton.edu:5107/help">Our API</a></h4>
+   <!-- <div align="center">
+         <h4><a href="http://thacker.mathcs.carleton.edu:5107/help">Our API</a></h4>
+    </div>-->
+    <div>
+        <a id="reference" href="https://en.wikipedia.org/wiki/College#/media/File:Corpus_Christi_College_New_Court,_Cambridge,_UK_-_Diliff.jpg">Background Image</a>
     </div>
 </body>
 </html>

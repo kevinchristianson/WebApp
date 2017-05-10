@@ -27,7 +27,18 @@ def get_school_search_page(search_text):
     data_from_server = urllib.request.urlopen(api_url).read()
     string_from_server = data_from_server.decode('utf-8')
     data = json.loads(string_from_server)
-    return flask.render_template('results_page.html', message = data[0])
+    return flask.render_template('college_page.html', message = data[0])
+
+@app.route('/schools/by_state/<search_text>')
+def get_state_search_page(search_text):
+    # For when we have full-name state search implemented
+    while ' ' in search_text:
+        search_text = search_text[:search_text.index(' ')] + '_' + search_text[search_text.index(' ') + 1:]
+    api_url = config.api_base_url + 'schools/by_state/' + search_text
+    data_from_server = urllib.request.urlopen(api_url).read()
+    string_from_server = data_from_server.decode('utf-8')
+    data = json.loads(string_from_server)
+    return flask.render_template('state_page.html', message = data)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

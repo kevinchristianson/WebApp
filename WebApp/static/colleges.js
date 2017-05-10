@@ -16,3 +16,14 @@ function onStateSearchButton() {
 	var url = website_base_url + 'schools/by_state/' + stateSearchElement.value;
 	document.location.href = url;
 }
+
+function onLoadStates(message) {
+	tableBody = '';
+	for (var i = 0; i < message.length; i++) {
+		tableBody += '<tr>';
+		tableBody += '<td><a href = ' + message[i][1] + '>' + message[i][0] + '</a></td>';
+		tableBody += '</tr>';
+	}
+	var schoolTable = document.getElementById('school_table');
+	schoolTable.innerHTML = tableBody;
+}

@@ -99,7 +99,10 @@ def get_schools_by_state(state_abbreviation):
 
     school_list = []
     for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_school', search_text=row[1], _external=True)
+        school_name = row[1]
+        while ' ' in school_name:
+            school_name = school_name[:school_name.index(' ')] + '_' + school_name[school_name.index(' ') + 1:]
+        url = config.website_base_url + 'schools/search/' + school_name
         school = [row[1], url]
         school_list.append(school)
     return json.dumps(school_list)
@@ -132,4 +135,4 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=8080)
+    app.run(host='localhost', port=int(8080), debug=True)

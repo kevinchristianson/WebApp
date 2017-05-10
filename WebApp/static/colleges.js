@@ -9,7 +9,6 @@ function onCollegeSearchButton() {
 	var collegeSearchElement = document.getElementById('input_college');
 	var url = website_base_url + 'schools/search/' + collegeSearchElement.value;
 	document.location.href = url;
-	// Window.location.href = url;
 
 	// var collegeSearchElement = document.getElementById('input_college');
 	// var url = api_base_url + 'schools/search/' + collegeSearchElement.value;

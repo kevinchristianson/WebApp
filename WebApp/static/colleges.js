@@ -7,15 +7,20 @@
 
 function onCollegeSearchButton() {
 	var collegeSearchElement = document.getElementById('input_college');
-	var url = api_base_url + 'schools/search/' + collegeSearchElement.value;
-	xmlHttpRequest = new XMLHttpRequest();
-	xmlHttpRequest.open('get', url);
-	xmlHttpRequest.onreadystatechange = function() {
-	        if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) { 
-	            collegeSearchCallback(xmlHttpRequest.responseText);
-	        } 
-	    }; 
-	xmlHttpRequest.send(null);
+	var url = website_base_url + 'schools/search/' + collegeSearchElement.value;
+	document.location.href = url;
+	// Window.location.href = url;
+
+	// var collegeSearchElement = document.getElementById('input_college');
+	// var url = api_base_url + 'schools/search/' + collegeSearchElement.value;
+	// var xmlHttpRequest = new XMLHttpRequest();
+	// xmlHttpRequest.open('get', url);
+	// xmlHttpRequest.onreadystatechange = function() {
+	//         if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) { 
+	//             collegeSearchCallback(xmlHttpRequest.responseText);
+	//         } 
+	//     }; 
+	// xmlHttpRequest.send(null);
 }
 
 function collegeSearchCallback(responseText) {
@@ -40,7 +45,7 @@ function collegeSearchCallback(responseText) {
 function onStateSearchButton() {
 	var stateSearchElement = document.getElementById('input_state');
 	var url = api_base_url + 'schools/by_state/' + stateSearchElement.value;
-	xmlHttpRequest = new XMLHttpRequest();
+	var xmlHttpRequest = new XMLHttpRequest();
 	xmlHttpRequest.open('get', url);
 	xmlHttpRequest.onreadystatechange = function() {
 	        if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) { 
@@ -54,8 +59,9 @@ function stateSearchCallback(responseText) {
     var collegeList = JSON.parse(responseText);
     var resultsTextElement = document.getElementById('state_results_element');
     for (i = 0; i < collegeList.length; i++) {
-    	if (i != collegeList.length) {
-    		resultsTextElement.innerHTML += collegeList[i][0] + ' --- ';    
-    	}
+		resultsTextElement.innerHTML += collegeList[i][0];
+		if (i != collegeList.length - 1) {
+			resultsTextElement.innerHTML += ' --- '
+		}    
     }
 }

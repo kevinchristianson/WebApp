@@ -16,11 +16,15 @@ def get_main_page():
     ''' This is the only route intended for human users '''
     return flask.render_template('index.html')
 
+@app.route('/schools/search/<search_text>')
+def get_school_search_page(search_text):
+    return flask.render_template('test.html')
+
 if __name__ == '__main__':
     if len(sys.argv) != 3:
         print('Usage: {0} host port'.format(sys.argv[0]), file=sys.stderr)
         exit()
 
     host = sys.argv[1]
-    port = sys.argv[2]
-    app.run(host=host, port=port)
+    port = int(sys.argv[2])
+    app.run(host=host, port=port, debug=True)

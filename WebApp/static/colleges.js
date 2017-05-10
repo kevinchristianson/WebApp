@@ -7,7 +7,7 @@
 
 function onCollegeSearchButton() {
 	var collegeSearchElement = document.getElementById('inputcollege');
-	var url = api_base_url + 'schools/search/' + collegeSearchElement;
+	var url = api_base_url + 'schools/search/' + collegeSearchElement.value;
 	xmlHttpRequest = new XMLHttpRequest();
 	xmlHttpRequest.open('get', url);
 	xmlHttpRequest.onreadystatechange = function() {
@@ -24,7 +24,7 @@ function collegeSearchCallback(responseText) {
     // If responseText is one item, go to that school's page
 
     var resultsTextElement = document.getElementById('results_text');
-    resultsTableElement.innerHTML = collegeList[0]['name'];
+    resultsTextElement.innerHTML = collegeList[0]['name'];
 
 	// Else if it's multiple items, show the helper page with options and links
 	// Else if it's empty, stay and display an error message

@@ -21,11 +21,13 @@ def get_main_page():
 
 @app.route('/schools/search/<search_text>')
 def get_school_search_page(search_text):
+    while ' ' in search_text:
+        search_text = search_text[:search_text.index(' ')] + '_' + search_text[search_text.index(' ') + 1:]
     api_url = config.api_base_url + 'schools/search/' + search_text
     data_from_server = urllib.request.urlopen(api_url).read()
     string_from_server = data_from_server.decode('utf-8')
     data = json.loads(string_from_server)
-    return flask.render_template('test.html', message = data[0])
+    return flask.render_template('results_page.html', message = data[0])
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

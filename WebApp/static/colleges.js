@@ -6,7 +6,7 @@
  */
 
 function onCollegeSearchButton() {
-	var collegeSearchElement = document.getElementById('inputcollege');
+	var collegeSearchElement = document.getElementById('input_college');
 	var url = api_base_url + 'schools/search/' + collegeSearchElement.value;
 	xmlHttpRequest = new XMLHttpRequest();
 	xmlHttpRequest.open('get', url);
@@ -23,7 +23,7 @@ function collegeSearchCallback(responseText) {
     
     // If responseText is one item, go to that school's page
 
-    var resultsTextElement = document.getElementById('results_text');
+    var resultsTextElement = document.getElementById('college_results_element');
     resultsTextElement.innerHTML = collegeList[0]['name'];
 
 	// Else if it's multiple items, show the helper page with options and links
@@ -32,5 +32,20 @@ function collegeSearchCallback(responseText) {
 }
 
 function onStateSearchButton() {
-	var stateSearchElement = document.getElementById('inputstate');
+	var stateSearchElement = document.getElementById('input_state');
+	var url = api_base_url + 'schools/by_state/' + stateSearchElement.value;
+	xmlHttpRequest = new XMLHttpRequest();
+	xmlHttpRequest.open('get', url);
+	xmlHttpRequest.onreadystatechange = function() {
+	        if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) { 
+	            stateSearchCallback(xmlHttpRequest.responseText);
+	        } 
+	    }; 
+	xmlHttpRequest.send(null);
+}
+
+function stateSearchCallback(responseText) {
+    var collegeList = JSON.parse(responseText);
+    var resultsTextElement = document.getElementById('state_results_element');
+    resultsTextElement.innerHTML = collegeList[0][0];    
 }

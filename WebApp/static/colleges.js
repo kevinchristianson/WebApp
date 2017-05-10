@@ -24,7 +24,13 @@ function collegeSearchCallback(responseText) {
     // If responseText is one item, go to that school's page
 
     var resultsTextElement = document.getElementById('college_results_element');
-    resultsTextElement.innerHTML = collegeList[0]['name'];
+    resultsTextElement.innerHTML = collegeList[0]['name'] + ' is located in ' + collegeList[0]['state'] + '. '
+    							   + collegeList[0]['size'] + ' students attend. Its tuition is $'
+    							   + collegeList[0]['in_state_tuition'] + ', its acceptance rate is '
+    							   + collegeList[0]['acceptance_rate'] + ', its midpoint ACT is '
+    							   + collegeList[0]['midpoint_ACT'] + ', and its midpoint SAT is '
+    							   + collegeList[0]['midpoint_SAT'] + '. To find out more, visit '
+    							   + collegeList[0]['school_site'] + '.';
 
 	// Else if it's multiple items, show the helper page with options and links
 	// Else if it's empty, stay and display an error message
@@ -47,5 +53,9 @@ function onStateSearchButton() {
 function stateSearchCallback(responseText) {
     var collegeList = JSON.parse(responseText);
     var resultsTextElement = document.getElementById('state_results_element');
-    resultsTextElement.innerHTML = collegeList[0][0];    
+    for (i = 0; i < collegeList.length; i++) {
+    	if (i != collegeList.length) {
+    		resultsTextElement.innerHTML += collegeList[i][0] + ' --- ';    
+    	}
+    }
 }

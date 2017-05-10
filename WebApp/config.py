@@ -9,3 +9,4 @@
 database = 'collegemetrics'
 user = 'Isaac'
 password = ''
+api_base_url = 'http://localhost:8080/'

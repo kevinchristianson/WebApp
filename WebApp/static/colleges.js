@@ -17,6 +17,11 @@ function onStateSearchButton() {
 	document.location.href = url;
 }
 
+function insertInstitutionWebsite(message) {
+	var institutionWebsite = document.getElementById('institution_website');
+    institutionWebsite.innerHTML = '<b>Institution website:</b> <a href = ' + url + '>' + url + '</a></p>'
+}
+
 function onLoadStates(message) {
 	tableBody = '';
 	for (var i = 0; i < message.length; i++) {

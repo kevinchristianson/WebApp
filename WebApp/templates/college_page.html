@@ -12,7 +12,13 @@
     <h1 id="page_title">{{message['name']}}</h1>
     <p><b>Location:</b> {{message['state']}}<br><b>Total enrollment:</b> {{message['size']}}<br>
     <b>Tuition:</b> ${{message['in_state_tuition']}}<br><b>Acceptance rate:</b> {{message['acceptance_rate']}}<br>
-    <b>Midpoint ACT:</b> {{message['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message['midpoint_SAT']}}<br>
-    <b>Institution website:</b> <a href = {{message['school_site']}}>{{message['school_site']}}</a></p>
+    <b>Midpoint ACT:</b> {{message['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message['midpoint_SAT']}}<br></p>
+
+    <!-- The following line displays the issue: the school's URL gets tacked onto ours -->
+    <p><b>Institution website:</b> <a href = {{message['school_site']}}>{{message['school_site']}}</a></p>
+
+    <!-- The following lines are an attempt to solve -->
+    <!-- <p id="institution_website"></p>
+    <script type="text/javascript">insertInstitutionWebsite(document.message);</script> -->
 </body>
 </html>

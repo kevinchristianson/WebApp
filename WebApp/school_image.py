@@ -5,6 +5,7 @@
     hits the the bing image search api to get an image of the college searched for
 '''
 from py_ms_cognitive import PyMsCognitiveImageSearch
+#documentation: https://github.com/tristantao/py-ms-cognitive
 import flask
 import json
 from flask import request

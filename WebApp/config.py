@@ -6,8 +6,9 @@
 '''
 
 # Change these values as appropriate for your postgresql setup.
-database = 'collegemetrics'
-user = 'Isaac'
+database = 'kevinchristianson'
+user = 'kevinchristianson'
 password = ''
 api_base_url = 'http://localhost:8080/'
 website_base_url = 'http://localhost:8081/'
+images_base_url = 'http://localhost:8082/image?'

@@ -2,17 +2,19 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='results_page.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='college_page.css') }}" />
     <script type="text/javascript" src="{{ url_for('static', filename='colleges-config.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='colleges.js') }}"></script>
     <title>College Metrics</title>
 </head>
 
 <body>
-    <h1 id="page_title">{{message['name']}}</h1>
-    <p><b>Location:</b> {{message['state']}}<br><b>Total enrollment:</b> {{message['size']}}<br>
-    <b>Tuition:</b> ${{message['in_state_tuition']}}<br><b>Acceptance rate:</b> {{message['acceptance_rate']}}<br>
-    <b>Midpoint ACT:</b> {{message['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message['midpoint_SAT']}}<br>
-    <b>Institution website:</b> <a href = {{message['school_site']}}>{{message['school_site']}}</a></p>
+    <h1 id="page_title">{{message[0]['name']}}</h1>
+    <p><b>Location:</b> {{message[0]['state']}}<br><b>Total enrollment:</b> {{message[0]['size']}}<br>
+    <b>Tuition:</b> ${{message[0]['in_state_tuition']}}<br><b>Acceptance rate:</b> {{message[0]['acceptance_rate']}}<br>
+    <b>Midpoint ACT:</b> {{message[0]['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message[0]['midpoint_SAT']}}<br>
+    <b>Institution website:</b> <a href = {{message[0]['school_site']}}>{{message[0]['school_site']}}</a></p>
+    <img src={{message[1][0]}}>
+    <a href={{message[1][1]}}>image source</a>
 </body>
 </html>

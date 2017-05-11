@@ -15,13 +15,14 @@
     <b>Midpoint ACT:</b> {{message[0]['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message[0]['midpoint_SAT']}}<br>
     
     <!-- The following line displays the issue: the school's URL gets tacked onto ours -->
-    <p><b>Institution website:</b> <a href = {{message['school_site']}}>{{message['school_site']}}</a></p>
+    <p><b>Institution website:</b> <a href = {{message[0]['school_site']}}>{{message['school_site']}}</a></p>
 
     <!-- The following lines are an attempt to solve -->
     <!-- <p id="institution_website"></p>
-    <script type="text/javascript">insertInstitutionWebsite(document.message);</script> -->
-
-    <img src={{message[1][0]}}>
-    <a href={{message[1][1]}}>image source</a>
+    <script type="text/javascript">insertInstitutionWebsite(document.message[0]);</script> -->
+    <div id="image_box">
+        <img src={{message[1][0]}}>
+        <a href={{message[1][1]}}>image source</a>
+    </div>
 </body>
 </html>

@@ -19,6 +19,7 @@ function onStateSearchButton() {
 
 function insertInstitutionWebsite(message) {
 	var institutionWebsite = document.getElementById('institution_website');
+    var url = message['school_site'];
     institutionWebsite.innerHTML = '<b>Institution website:</b> <a href = ' + url + '>' + url + '</a></p>'
 }
 

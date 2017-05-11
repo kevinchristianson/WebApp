@@ -9,7 +9,8 @@
 </head>
 
 <body onload="onLoadStates({{message}})">
-    <h1 id="page_title">State Name Here (work in progress)</h1>
+    <h1 id="page_title">Schools in {{message[0]}}</h1>
     <p><table id="school_table"></table></p>
+    <script>onLoadStates({{message[1]}});</script>
 </body>
 </html>

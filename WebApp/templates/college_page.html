@@ -14,7 +14,9 @@
     <b>Tuition:</b> ${{message[0]['in_state_tuition']}}<br><b>Acceptance rate:</b> {{message[0]['acceptance_rate']}}<br>
     <b>Midpoint ACT:</b> {{message[0]['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message[0]['midpoint_SAT']}}<br>
     <b>Institution website:</b> <a href = {{message[0]['school_site']}}>{{message[0]['school_site']}}</a></p>
-    <img src={{message[1][0]}}>
-    <a href={{message[1][1]}}>image source</a>
+    <div id="image_box">
+        <img src={{message[1][0]}}>
+        <a href={{message[1][1]}}>image source</a>
+    </div>
 </body>
 </html>

@@ -5,7 +5,21 @@
     line-height: 150%;
     font-size: 250%;
 }
+p {
+    text-align: left;
+    font-size: 175%;
+    line-height: 175%;
+    padding-left: 50px;
+}
 #image_box{
+    position: absolute;
+    left: 900px;
+    top:120px;
+    height: 125vw;
+    width: 500px;
+    text-align: right;
+}
+img {
     max-width: 100%;
-    height: auto;
+    max-height: 100%;
 }

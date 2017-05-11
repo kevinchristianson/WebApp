@@ -6,6 +6,7 @@
     font-size: 250%;
 }
 #image_box{
+    position: relative;
     max-width: 100%;
     height: auto;
 }

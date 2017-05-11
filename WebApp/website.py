@@ -27,7 +27,16 @@ def get_school_search_page(search_text):
     data_from_server = urllib.request.urlopen(api_url).read()
     string_from_server = data_from_server.decode('utf-8')
     data = json.loads(string_from_server)
-    return flask.render_template('college_page.html', message = data[0])
+    if(len(data) == 1):
+        search_name = data[0]['name'].lower()
+        while ' ' in search_name:
+            search_name = search_name[:search_name.index(' ')] + '_' + search_name[search_name.index(' ') + 1:]
+        image_url = config.images_base_url + 'name=' + search_name + '&state=' + data[0]['state'].lower()
+        data_from_image_server = urllib.request.urlopen(image_url).read()
+        image_data = json.loads(data_from_image_server.decode('utf-8'))
+        data.append(image_data)
+        return flask.render_template('college_page.html', message = data)
+    return flask.render_template('state_page.html', message = data)
 
 @app.route('/schools/by_state/<search_text>')
 def get_state_search_page(search_text):

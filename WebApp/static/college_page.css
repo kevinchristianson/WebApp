@@ -5,3 +5,7 @@
     line-height: 150%;
     font-size: 250%;
 }
+#image_box{
+    max-width: 100%;
+    height: auto;
+}

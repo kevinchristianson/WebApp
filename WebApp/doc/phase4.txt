@@ -38,7 +38,7 @@ EXAMPLE: http://whatever.com/schools/search/Carleton_College
     'designation':'2', 'size':2042, 'midpoint_ACT':32, 'midpoint_SAT':1408, 'school_site':'www.carleton.edu',
     'url':<Flask URL for school here>}]
 
-
+-------------------------------------------------------------
 
 SYNOPSIS: Get a list of all schools in a state
 
@@ -51,7 +51,7 @@ EXAMPLE: http://whatever.com/schools/by_state/MN
 [['Carleton College', <Flask URL for school here>], ['St. Olaf', <Flask URL for school here>],
     ['The University of Minnesota: Twin Cities', <Flask URL for school here>], ...]
 
-
+-------------------------------------------------------------
 
 SYNOPSIS: Get a list of all valid states and their abbreviations
 
@@ -67,7 +67,7 @@ EXAMPLE: http://whatever.com/states/options
     ["AR", "Arkansas", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AR/"], 
     ["AS", "American Samoa", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AS/"], ...]
 
-
+-------------------------------------------------------------
 
 SYNOPSIS: Get a list of API routes we want users to take
 

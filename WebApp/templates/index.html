@@ -16,25 +16,20 @@
                 <source src="{{ url_for('static', filename='carleton_footage.mp4') }}" type="video/mp4">
             </video>
         </div>
-        <h3 cid="description" align="center">We provide stats for colleges and universities around the United States</h3>
-            <h3 id="descriptor" align="center">as well as its protectorates.</h3>
+        <h3 class="description" align="center">We provide stats for colleges and universities around the United States</h3>
 
         <h2 class="search_text" align="center">School Search</h2>
-       <!-- <p class="search_sub">Search for a college or university by name:</p>-->
         <p>
             <input id="input_college" type="text" />
             <button onclick="onCollegeSearchButton()">Search</button>
         </p>
         <p id="college_results_element" align="center"></p>
-
-        <h2 class="search_text" align="center">State Search</h2>
-        <!--<p class="search_sub">Search for a state to view all of its colleges and universities:</p>-->
+        <h3 class="description" align="center">Enter a state's abbreviation to view all of its colleges and universities:</h3>
         <p>
             <input id="input_state" type="text" />
             <button onclick="onStateSearchButton()">Search</button>
         </p>
         <p id="state_results_element" align="center"></p>
-
         <div align="center">
             <a href="http://thacker.mathcs.carleton.edu:5107/states/options">All possible state acronyms</a>
         </div>

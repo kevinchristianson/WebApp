@@ -33,3 +33,10 @@ function onLoadStates(message) {
 	var schoolTable = document.getElementById('school_table');
 	schoolTable.innerHTML = tableBody;
 }
+
+// for when server does not support html5 loop for video on homepage
+function repeat(){
+    var film = document.getElementsByTagName('video')[0];
+   // film.load();
+    film.play();
+}

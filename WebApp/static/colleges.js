@@ -19,7 +19,7 @@ function onStateSearchButton() {
 
 function onLoadStates(message) {
     tableBody = '';
-    for (var i = 0; i < message.length; i++) {
+    for (var i = 1; i < message.length; i++) {
         tableBody += '<tr>';
         tableBody += '<td><a href = ' + message[i][1] + '>' + message[i][0] + '</a></td>';
         tableBody += '</tr>';

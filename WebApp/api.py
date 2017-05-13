@@ -86,19 +86,31 @@ def no_param_state():
     return json.dumps([])
 
 
-@app.route('/schools/by_state/<state_abbreviation>/')
-def get_schools_by_state(state_abbreviation):
+@app.route('/schools/by_state/<search_text>/')
+def get_schools_by_state(search_text):
     '''
     :param state: A two-character state abbreviation
     :return: A list of all schools in that state
     '''
-    query = '''SELECT schools.state_id, schools.name, states.id, states.abbrev
+    while '_' in search_text:
+        search_text = search_text[:search_text.index('_')] + ' ' + search_text[search_text.index('_') + 1:]
+    if len(search_text) == 2:
+        search_text = search_text.upper()
+    else:
+        search_text = search_text.title()
+    if search_text.lower() == "district of columbia":
+        search_text = "District of Columbia" 
+    query = '''SELECT schools.state_id, schools.name, states.id, states.abbrev, states.name
                FROM schools, states
-               WHERE states.abbrev = '{0}' and schools.state_id = states.id
-               ORDER BY schools.name'''.format(state_abbreviation.upper())
+               WHERE schools.state_id = states.id and (states.abbrev = '{0}' or states.name = '{0}')
+               ORDER BY schools.name'''.format(search_text)
 
     school_list = []
+    added_state_name = False
     for row in _fetch_all_rows_for_query(query):
+        if added_state_name == False:
+            school_list.append(row[4])
+            added_state_name = True
         school_name = row[1]
         while ' ' in school_name:
             school_name = school_name[:school_name.index(' ')] + '_' + school_name[school_name.index(' ') + 1:]

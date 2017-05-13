@@ -50,8 +50,7 @@ def get_state_search_page(search_text):
     api_url = config.api_base_url + 'schools/by_state/' + search_text
     data_from_server = urllib.request.urlopen(api_url).read()
     string_from_server = data_from_server.decode('utf-8')
-    college_list = [search_text.upper()]
-    college_list.append(json.loads(string_from_server))
+    college_list = json.loads(string_from_server)
     return flask.render_template('state_page.html', message = college_list)
 
 if __name__ == '__main__':

@@ -33,3 +33,8 @@ function repeat(){
     var film = document.getElementsByTagName('video')[0];
     film.play();
 }
+var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2;
+
+if (!isPlaying){
+    repeat()
+}

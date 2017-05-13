@@ -32,10 +32,6 @@ def get_school_search_page(search_text):
     college_list = json.loads(string_from_server)
 
     if (len(college_list) == 1):
-        # if None is returned, have it be a more helpful message
-        for key, value in college_list[0].items():
-            if value == None:
-                school[key] = 'Data Not Available'
         
         # Retrieve a college's image from Bing's image API
         search_name = college_list[0]['name'].lower()

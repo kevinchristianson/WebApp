@@ -76,6 +76,11 @@ def get_school(search_text):
         school = {'name': row[0], 'state': row[1], 'in_state_tuition': row[2], 'out_state_tuition': row[3],
                   'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
                   'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}
+        #if None is returned, have it be a more helpful message
+        for key, value in school.items():
+            if value == None:
+                print(value)
+                school[key] = 'Data Not Available'
         school_list.append(school)
 
     return json.dumps(school_list)

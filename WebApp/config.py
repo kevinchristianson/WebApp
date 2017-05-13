@@ -26,7 +26,7 @@ if thacker:
         user = 'haseleyi'
         password = 'seal522field'
     api_base_url = 'http://thacker.mathcs.carleton.edu:5107/'
-    website_base_url = 'http://thacker.mathcs.carleton,edu:5207/'
+    website_base_url = 'http://thacker.mathcs.carleton.edu:5207/'
     images_base_url = 'http://thacker.mathcs.carleton.edu:5116/image?'
     host = 'thacker.mathcs.carleton.edu'
     api_port = 5107

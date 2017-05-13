@@ -2,24 +2,29 @@
 '''
     config.py
     Kevin Christianson and Isaac Haseley
-    Database login info for our college metrics web app
+    Info for database login and server ports
 '''
 
-# Change these values as appropriate for your postgresql setup.
-kevin = True
+# Change these values as appropriate for your setup.
+kevin = False
 thacker = False
 if kevin:
     database = 'kevinchristianson'
     user = 'kevinchristianson'
     password = ''
 else:
-    database = 'CollegeMetrics'
+    database = 'collegemetrics'
     user = 'haseleyi'
     password = ''
 if thacker:
-    database = 'christiansonk'
-    user = 'christiansonk'
-    password = 'carpet784books'
+    if kevin:
+        database = 'christiansonk'
+        user = 'christiansonk'
+        password = 'carpet784books'
+    else:
+        database = 'haseleyi'
+        user = 'haseleyi'
+        password = 'seal522field'
     api_base_url = 'http://thacker.mathcs.carleton.edu:5107/'
     website_base_url = 'http://thacker.mathcs.carleton,edu:5207/'
     images_base_url = 'http://thacker.mathcs.carleton.edu:5116/image?'

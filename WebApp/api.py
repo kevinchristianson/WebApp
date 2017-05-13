@@ -44,9 +44,31 @@ def set_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
+
 @app.route('/schools/search/')
 def no_param_search():
     return json.dumps([])
+
+
+def format_school(school):
+    if school['acceptance_rate'] is not None:
+        school['acceptance_rate'] = str(round(school['acceptance_rate'] * 100, 2)) +'%'
+    if (school['in_state_tuition'] is not None) and (len(str(school['in_state_tuition'])) == 4):
+        school['in_state_tuition'] = str(school['in_state_tuition'])[0] + ',' \
+        + str(school['in_state_tuition'])[1:]
+    elif (school['in_state_tuition'] is not None) and (len(str(school['in_state_tuition'])) == 5):
+        school['in_state_tuition'] = str(school['in_state_tuition'])[0:2] + ',' \
+        + str(school['in_state_tuition'])[2:]
+    if (school['out_state_tuition'] is not None) and (len(str(school['out_state_tuition'])) == 4):
+        school['out_state_tuition'] = str(school['out_state_tuition'])[0] + ',' \
+        + str(school['out_state_tuition'])[1:]
+    elif (school['out_state_tuition'] is not None) and (len(str(school['out_state_tuition'])) == 5):
+        school['out_state_tuition'] = str(school['out_state_tuition'])[0:2] + ',' \
+        + str(school['out_state_tuition'])[2:]
+    for key, value in school.items():
+        if value == None:
+            print(value)
+            school[key] = 'Data Not Available'
 
 
 @app.route('/schools/search/<search_text>')
@@ -74,8 +96,9 @@ def get_school(search_text):
     for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_school', search_text=row[0], _external=True)
         school = {'name': row[0], 'state': row[1], 'in_state_tuition': row[2], 'out_state_tuition': row[3],
-                  'acceptance_rate': str(round(row[4]*100, 2))+'%', 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
+                  'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
                   'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}
+        format_school(school)
         school_list.append(school)
     return json.dumps(school_list)
 

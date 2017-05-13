@@ -67,8 +67,7 @@ def format_school(school):
         + str(school['out_state_tuition'])[2:]
     for key, value in school.items():
         if value == None:
-            print(value)
-            school[key] = 'Data Not Available'
+            school[key] = 'Data not available'
 
 
 @app.route('/schools/search/<search_text>')

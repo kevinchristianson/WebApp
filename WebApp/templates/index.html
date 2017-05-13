@@ -20,14 +20,16 @@
 
         <h2 class="search_text" align="center">School Search</h2>
         <p>
-            <input id="input_college" type="text" />
-            <button onclick="onCollegeSearchButton()">Search</button>
+            <input id="input_college" type="text" onkeyup="if (event.keyCode == 13)
+                                                               document.getElementById('button_college').click()"   />
+            <button id = "button_college" onclick="onCollegeSearchButton()">Search</button>
         </p>
         <p id="college_results_element" align="center"></p>
         <h3 class="description" align="center">Enter a state's abbreviation to view all of its colleges and universities:</h3>
         <p>
-            <input id="input_state" type="text" />
-            <button onclick="onStateSearchButton()">Search</button>
+            <input id="input_state" type="text" onkeyup="if (event.keyCode == 13)
+                                                               document.getElementById('button_state').click()" />
+            <button id="button_state" onclick="onStateSearchButton()">Search</button>
         </p>
         <p id="state_results_element" align="center"></p>
         <div align="center">

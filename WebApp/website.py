@@ -18,7 +18,7 @@ app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 @app.route('/')
 def get_main_page():
     ''' This is the only route intended for human users '''
-    return flask.render_template('index.html', message = '')
+    return flask.render_template('index.html', message = ['', ''])
 
 @app.route('/schools/search/<search_text>')
 def get_school_search_page(search_text):
@@ -48,7 +48,7 @@ def get_school_search_page(search_text):
     elif (len(college_list) > 1):
         return flask.render_template('state_page.html', message = college_list)
     else:
-        return flask.render_template('index.html', message = 'No Results Found')
+        return flask.render_template('index.html', message = ['No Results Found',''])
 
 @app.route('/schools/by_state/<search_text>')
 def get_state_search_page(search_text):
@@ -60,7 +60,7 @@ def get_state_search_page(search_text):
     string_from_server = data_from_server.decode('utf-8')
     college_list = json.loads(string_from_server)
     if (len(college_list) == 0):
-        return flask.render_template('index.html', message = 'No Results Found')
+        return flask.render_template('index.html', message = ['','No Results Found'])
     return flask.render_template('state_page.html', message = college_list)
 
 if __name__ == '__main__':

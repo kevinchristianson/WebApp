@@ -24,7 +24,7 @@
                 document.getElementById('button_college').click()"   />
             <button id = "button_college" onclick="onCollegeSearchButton()">Search</button>
         </p>
-        <p id="college_results_element" align="center">{{message}}</p>
+        <p id="college_results_element" align="center">{{message[0]}}</p>
         <br>
         <h2 class="search_text" align="center">State Search</h2>
         <h3 class="description" align="center">Enter a state's name or abbreviation to view its institutions</h3>
@@ -33,7 +33,7 @@
                 document.getElementById('button_state').click()" />
             <button id="button_state" onclick="onStateSearchButton()">Search</button>
         </p>
-        <p id="state_results_element" align="center"></p>
+        <p id="state_results_element" align="center">{{message[1]}}</p>
     </div>
 </body>
 </html>

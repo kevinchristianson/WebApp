@@ -11,6 +11,17 @@ function onCollegeSearchButton() {
     document.location.href = url;
 }
 
+function onLoadMultipleResults(message) {
+    tableBody = '';
+    for (var i = 1; i < message.length; i++) {
+        tableBody += '<tr>';
+        tableBody += '<td><a href = ' + message[i]['url'] + '>' + message[i]['name'] + '</a></td>';
+        tableBody += '</tr>';
+    }
+    var schoolTable = document.getElementById('school_table');
+    schoolTable.innerHTML = tableBody;
+}
+
 function onStateSearchButton() {
     var stateSearchElement = document.getElementById('input_state');
     var url = website_base_url + 'schools/by_state/' + stateSearchElement.value;

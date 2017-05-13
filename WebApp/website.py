@@ -63,7 +63,8 @@ def get_school_search_page(search_text):
                                  'http://www.wellesleysocietyofartists.org/image-not-found/'])
         return flask.render_template('college_page.html', message = college_list)
     elif len(college_list) > 1:
-        return flask.render_template('state_page.html', message = college_list)
+        college_list.insert(0, search_text)
+        return flask.render_template('multiple_results_page.html', message = college_list)
     else:
         return flask.render_template('index.html', message = ['No Results Found',''])
 

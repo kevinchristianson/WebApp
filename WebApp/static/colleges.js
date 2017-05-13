@@ -28,13 +28,9 @@ function onLoadStates(message) {
     schoolTable.innerHTML = tableBody;
 }
 
-// for when server does not support html5 loop for video on homepage
-function repeat(){
-    var film = document.getElementsByTagName('video')[0];
-    film.play();
-}
+var video = document.getElementsByTagName('video')[0];
 var isPlaying = video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2;
 
 if (!isPlaying){
-    repeat()
+    video.play();
 }

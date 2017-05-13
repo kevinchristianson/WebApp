@@ -47,18 +47,12 @@ fabric.properties
 
 TTT3D/.idea/workspace.xml
 
-*.class
+**/**/**/*.class
 
-**/.xml
+**/**/**/*.xml
 
-**/.iml
+**/**/**/*.iml
 
-*.xml
+**/**/**/*.pyc
 
-*.iml
-
-*.iml
-
-*.xml
-
-*.pyc
+**/**/**/config.py

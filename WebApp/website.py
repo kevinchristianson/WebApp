@@ -36,15 +36,19 @@ def get_school_search_page(search_text):
             college_list[0]['designation'] = 'Public'
             college_list[0]['tuition_text'] = ['', 'In-State Tuition: ', 'Out-of-State Tuition: ']
             college_list[0]['tuition'] = ''
-            college_list[0]['in_state_tuition'] = '$' + college_list[0]['in_state_tuition']
-            college_list[0]['out_state_tuition'] = '$' + college_list[0]['out_state_tuition']
+            if college_list[0]['in_state_tuition'] != 'Data not available':
+                college_list[0]['in_state_tuition'] = '$' + college_list[0]['in_state_tuition']
+                college_list[0]['out_state_tuition'] = '$' + college_list[0]['out_state_tuition']
         else:
             if college_list[0]['designation'] == 2:
                 college_list[0]['designation'] = 'Private'
             elif college_list[0]['designation'] == 3:
                 college_list[0]['designation'] = 'For-profit'
             college_list[0]['tuition_text'] = ['Tuition: ', '', '']
-            college_list[0]['tuition'] = '$' + college_list[0]['in_state_tuition']
+            if college_list[0]['in_state_tuition'] != 'Data not available':
+                college_list[0]['tuition'] = '$' + college_list[0]['in_state_tuition']
+            else:
+                college_list[0]['tuition'] = college_list[0]['in_state_tuition']
             college_list[0]['in_state_tuition'] = ''
             college_list[0]['out_state_tuition'] = ''
 

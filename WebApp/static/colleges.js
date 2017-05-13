@@ -30,7 +30,7 @@ function onLoadStates(message) {
 
 window.onload = function() {
     document.getElementsByTagName('video')[0].onended = function () {
-       // this.load();
-        this.play();
+        this.load();
+       // this.play();
     }
 }

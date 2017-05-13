@@ -2,18 +2,18 @@
 '''
     config.py
     Kevin Christianson and Isaac Haseley
-    Database login info for our college metrics web app
+    Info for database login and server ports
 '''
 
-# Change these values as appropriate for your postgresql setup.
-kevin = True
+# Change these values as appropriate for your setup.
+kevin = False
 thacker = False
 if kevin:
     database = 'kevinchristianson'
     user = 'kevinchristianson'
     password = ''
 else:
-    database = 'CollegeMetrics'
+    database = 'collegemetrics'
     user = 'haseleyi'
     password = ''
 if thacker:

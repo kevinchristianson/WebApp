@@ -74,7 +74,7 @@ def get_school(search_text):
     for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_school', search_text=row[0], _external=True)
         school = {'name': row[0], 'state': row[1], 'in_state_tuition': row[2], 'out_state_tuition': row[3],
-                  'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
+                  'acceptance_rate': str(round(row[4]*100, 2))+'%', 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
                   'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}
         #if None is returned, have it be a more helpful message
         for key, value in school.items():

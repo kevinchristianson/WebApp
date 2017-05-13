@@ -16,25 +16,24 @@
                 <source src="{{ url_for('static', filename='carleton_footage.mp4') }}" type="video/mp4">
             </video>
         </div>
-        <h3 class="description" align="center">We provide stats for colleges and universities around the United States</h3>
-
+        <br>
         <h2 class="search_text" align="center">School Search</h2>
+        <h3 class="description" align="center">Enter the name of a U.S. college or university</h3>
         <p>
-            <input id="input_college" type="text" onkeyup="if (event.keyCode == 13)
-                                                               document.getElementById('button_college').click()"   />
+            <input id="input_college" type="text" onkeyup="if (event.keyCode == 13) 
+                document.getElementById('button_college').click()"   />
             <button id = "button_college" onclick="onCollegeSearchButton()">Search</button>
         </p>
         <p id="college_results_element" align="center"></p>
-        <h3 class="description" align="center">Enter a state's abbreviation to view all of its colleges and universities:</h3>
+        <br>
+        <h2 class="search_text" align="center">School Search</h2>
+        <h3 class="description" align="center">Enter a state's name or abbreviation to view its institutions</h3>
         <p>
-            <input id="input_state" type="text" onkeyup="if (event.keyCode == 13)
-                                                               document.getElementById('button_state').click()" />
+            <input id="input_state" type="text" onkeyup="if (event.keyCode == 13) 
+                document.getElementById('button_state').click()" />
             <button id="button_state" onclick="onStateSearchButton()">Search</button>
         </p>
         <p id="state_results_element" align="center"></p>
-        <div align="center">
-            <a href="http://thacker.mathcs.carleton.edu:5107/states/options">All possible state acronyms</a>
-        </div>
     </div>
 </body>
 </html>

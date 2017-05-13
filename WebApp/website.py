@@ -11,13 +11,14 @@ import flask
 import config
 import json
 import urllib.request
+import os
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route('/')
 def get_main_page():
     ''' This is the only route intended for human users '''
-    return flask.render_template('index.html')
+    return flask.render_template('index.html', message = '')
 
 @app.route('/schools/search/<search_text>')
 def get_school_search_page(search_text):
@@ -35,12 +36,19 @@ def get_school_search_page(search_text):
         while ' ' in search_name:
             search_name = search_name[:search_name.index(' ')] + '_' + search_name[search_name.index(' ') + 1:]
         image_url = config.images_base_url + 'name=' + search_name + '&state=' + college_list[0]['state'].lower()
-        data_from_image_server = urllib.request.urlopen(image_url).read()
-        image_data = json.loads(data_from_image_server.decode('utf-8'))
-        college_list.append(image_data)
+        try:
+            data_from_image_server = urllib.request.urlopen(image_url).read()
+            image_data = json.loads(data_from_image_server.decode('utf-8'))
+            college_list.append(image_data)
+        except (urllib.error.HTTPError, urllib.error.URLError) as e:
+            print(e)
+            college_list.append(['http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg',
+                                 'http://www.wellesleysocietyofartists.org/image-not-found/'])
         return flask.render_template('college_page.html', message = college_list)
-
-    return flask.render_template('state_page.html', message = college_list)
+    elif (len(college_list) > 1):
+        return flask.render_template('state_page.html', message = college_list)
+    else:
+        return flask.render_template('index.html', message = 'No Results Found')
 
 @app.route('/schools/by_state/<search_text>')
 def get_state_search_page(search_text):
@@ -51,6 +59,8 @@ def get_state_search_page(search_text):
     data_from_server = urllib.request.urlopen(api_url).read()
     string_from_server = data_from_server.decode('utf-8')
     college_list = json.loads(string_from_server)
+    if (len(college_list) == 0):
+        return flask.render_template('index.html', message = 'No Results Found')
     return flask.render_template('state_page.html', message = college_list)
 
 if __name__ == '__main__':

@@ -50,6 +50,9 @@ p {
     width: 50%;
     height: 24vw;
 }
+#college_results_element{
+    color: red;
+}
 /*
 #box:hover{
     background-color: rgba(72, 61, 139, .96);

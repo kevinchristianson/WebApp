@@ -93,7 +93,10 @@ def get_school(search_text):
                ORDER BY schools.name'''.format(search_text)
     school_list = []
     for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_school', search_text=row[0], _external=True)
+        name = row[0]
+        while ' ' in name:
+            name = name[:name.index(' ')] + '_' + name[name.index(' ') + 1:]
+        url = config.website_base_url + 'schools/search/' + name
         school = {'name': row[0], 'state': row[1], 'in_state_tuition': row[2], 'out_state_tuition': row[3],
                   'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
                   'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}

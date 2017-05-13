@@ -28,7 +28,9 @@ function onLoadStates(message) {
     schoolTable.innerHTML = tableBody;
 }
 
-document.getElementsByTagName('video')[0].onended = function () {
-    this.load();
-     this.play();
-};
+window.onload = function() {
+    document.getElementsByTagName('video')[0].onended = function () {
+        this.load();
+        this.play();
+    }
+}

@@ -30,9 +30,25 @@ def get_school_search_page(search_text):
     data_from_server = urllib.request.urlopen(api_url).read()
     string_from_server = data_from_server.decode('utf-8')
     college_list = json.loads(string_from_server)
-
     if (len(college_list) == 1):
-        
+        #change designation to string
+        if college_list[0]['designation'] == 1:
+            college_list[0]['designation'] = 'Public'
+            college_list[0]['tuition_text'] = ['', 'In-State Tuition: ', 'Out-of-State Tuition: ']
+            college_list[0]['tuition'] = ''
+            college_list[0]['in_state_tuition'] = '$' + college_list[0]['in_state_tuition']
+            college_list[0]['out_state_tuition'] = '$' + college_list[0]['out_state_tuition']
+        else:
+            if college_list[0]['designation'] == 2:
+                college_list[0]['designation'] = 'Private'
+            elif college_list[0]['designation'] == 3:
+                college_list[0]['designation'] = 'For-profit'
+            college_list[0]['tuition_text'] = ['Tuition: ', '', '']
+            college_list[0]['tuition'] = '$' + college_list[0]['in_state_tuition']
+            college_list[0]['in_state_tuition'] = ''
+            college_list[0]['out_state_tuition'] = ''
+
+
         # Retrieve a college's image from Bing's image API
         search_name = college_list[0]['name'].lower()
         while ' ' in search_name:

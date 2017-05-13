@@ -11,7 +11,9 @@
 <body>
     <h1 id="page_title">{{message[0]['name']}}</h1>
     <p><b>Location:</b> {{message[0]['state']}}<br><b>Total enrollment:</b> {{message[0]['size']}}<br>
-    <b>Tuition:</b> ${{message[0]['in_state_tuition']}}<br><b>Acceptance rate:</b> {{message[0]['acceptance_rate']}}<br>
+    <b>Designation: </b>{{message[0]['designation']}}<br><b>{{message[0]['tuition_text'][0]}}</b> {{message[0]['tuition']}}<br>
+    <b>{{message[0]['tuition_text'][1]}}</b> {{message[0]['in_state_tuition']}}<br>
+    <b>{{message[0]['tuition_text'][2]}}</b> {{message[0]['out_state_tuition']}}<br><b>Acceptance rate:</b> {{message[0]['acceptance_rate']}}<br>
     <b>Midpoint ACT:</b> {{message[0]['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message[0]['midpoint_SAT']}}<br></p>
     
     <!-- The following line displays the issue: the school's URL gets tacked onto ours -->

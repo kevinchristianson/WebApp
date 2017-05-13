@@ -54,10 +54,4 @@ def get_state_search_page(search_text):
     return flask.render_template('state_page.html', message = college_list)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print('Usage: {0} host port'.format(sys.argv[0]), file=sys.stderr)
-        exit()
-
-    host = sys.argv[1]
-    port = int(sys.argv[2])
-    app.run(host=host, port=port, debug=True)
+    app.run(host=config.host, port=config.website_port, debug=True)

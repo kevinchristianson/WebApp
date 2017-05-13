@@ -9,6 +9,7 @@ from py_ms_cognitive import PyMsCognitiveImageSearch
 import flask
 import json
 from flask import request
+import config
 
 app = flask.Flask(__name__)
 
@@ -41,4 +42,4 @@ def wrong_call(e):
     return json.dumps([])
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=8082, debug=True)
+    app.run(host=config.host, port=config.images_port, debug=True)

@@ -48,7 +48,6 @@ def get_school_search_page(search_text):
             college_list[0]['in_state_tuition'] = ''
             college_list[0]['out_state_tuition'] = ''
 
-
         # Retrieve a college's image from Bing's image API
         search_name = college_list[0]['name'].lower()
         while ' ' in search_name:
@@ -63,7 +62,7 @@ def get_school_search_page(search_text):
             college_list.append(['http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg',
                                  'http://www.wellesleysocietyofartists.org/image-not-found/'])
         return flask.render_template('college_page.html', message = college_list)
-    elif (len(college_list) > 1):
+    elif len(college_list) > 1:
         return flask.render_template('state_page.html', message = college_list)
     else:
         return flask.render_template('index.html', message = ['No Results Found',''])

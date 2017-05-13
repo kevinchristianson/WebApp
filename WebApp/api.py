@@ -67,7 +67,7 @@ def format_school(school):
         + str(school['out_state_tuition'])[2:]
     for key, value in school.items():
         if value == None:
-            school[key] = 'Data Not Available'
+            school[key] = 'Data not available'
 
 
 @app.route('/schools/search/<search_text>')
@@ -99,6 +99,11 @@ def get_school(search_text):
                   'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}
         format_school(school)
         school_list.append(school)
+    for school in school_list:
+        if school['name'] == search_text:
+            exact_match = []
+            exact_match.append(school)
+            return json.dumps(exact_match)
     return json.dumps(school_list)
 
 

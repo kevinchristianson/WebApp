@@ -12,6 +12,7 @@ import config
 import json
 import urllib.request
 import os
+import http.client
 
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
 
@@ -30,8 +31,13 @@ def get_school_search_page(search_text):
     string_from_server = data_from_server.decode('utf-8')
     college_list = json.loads(string_from_server)
 
-    # Retrieve a college's image from Bing's image API
     if (len(college_list) == 1):
+        # if None is returned, have it be a more helpful message
+        for key, value in college_list[0].items():
+            if value == None:
+                school[key] = 'Data Not Available'
+        
+        # Retrieve a college's image from Bing's image API
         search_name = college_list[0]['name'].lower()
         while ' ' in search_name:
             search_name = search_name[:search_name.index(' ')] + '_' + search_name[search_name.index(' ') + 1:]
@@ -40,7 +46,7 @@ def get_school_search_page(search_text):
             data_from_image_server = urllib.request.urlopen(image_url).read()
             image_data = json.loads(data_from_image_server.decode('utf-8'))
             college_list.append(image_data)
-        except (urllib.error.HTTPError, urllib.error.URLError) as e:
+        except (urllib.error.HTTPError, urllib.error.URLError, http.client.BadStatusLine) as e:
             print(e)
             college_list.append(['http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg',
                                  'http://www.wellesleysocietyofartists.org/image-not-found/'])

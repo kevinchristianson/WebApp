@@ -44,15 +44,16 @@ p {
 #box{
     position: relative;
     top: -27px;
-    background-color: rgba(72, 61, 139, .85);
+    background-color: rgba(72, 61, 139, .95);
     border: 25px black;
     margin: auto;
     width: 50%;
     height: 24vw;
 }
+/*
 #box:hover{
     background-color: rgba(72, 61, 139, .96);
-}
+}*/
 
 /* from: https://slicejack.com/fullscreen-html5-video-background-css/ */
 .fullscreen-bg {

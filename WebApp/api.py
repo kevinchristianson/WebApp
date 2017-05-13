@@ -81,16 +81,18 @@ def get_school(search_text):
     word_list = search_text.split()
     search_text = ''
     for word in word_list:
-        if (word != 'at' and word != 'of'):
-            word = word.title()
+        if (word != 'at' and word != 'of' and word != 'and' and word != 'in'):
+            word = word.capitalize()
+        if "'" in word:
+            word = word[:word.index("'")] + "''" + word[word.index("'") + 1:]
         search_text += word + ' '
     search_text = search_text[:-1]
     query = '''SELECT schools.name, states.name, schools.in_state_tuition, schools.out_state_tuition,
                schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT,
                schools.midpoint_SAT, schools.school_site, schools.state_id
                FROM schools, states
-               WHERE schools.name LIKE '%{0}%' and schools.state_id = states.id
-               ORDER BY schools.name'''.format(search_text)
+               WHERE LOWER(schools.name) LIKE '%{0}%' and schools.state_id = states.id
+               ORDER BY schools.name'''.format(search_text.lower())
     school_list = []
     for row in _fetch_all_rows_for_query(query):
         name = row[0]
@@ -98,7 +100,7 @@ def get_school(search_text):
             name = name[:name.index(' ')] + '_' + name[name.index(' ') + 1:]
         url = config.website_base_url + 'schools/search/' + name
         school = {'name': row[0], 'state': row[1], 'in_state_tuition': row[2], 'out_state_tuition': row[3],
-                  'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT':row[7],
+                  'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT': row[7],
                   'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}
         format_school(school)
         school_list.append(school)

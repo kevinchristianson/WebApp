@@ -19,7 +19,7 @@ else:
 if thacker:
     database = 'christiansonk'
     user = 'christiansonk'
-    password = ''
+    password = 'carpet784books'
     api_base_url = 'http://thacker.mathcs.carleton.edu:5107'
     website_base_url = 'http://thacker.mathcs.carleton,edu:5207'
     images_base_url = 'http://thacker.mathcs.carleton.edu:5116'

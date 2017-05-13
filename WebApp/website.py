@@ -31,11 +31,11 @@ def get_school_search_page(search_text):
     string_from_server = data_from_server.decode('utf-8')
     college_list = json.loads(string_from_server)
 
-    if (len(college_list) == 1):
+    if len(college_list) == 1:
         # if None is returned, have it be a more helpful message
         for key, value in college_list[0].items():
             if value == None:
-                school[key] = 'Data Not Available'
+                school[key] = 'Data not available'
         
         # Retrieve a college's image from Bing's image API
         search_name = college_list[0]['name'].lower()
@@ -51,7 +51,7 @@ def get_school_search_page(search_text):
             college_list.append(['http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg',
                                  'http://www.wellesleysocietyofartists.org/image-not-found/'])
         return flask.render_template('college_page.html', message = college_list)
-    elif (len(college_list) > 1):
+    elif len(college_list) > 1:
         return flask.render_template('state_page.html', message = college_list)
     else:
         return flask.render_template('index.html', message = ['No Results Found',''])

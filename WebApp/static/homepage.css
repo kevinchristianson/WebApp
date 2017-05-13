@@ -48,7 +48,7 @@ p {
     border: 25px black;
     margin: auto;
     width: 50%;
-    height: 20vw;
+    height: 23vw;
 }
 #box:hover{
     background-color: rgba(72, 61, 139, .96);

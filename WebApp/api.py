@@ -1,7 +1,8 @@
 '''
     api.py
     Kevin Christianson and Isaac Haseley
-    Simple Flask API for our college metrics web app
+    
+    Flask API for our college metrics web app
 '''
 import sys
 import flask
@@ -45,11 +46,6 @@ def set_headers(response):
     return response
 
 
-@app.route('/schools/search/')
-def no_param_search():
-    return json.dumps([])
-
-
 def format_school(school):
     if school['acceptance_rate'] is not None:
         school['acceptance_rate'] = str(round(school['acceptance_rate'] * 100, 2)) +'%'
@@ -74,15 +70,14 @@ def format_school(school):
 def get_school(search_text):
     '''
     :param search_text
-    :return: A list of all the schools in our database, in alphabetical order, that match the search text
+    :return: A list of all the schools in our database, in alphabetical order, that match the search text. If
+        a school name matches the search text exactly, just returns that school.
     '''
     while '_' in search_text:
         search_text = search_text[:search_text.index('_')] + ' ' + search_text[search_text.index('_') + 1:]
     word_list = search_text.split()
     search_text = ''
     for word in word_list:
-        if (word != 'at' and word != 'of' and word != 'and' and word != 'in'):
-            word = word.capitalize()
         if "'" in word:
             word = word[:word.index("'")] + "''" + word[word.index("'") + 1:]
         search_text += word + ' '
@@ -112,11 +107,6 @@ def get_school(search_text):
     return json.dumps(school_list)
 
 
-@app.route('/schools/by_state/')
-def no_param_state():
-    return json.dumps([])
-
-
 @app.route('/schools/by_state/<search_text>/')
 def get_schools_by_state(search_text):
     '''
@@ -135,7 +125,6 @@ def get_schools_by_state(search_text):
                FROM schools, states
                WHERE schools.state_id = states.id and (states.abbrev = '{0}' or states.name = '{0}')
                ORDER BY schools.name'''.format(search_text)
-
     school_list = []
     added_state_name = False
     for row in _fetch_all_rows_for_query(query):
@@ -161,20 +150,30 @@ def help():
     return json.dumps(rule_list)
 
 
-@app.route('/states/options/')
+@app.route('/state_options')
 def options():
     states_list = []
     query = '''SELECT states.abbrev, states.name FROM states ORDER BY states.abbrev'''
     for row in _fetch_all_rows_for_query(query):
-        url = flask.url_for('get_schools_by_state', state_abbreviation=row[0], _external=True)
+        url = flask.url_for('get_schools_by_state', search_text=row[0], _external=True)
         result = [row[0],row[1],url]
         states_list.append(result)
     return json.dumps(states_list)
 
 
+@app.route('/schools/search/')
+def no_param_search():
+    return json.dumps([])
+
+
+@app.route('/schools/by_state/')
+def no_param_state():
+    return json.dumps([])
+
+
 @app.errorhandler(404)
 def page_not_found(e):
-    return json.dumps(['PAGE NOT FOUND, AND YET HERE YOU ARE','SEE HELP FOR MORE INFO: http://thacker.mathcs.carleton.edu:5107/help'])
+    return json.dumps(['PAGE NOT FOUND, AND YET HERE YOU ARE','SEE HELP FOR MORE INFO: http://thacker.mathcs.carleton.edu:5207/help'])
 
 
 if __name__ == '__main__':

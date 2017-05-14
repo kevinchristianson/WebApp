@@ -11,19 +11,6 @@
 <body onload="onLoadSchool({{message[0]}})">
     <h1 id="page_title">{{message[0]['name']}}</h1>
     <p><table id="info_table"></table></p>
-
-    <!--<p><b>Location:</b> {{message[0]['state']}}<br><b>Total enrollment:</b> {{message[0]['size']}}<br>
-    <b>Designation: </b>{{message[0]['designation']}}<br><b>{{message[0]['tuition_text'][0]}}</b> {{message[0]['tuition']}}<br>
-    <b>{{message[0]['tuition_text'][1]}}</b> {{message[0]['in_state_tuition']}}<br>
-    <b>{{message[0]['tuition_text'][2]}}</b> {{message[0]['out_state_tuition']}}<br><b>Acceptance rate:</b> {{message[0]['acceptance_rate']}}<br>
-    <b>Midpoint ACT:</b> {{message[0]['midpoint_ACT']}}<br><b>Midpoint SAT:</b> {{message[0]['midpoint_SAT']}}<br></p>-->
-    
-    <!-- The following line displays the issue: the school's URL gets tacked onto ours -->
-    <!--<p><b>Institution website:</b> <a href = "http://{{message[0]['school_site']}}">{{message[0]['school_site']}}</a></p>-->
-
-    <!-- The following lines are an attempt to solve -->
-    <!-- <p id="institution_website"></p>
-    <script type="text/javascript">insertInstitutionWebsite(document.message[0]);</script> -->
     <div id="image_box">
         <img src={{message[1][0]}}>
         <a href={{message[1][1]}}>image source</a>

@@ -1,11 +1,7 @@
 html {
     height: 100%;
 }
-/*body {
-    background-image: url(college_background.jpg);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}*/
+
 #page_title{
     text-align: center;
     font-size: 250%;
@@ -13,34 +9,41 @@ html {
     background-color: #AAAAAA;
     line-height: 150%;
 }
+
 #descriptor{
     text-align: center;
     font-size: 20px;
     line-height: 5px;
 }
+
 #description{
     text-align: center;
     font-size: 20px;
     line-height: 50px;
 }
+
 .search_text{
     font-size: 175%;
     text-shadow: 1px 2px red;
     line-height: 55%;
 }
+
 .search_sub{
     text-align: center;
     font-size: 150%;
 }
+
 p {
     text-align: center;
 }
+
 #reference{
     text-align: center;
     position: fixed;
     bottom: 0;
     color: firebrick;
 }
+
 #box{
     position: relative;
     top: -27px;
@@ -50,16 +53,14 @@ p {
     width: 50%;
     height: 26vw;
 }
+
 #college_results_element{
     color: red;
 }
+
 #state_results_element{
     color: red;
 }
-/*
-#box:hover{
-    background-color: rgba(72, 61, 139, .96);
-}*/
 
 /* from: https://slicejack.com/fullscreen-html5-video-background-css/ */
 .fullscreen-bg {

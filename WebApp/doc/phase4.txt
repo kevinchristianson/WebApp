@@ -29,14 +29,15 @@ SYNOPSIS: Get a single school
 QUERY (GET): /schools/search/<search_text>
 
 RESPONSE: A list containing a dictionary for each school matching the search criteria. Dictionary keys include 
-    'name,' 'state,' 'in_state_tuition,' 'out_state_tuition,' 'acceptance_rate,' 'designation,' 'size,' 'midpoint_ACT,'
-    'midpoint_SAT,' 'school site,' and 'url'
+    'name,' 'state,' 'in_state_tuition,' 'out_state_tuition,' 'acceptance_rate,' 'designation,' 'size,'
+    'midpoint_ACT,' 'midpoint_SAT,' 'school site,' and 'url'. If the search text exactly matches a school name,
+    returns only that school.
 
 EXAMPLE: http://whatever.com/schools/search/Carleton_College
 
-[{'name':'Carleton College', 'state':'Minnesota', 'in_state_tuition':47736, 'out_state_tuition':47736, 'acceptance_rate':22.77,
-    'designation':'2', 'size':2042, 'midpoint_ACT':32, 'midpoint_SAT':1408, 'school_site':'www.carleton.edu',
-    'url':<Flask URL for school here>}]
+[{'name':'Carleton College', 'state':'Minnesota', 'in_state_tuition':47736, 'out_state_tuition':47736, 
+    'acceptance_rate':22.77, 'designation':'2', 'size':2042, 'midpoint_ACT':32, 'midpoint_SAT': 1408,
+    'school_site':'www.carleton.edu', 'url':<Flask URL for school here>}]
 
 -------------------------------------------------------------
 
@@ -44,23 +45,24 @@ SYNOPSIS: Get a list of all schools in a state
 
 QUERY (GET): /schools/by_state/<state_abbreviation>
 
-RESPONSE: A list containing lists with the name and URL of all schools in the given state
+RESPONSE: A list containing the state's name followed by lists with the names and URLs of all schools therein
+    sorted alphabetically by school name
 
 EXAMPLE: http://whatever.com/schools/by_state/MN
 
-[['Carleton College', <Flask URL for school here>], ['St. Olaf', <Flask URL for school here>],
+["Minnesota", ..., ['Carleton College', <Flask URL for school here>], ..., ['St. Olaf', <Flask URL for school here>],
     ['The University of Minnesota: Twin Cities', <Flask URL for school here>], ...]
 
 -------------------------------------------------------------
 
 SYNOPSIS: Get a list of all valid states and their abbreviations
 
-QUERY (GET): /states/options
+QUERY (GET): /state_options
 
 RESPONSE: A list containing 59 lists of 3 elements each: state abbreviation, state name,
     and URL with which to search for all schools in that state
 
-EXAMPLE: http://whatever.com/states/options
+EXAMPLE: http://whatever.com/state_options
 
 [[["AK", "Alaska", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AK/"], 
     ["AL", "Alabama", "http://thacker.mathcs.carleton.edu:5107/schools/by_state/AL/"], 
@@ -69,13 +71,14 @@ EXAMPLE: http://whatever.com/states/options
 
 -------------------------------------------------------------
 
-SYNOPSIS: Get a list of API routes we want users to take
+SYNOPSIS: Get a list of API routes that users can take
 
 QUERY (GET): /help
 
-RESPONSE: A list containing routes with which to query the API ignoring "/states/options/" and "/schools/by_state/" routes which were made to handle edge cases, and the "/static/…" route because it isn't one of our basic queries.
+RESPONSE: A list containing routes with which to query the API ignoring "/schools/search_text/" and "/schools/by_state/"
+    routes which were made to handle edge cases, and the "/static/…" route because it isn't one of our basic queries.
 
 EXAMPLE: http://whatever.com/help
 
-["/states/options/", "/help", "/schools/by_state/<state_abbreviation>/",
+["/state_options/", "/help", "/schools/by_state/<state_abbreviation>/",
     "/schools/search/<search_text>"]

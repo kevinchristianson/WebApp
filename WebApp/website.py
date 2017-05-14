@@ -24,6 +24,7 @@ def get_main_page():
 @app.route('/schools/search/<search_text>')
 def get_school_search_page(search_text):
     # Retrieve a college's data from the API
+    original_input = search_text
     while ' ' in search_text:
         search_text = search_text[:search_text.index(' ')] + '_' + search_text[search_text.index(' ') + 1:]
     api_url = config.api_base_url + 'schools/search/' + search_text
@@ -67,7 +68,7 @@ def get_school_search_page(search_text):
                                  'http://www.wellesleysocietyofartists.org/image-not-found/'])
         return flask.render_template('college_page.html', message = college_list)
     elif len(college_list) > 1:
-        college_list.insert(0, search_text)
+        college_list.insert(0, original_input)
         return flask.render_template('multiple_results_page.html', message = college_list)
     else:
         return flask.render_template('index.html', message = ['No Results Found',''])

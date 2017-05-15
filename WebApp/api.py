@@ -18,9 +18,6 @@ def _fetch_all_rows_for_query(query):
     '''
     Returns a list of rows obtained from the books database by the specified SQL
     query. If the query fails for any reason, an empty list is returned.
-    Note that this is not necessarily the right error-handling choice. Would users
-    of the API like to know the nature of the error? Do we as API implementors
-    want to share that information? There are many considerations to balance.
     '''
     try:
         connection = psycopg2.connect(database=config.database, user=config.user, password=config.password)
@@ -47,6 +44,9 @@ def set_headers(response):
 
 
 def format_school(school):
+    '''
+    Adds % to acceptance rate, comma to tuition, 'Data not available' when that's the case
+    '''
     if school['acceptance_rate'] is not None:
         school['acceptance_rate'] = str(round(school['acceptance_rate'] * 100, 2)) +'%'
     if (school['in_state_tuition'] is not None) and (len(str(school['in_state_tuition'])) == 4):
@@ -82,6 +82,8 @@ def get_school(search_text):
             word = word[:word.index("'")] + "''" + word[word.index("'") + 1:]
         search_text += word + ' '
     search_text = search_text[:-1]
+    while ';' in search_text:
+        search_text = search_text[:search_text.index(';')] + search_text[search_text.index(';') + 1:]
     query = '''SELECT schools.name, states.name, schools.in_state_tuition, schools.out_state_tuition,
                schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT,
                schools.midpoint_SAT, schools.school_site, schools.state_id
@@ -142,6 +144,9 @@ def get_schools_by_state(search_text):
 
 @app.route('/help')
 def help():
+    '''
+    :return: A list of API routes
+    '''
     rule_list = []
     for rule in app.url_map.iter_rules():
         rule_text = rule.rule.replace('<', '&lt;').replace('>', '&gt;')
@@ -152,11 +157,14 @@ def help():
 
 @app.route('/state_options')
 def options():
+    '''
+    :return: A list of possible state abbreviations and names
+    '''
     states_list = []
     query = '''SELECT states.abbrev, states.name FROM states ORDER BY states.abbrev'''
     for row in _fetch_all_rows_for_query(query):
         url = flask.url_for('get_schools_by_state', search_text=row[0], _external=True)
-        result = [row[0],row[1],url]
+        result = [row[0], row[1], url]
         states_list.append(result)
     return json.dumps(states_list)
 

@@ -11,6 +11,7 @@ function onCollegeSearchButton() {
     document.location.href = url;
 }
 
+// Creates a table of colleges that resulted from a user's search
 function onLoadMultipleResults(message) {
     tableBody = '';
     for (var i = 1; i < message.length; i++) {
@@ -28,6 +29,7 @@ function onStateSearchButton() {
     document.location.href = url;
 }
 
+// Creates a table of colleges located in the state of interest
 function onLoadStates(message) {
     tableBody = '';
     for (var i = 1; i < message.length; i++) {
@@ -45,7 +47,8 @@ window.onload = function() {
     }
 }
 
-function onLoadSchool(message){
+// Creates a table of metrics on a single college
+function onLoadSchool(message) {
     tableBody = "<p><b>Location: </b>" + message['state'] + "<br></p><p><b>Total enrollment: </b>" + message['size'] + "<br></p>";
     tableBody += "<p><b>Designation: </b>" + message['designation'] + "<br></p><p><b>";
     if (message['tuition_text'][0] != '') {

@@ -23,6 +23,10 @@ def get_main_page():
 
 
 def format_tuition(college_list):
+    '''
+    Formats school designation (public/private/for-profit)
+    Formats relevant tuition accordingly
+    '''
     if college_list[0]['designation'] == 1:
         college_list[0]['designation'] = 'Public'
         college_list[0]['tuition_text'] = ['', 'In-state tuition: ', 'Out-of-state tuition: ']
@@ -45,6 +49,9 @@ def format_tuition(college_list):
 
 
 def get_school_image(college_list):
+    '''
+    Retrieves an image from the Bing images API
+    '''
     search_name = college_list[0]['name'].lower()
     while ' ' in search_name:
         search_name = search_name[:search_name.index(' ')] + '_' + search_name[search_name.index(' ') + 1:]
@@ -54,13 +61,16 @@ def get_school_image(college_list):
         image_data = json.loads(data_from_image_server.decode('utf-8'))
         college_list.append(image_data)
     except (urllib.error.HTTPError, urllib.error.URLError, http.client.BadStatusLine) as e:
-        print(e)
         college_list.append(['http://www.wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg',
                              'http://www.wellesleysocietyofartists.org/image-not-found/'])
 
 
 @app.route('/schools/search/<search_text>')
 def get_school_search_page(search_text):
+    '''
+    If user search yields a single college, takes user to that college's page
+    If it yields multiple colleges, offers user those options
+    '''
     original_input = search_text
     while ' ' in search_text:
         search_text = search_text[:search_text.index(' ')] + '_' + search_text[search_text.index(' ') + 1:]
@@ -80,6 +90,9 @@ def get_school_search_page(search_text):
 
 @app.route('/schools/by_state/<search_text>')
 def get_state_search_page(search_text):
+    '''
+    Brings user to page displaying all colleges and universities in the state of interest
+    '''
     while ' ' in search_text:
         search_text = search_text[:search_text.index(' ')] + '_' + search_text[search_text.index(' ') + 1:]
     api_url = config.api_base_url + 'schools/by_state/' + search_text

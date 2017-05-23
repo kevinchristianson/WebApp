@@ -59,7 +59,7 @@ public class SpriteWorld extends Application {
         double mooseVelocityX = 3.0;
         double mooseVelocityY = 5.0;
 
-        sprite = new SpinningMoose();
+        sprite = new KevinChristianson();
         sprite.setName("Bullwinkle");
         sprite.setSize(mooseWidth, mooseHeight);
         sprite.setPosition(mooseX, mooseY);

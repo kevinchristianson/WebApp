@@ -37,21 +37,21 @@ public class KevinChristianson extends Sprite {
         this.imageView.setFitHeight(height);
     }
 
-    /*
-    public void setVelocity(int xvel, int yvel) {
-        if(xvel > 0 && !this.lookRight) {
+
+    public void setDirection() {
+        if(this.getVelocity().getX() > 0 && !this.lookRight) {
             this.getTransforms().add(new Rotate(180, this.getSize().getX() / 2, this.getSize().getY() / 2));
             this.lookRight = true;
-        }else if(xvel < 0 && this.lookRight){
+        }else if(this.getVelocity().getX() < 0 && this.lookRight){
             this.getTransforms().add(new Rotate(180, this.getSize().getX() / 2, this.getSize().getY() / 2));
             this.lookRight = false;
         }
-        super.setVelocity(xvel, yvel);
     }
-    */
-    
+
+
     @Override
     public void step(){
+        setDirection();
         this.animationCounter++;
         if(this.animationCounter > 10) {
             if (this.isOpen) {

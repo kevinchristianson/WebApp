@@ -25,7 +25,7 @@ public class College {
 
     /**
      * Constructs College with API data
-     * @param apiDictionary - dictionary returned from our API
+     * @param apiDictionary - Dictionary returned from our API
      */
     public College(HashMap apiDictionary) {
     }

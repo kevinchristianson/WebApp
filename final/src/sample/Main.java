@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.*;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Main extends Application {
 
@@ -19,20 +21,27 @@ public class Main extends Application {
     }
 
     public static void iCanHasInternat() throws IOException {
-        URL url = new URL("http://thacker.mathcs.carleton.edu:5107/schools/search/carleton_college");
-        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-        String inputLine;
-        while ((inputLine = in.readLine()) != null)
-            System.out.println(inputLine);
-        in.close();
+//        URL url = new URL("http://thacker.mathcs.carleton.edu:5107/schools/search/carleton_college");
+//        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+//        String inputLine;
+//        Map<String, String> myMap = new HashMap<>();
+//        String[] pairs = inputLine.split(",");
+//        for (int i = 0; i < pairs.length; i++) {
+//            String pair = pairs[i]
+//            String[] keyValue = pair.split(":");
+//            myMap.put(keyValue[0], Integer.valueOf(keyValue[1]));
+//        }
+////        while ((inputLine = in.readLine()) != null)
+////            System.out.println(inputLine);
+//        in.close();
     }
 
     public static void main(String[] args) {
-        try {
-            iCanHasInternat();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            iCanHasInternat();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         launch(args);
     }
 }

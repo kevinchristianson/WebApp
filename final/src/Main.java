@@ -7,7 +7,6 @@ import java.io.*;
 import java.net.*;
 import java.util.Map;
 import java.util.HashMap;
-import JSONParser;
 
 public class Main extends Application {
 
@@ -33,7 +32,7 @@ public class Main extends Application {
 ////        while ((inputLine = in.readLine()) != null)
 ////            System.out.println(inputLine);
 //        in.close();
-        JSONParser parser = new JSONParser();
+//        JSONParser parser = new JSONParser();
 
     }
 

@@ -46,9 +46,19 @@ public class Controller {
     }
 
     public void onRankCollegesButton(ActionEvent actionEvent) {
-        if(percentage < 0 || (0 < percentage && percentage < 100)){
+        try {
+            percentage = Double.parseDouble(tuition.getText()) + Double.parseDouble(ACT.getText()) + Double.parseDouble(acceptance_rate.getText());
+        }catch (NumberFormatException e) {
+            //print error message to screen
+            return;
+        }
+        if(percentage < 0 || percentage > 100){
             // print error message to screen
             return;
+        }
+        double rate = 1;
+        if(0 < percentage && percentage < 100){
+            rate = 1/(percentage/100);
         }
         return;
     }

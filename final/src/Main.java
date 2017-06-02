@@ -1,19 +1,16 @@
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends Application {
 
@@ -36,6 +33,8 @@ public class Main extends Application {
         JsonObject myObject = myArray.get(0).getAsJsonObject();
         System.out.println(myObject.get("name"));
 
+//        Type collegeMap = new TypeToken<Map<String, String>>(){}.getType();
+//        Map<String, String> carleton = Gson.fromJson()
     }
 
     public static void main(String[] args) {

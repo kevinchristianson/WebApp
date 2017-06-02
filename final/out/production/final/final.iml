@@ -9,5 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="gson-2.8.1-javadoc" level="project" />
+    <orderEntry type="library" name="gson-2.8.1-sources" level="project" />
+    <orderEntry type="library" name="gson-2.8.1" level="project" />
   </component>
 </module>

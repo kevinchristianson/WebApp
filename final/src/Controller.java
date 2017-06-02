@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TextField;
 
@@ -25,6 +26,8 @@ public class Controller {
     private TextField ACT;
     @FXML
     private TextField acceptance_rate;
+    @FXML
+    private Label error_text;
 
     private double percentage = 0.0;
 
@@ -41,23 +44,25 @@ public class Controller {
         ACT.setText("00");
         acceptance_rate.setText("00");
         percentage = 0.0;
+        error_text.setText("");
     }
 
     public void onRankCollegesButton(ActionEvent actionEvent) {
         try {
             percentage = Double.parseDouble(tuition.getText()) + Double.parseDouble(ACT.getText()) + Double.parseDouble(acceptance_rate.getText());
         } catch (NumberFormatException e) {
-            //print error message to screen
+            error_text.setText("Metric value not a number");
             return;
         }
         if (percentage < 0 || percentage > 100) {
-            // print error message to screen
+            error_text.setText("Invalid percentage");
             return;
         }
         double rate = 1;
         if (0 < percentage && percentage < 100) {
             rate = 1 / (percentage / 100);
         }
+        error_text.setText("");
         return;
     }
 

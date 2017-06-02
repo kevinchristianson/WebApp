@@ -23,18 +23,23 @@ public class Main extends Application {
     }
 
     public static void iCanHasInternat() throws IOException {
-        URL url = new URL("http://thacker.mathcs.carleton.edu:5107/schools/search/carleton_college");
+        URL url = new URL("http://thacker.mathcs.carleton.edu:5107/schools/all");
         BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
         String apiOutput = in.readLine();
 
         JsonParser myParser = new JsonParser();
         JsonElement myElement = myParser.parse(apiOutput);
         JsonArray myArray = myElement.getAsJsonArray();
-        JsonObject myObject = myArray.get(0).getAsJsonObject();
-        System.out.println(myObject.get("name"));
+        Gson gson = new Gson();
+        Type collegeMap = new TypeToken<Map<String, String>>(){}.getType();
 
-//        Type collegeMap = new TypeToken<Map<String, String>>(){}.getType();
-//        Map<String, String> carleton = Gson.fromJson()
+        for (int i = 0; i < myArray.size(); i++) {
+            JsonObject myObject = myArray.get(i).getAsJsonObject();
+            Map<String, String> carleton = gson.fromJson(myObject, collegeMap);
+            for (Map.Entry<String, String> entry : carleton.entrySet()) {
+                System.out.println(entry.getKey() + ": " + entry.getValue());
+            }
+        }
     }
 
     public static void main(String[] args) {

@@ -142,6 +142,28 @@ def get_schools_by_state(search_text):
     return json.dumps(school_list)
 
 
+@app.route('/schools/all')
+def get_all_schools():
+    query = '''SELECT schools.name, states.name, schools.in_state_tuition, schools.out_state_tuition,
+               schools.acceptance_rate, schools.designation, schools.size, schools.midpoint_ACT,
+               schools.midpoint_SAT, schools.school_site, schools.state_id
+               FROM schools, states
+               WHERE schools.state_id = states.id
+               ORDER BY schools.name''' 
+    school_list = []
+    for row in _fetch_all_rows_for_query(query):
+        name = row[0]
+        while ' ' in name:
+            name = name[:name.index(' ')] + '_' + name[name.index(' ') + 1:]
+        url = config.website_base_url + 'schools/search/' + name
+        school = {'name': row[0], 'state': row[1], 'in_state_tuition': row[2], 'out_state_tuition': row[3],
+                  'acceptance_rate': row[4], 'designation': row[5], 'size': row[6], 'midpoint_ACT': row[7],
+                  'midpoint_SAT': row[8], 'school_site': row[9], 'url': url}
+        format_school(school)
+        school_list.append(school)
+    return json.dumps(school_list)
+
+
 @app.route('/help')
 def help():
     '''

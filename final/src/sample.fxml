@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane fx:controller="Controller" xmlns:fx="http://javafx.com/fxml">
 
     <AnchorPane fx:id="title"
@@ -52,16 +53,15 @@
 
         <Label fx:id="error_text" style="-fx-font-size: 115%" AnchorPane.topAnchor="230" AnchorPane.leftAnchor="30" textFill="red" />
     </AnchorPane>
-    <AnchorPane fx:id="results"
-                AnchorPane.topAnchor="100" AnchorPane.leftAnchor="250" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0"
-                style="-fx-background-color: #c7ad88; -fx-border-color:black; -fx-border-width:1px 0px 1px 0px;">
-    </AnchorPane>
+    <ScrollPane style="-fx-background:#c7ad88;"
+                AnchorPane.topAnchor="100" AnchorPane.leftAnchor="250" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" >
+        <AnchorPane fx:id="results" />
+    </ScrollPane>
     <AnchorPane fx:id="bottom"
                 AnchorPane.topAnchor="800" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="600" AnchorPane.bottomAnchor="0"
                 style="-fx-background-color: #373737; -fx-border-color:black; -fx-border-width:1px 0px 1px 0px;">
-        <Button fx:id="start_over_button" text="Start Over" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="10" onAction="#onStartOverButton"/>
-        <Button fx:id="rank_colleges_button" text="Rank Colleges" AnchorPane.leftAnchor="115" AnchorPane.topAnchor="10" onAction="#onRankCollegesButton"/>
-
+        <Button text="Start Over" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="10" onAction="#onStartOverButton"/>
+        <Button text="Rank Colleges" AnchorPane.leftAnchor="115" AnchorPane.topAnchor="10" onAction="#onRankCollegesButton"/>
 
     </AnchorPane>
 </AnchorPane>

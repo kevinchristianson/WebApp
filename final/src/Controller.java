@@ -1,8 +1,16 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import models.AllColleges;
+import models.College;
+import javafx.scene.control.ScrollPane;
+
+import java.io.IOException;
+import java.util.List;
 
 
 public class Controller {
@@ -28,6 +36,8 @@ public class Controller {
     private TextField acceptance_rate;
     @FXML
     private Label error_text;
+    @FXML
+    private AnchorPane results;
 
     private double percentage = 0.0;
 
@@ -45,11 +55,33 @@ public class Controller {
         acceptance_rate.setText("00");
         percentage = 0.0;
         error_text.setText("");
+        results.getChildren().clear();
+    }
+
+    private void getResults(double weightTuition, double weightACT, double weightAcceptanceRate)throws IOException {
+        List<College> collegeList = new AllColleges().getCollegeList();
+        double topAnchor = 20.0;
+        for (College college : collegeList) {
+            Hyperlink link = new Hyperlink(college.getName());
+            link.setStyle("-fx-font-size: 110%");
+         //   link.setOnAction(college.getName());
+            AnchorPane.setTopAnchor(link, topAnchor);
+            AnchorPane.setLeftAnchor(link, 30.0);
+            results.getChildren().add(link);
+            topAnchor += 20.0;
+
+        }
     }
 
     public void onRankCollegesButton(ActionEvent actionEvent) {
+        double tuition_value;
+        double ACT_value;
+        double acceptance_rate_value;
         try {
-            percentage = Double.parseDouble(tuition.getText()) + Double.parseDouble(ACT.getText()) + Double.parseDouble(acceptance_rate.getText());
+            tuition_value = Double.parseDouble(tuition.getText());
+            ACT_value = Double.parseDouble(ACT.getText());
+            acceptance_rate_value = Double.parseDouble(acceptance_rate.getText());
+            percentage =  tuition_value + ACT_value + acceptance_rate_value;
         } catch (NumberFormatException e) {
             error_text.setText("Metric value not a number");
             return;
@@ -58,11 +90,18 @@ public class Controller {
             error_text.setText("Invalid percentage");
             return;
         }
-        double rate = 1;
         if (0 < percentage && percentage < 100) {
-            rate = 1 / (percentage / 100);
+            double rate = 1 / (percentage / 100);
+            tuition_value = rate * tuition_value;
+            ACT_value = rate * ACT_value;
+            acceptance_rate_value = rate * acceptance_rate_value;
         }
         error_text.setText("");
+        try {
+            getResults(tuition_value, ACT_value, acceptance_rate_value);
+        }catch (IOException e){
+            results.getChildren().add(new Label("Error getting information"));
+        }
         return;
     }
 

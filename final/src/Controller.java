@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
@@ -48,22 +46,22 @@ public class Controller {
     public void onRankCollegesButton(ActionEvent actionEvent) {
         try {
             percentage = Double.parseDouble(tuition.getText()) + Double.parseDouble(ACT.getText()) + Double.parseDouble(acceptance_rate.getText());
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             //print error message to screen
             return;
         }
-        if(percentage < 0 || percentage > 100){
+        if (percentage < 0 || percentage > 100) {
             // print error message to screen
             return;
         }
         double rate = 1;
-        if(0 < percentage && percentage < 100){
-            rate = 1/(percentage/100);
+        if (0 < percentage && percentage < 100) {
+            rate = 1 / (percentage / 100);
         }
         return;
     }
 
-    public void unSelectButtons(ToggleButton button1, ToggleButton button2){
+    public void unSelectButtons(ToggleButton button1, ToggleButton button2) {
         button1.setSelected(false);
         button2.setSelected(false);
     }

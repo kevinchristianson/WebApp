@@ -1,6 +1,6 @@
 package models;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Kevin Christianson and Isaac Haseley
@@ -19,52 +19,101 @@ public class College {
      */
     private String designation;
 
-    private double acceptanecRate;
+    private double acceptanceRate;
     private int inStateTuition, outStateTuition, midpointACT, enrollment;
-    private String state;
+    private String state, name;
 
     /**
      * Constructs College with API data
-     * @param apiDictionary - Dictionary returned from our API
+     * @param college - Dictionary returned from our API
      */
-    public College(HashMap apiDictionary) {
+    public College(Map<String, String> college) {
+        this.name = college.get("name");
+        this.state = college.get("state");
+        if (college.get("designation").equals("1")) {
+            this.designation = "Public";
+        } else if (college.get("designation").equals("2")) {
+            this.designation = "Private";
+        } else if (college.get("designation").equals("3")) {
+            this.designation = "For-profit";
+        }
+
+        String acceptanceRate = college.get("acceptance_rate");
+        if (!(acceptanceRate.equals("Data not available"))) {
+            acceptanceRate = acceptanceRate.replace("%", "");
+            this.acceptanceRate = Double.parseDouble(acceptanceRate);
+        } else {
+            this.acceptanceRate = -1;
+        }
+
+        String inStateTuition = college.get("in_state_tuition");
+        if (!(inStateTuition.equals("Data not available"))) {
+            inStateTuition = inStateTuition.replace(",", "");
+            this.inStateTuition = Integer.parseInt(inStateTuition);
+        } else {
+            this.inStateTuition = -1;
+        }
+
+        String outStateTuition = college.get("out_state_tuition");
+        if (!(outStateTuition.equals("Data not available"))) {
+            outStateTuition = outStateTuition.replace(",", "");
+            this.outStateTuition = Integer.parseInt(outStateTuition);
+        } else {
+            this.outStateTuition = -1;
+        }
+
+        String enrollment = college.get("size");
+        if (!(enrollment.equals("Data not available"))) {
+            this.enrollment = Integer.parseInt(enrollment);
+        } else {
+            this.enrollment = -1;
+        }
+
+        String midpointACT = college.get("midpoint_ACT");
+        if (!(midpointACT.equals("Data not available"))) {
+            this.midpointACT = Integer.parseInt(midpointACT);
+        } else {
+            this.midpointACT = -1;
+        }
     }
 
     /**
      * @param userWeights - Dictionary with key for each metric and value for user's weight
      */
-    public void calcTotalWeightedOutcome(HashMap userWeights) {
+    public void calcTotalWeightedOutcome(Map<String, Double> userWeights) {
     }
 
     public double getTotalWeightedOutcome() {
-        return totalWeightedOutcome;
+        return this.totalWeightedOutcome;
     }
 
     public double getAcceptanecRate() {
-        return acceptanecRate;
+        return this.acceptanceRate;
     }
 
     public int getInStateTuition() {
-        return inStateTuition;
+        return this.inStateTuition;
     }
 
     public int getOutStateTuition() {
-        return outStateTuition;
+        return this.outStateTuition;
     }
 
     public int getMidpointACT() {
-        return midpointACT;
+        return this.midpointACT;
     }
 
     public int getEnrollment() {
-        return enrollment;
+        return this.enrollment;
     }
 
     public String getDesignation() {
-        return designation;
+        return this.designation;
     }
 
     public String getState() {
-        return state;
+        return this.state;
     }
+
+    public String getName() { return this.name; }
 }

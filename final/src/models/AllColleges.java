@@ -1,8 +1,17 @@
 package models;
 
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Kevin Christianson and Isaac Haseley
@@ -17,7 +26,22 @@ public class AllColleges {
      * Hits the API and constructs all Colleges
      * Sticks them all in CollegeList
      */
-    public AllColleges() {
+    public AllColleges() throws IOException {
+        URL url = new URL("http://thacker.mathcs.carleton.edu:5107/schools/all");
+        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+        String apiOutput = in.readLine();
+        JsonParser myParser = new JsonParser();
+        JsonElement myElement = myParser.parse(apiOutput);
+        JsonArray myArray = myElement.getAsJsonArray();
+
+        Gson gson = new Gson();
+        Type collegeMap = new TypeToken<Map<String, String>>(){}.getType();
+        this.collegeList = new ArrayList<>();
+        for (int i = 0; i < myArray.size(); i++) {
+            JsonObject myObject = myArray.get(i).getAsJsonObject();
+            Map<String, String> collegeDictionary = gson.fromJson(myObject, collegeMap);
+            this.collegeList.add(new College(collegeDictionary));
+        }
     }
 
     /**
@@ -28,6 +52,6 @@ public class AllColleges {
     }
 
     public List<College> getCollegeList() {
-        return null;
+        return this.collegeList;
     }
 }

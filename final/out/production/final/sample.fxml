@@ -36,8 +36,8 @@
                 AnchorPane.topAnchor="320" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="600" AnchorPane.bottomAnchor="50"
                 style="-fx-background-color: #f4f4f4; -fx-border-color:black; -fx-border-width:1px 0px 1px 0px;">
         <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="15" style="-fx-font-size: 150%" text="Metrics" />
-        <Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="40" style="-fx-font-size: 100%" text="Weigh each category" />
-        <Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="55" style="-fx-font-size: 100%" text="based on importance" />
+        <Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="40" style="-fx-font-size: 100%" text="Weigh each category from low to high" />
+        <Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="55" style="-fx-font-size: 100%" text="based on importance " />
         <!-- TUITION TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="85" style="-fx-font-size: 115%" text="Tuition:" />
         <TextField fx:id="tuition" AnchorPane.topAnchor="80" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />

@@ -20,8 +20,8 @@
         <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="15" style="-fx-font-size: 150%" text="Filters" />
         <!-- DESIGNATION TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="45" style="-fx-font-size: 115%" text="Type:" />
-        <ToggleButton fx:id="private_button" text="Public" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="40" onAction="#unSelectButtonsPrivate"/>
-        <ToggleButton fx:id="public_button" text="Private" AnchorPane.leftAnchor="130" AnchorPane.topAnchor="40" onAction="#unSelectButtonsPublic"/>
+        <ToggleButton fx:id="public_button" text="Public" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="40" onAction="#unSelectButtonsPublic"/>
+        <ToggleButton fx:id="private_button" text="Private" AnchorPane.leftAnchor="130" AnchorPane.topAnchor="40" onAction="#unSelectButtonsPrivate"/>
         <ToggleButton fx:id="any_designation_button" text="Any" AnchorPane.leftAnchor="195" AnchorPane.topAnchor="40" onAction="#unSelectButtonsAnyDesignation"/>
         <!-- STATE TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="85" style="-fx-font-size: 115%" text="State:" />
@@ -40,15 +40,15 @@
         <Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="55" style="-fx-font-size: 100%" text="based on importance" />
         <!-- TUITION TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="85" style="-fx-font-size: 115%" text="Tuition:" />
-        <TextField fx:id="tuition" text="00" AnchorPane.topAnchor="80" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
+        <TextField fx:id="tuition" AnchorPane.topAnchor="80" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
         <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="85" AnchorPane.rightAnchor="20" />
         <!-- MIDPOINT ACT TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="135" style="-fx-font-size: 115%" text="Midpoint ACT:" />
-        <TextField fx:id="ACT" text="00" AnchorPane.topAnchor="130" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
+        <TextField fx:id="ACT" AnchorPane.topAnchor="130" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
         <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="135" AnchorPane.rightAnchor="20" />
         <!-- ACCEPTANCE RATE TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="185" style="-fx-font-size: 115%" text="Acceptance Rate:" />
-        <TextField fx:id="acceptance_rate" text="00" AnchorPane.topAnchor="180" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
+        <TextField fx:id="acceptance_rate" AnchorPane.topAnchor="180" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
         <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="185" AnchorPane.rightAnchor="20" />
 
         <Label fx:id="error_text" style="-fx-font-size: 115%" AnchorPane.topAnchor="230" AnchorPane.leftAnchor="30" textFill="red" />

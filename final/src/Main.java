@@ -14,13 +14,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("College Metrics");
         primaryStage.setScene(new Scene(root, 850, 1375.32889044));
         primaryStage.show();
     }
 
     public static void main(String[] args) throws IOException {
-        List<College> collegeList = new AllColleges().getCollegeList();
+        /*List<College> collegeList = new AllColleges().getCollegeList();
         for (College college : collegeList) {
             System.out.println(college.getName());
             System.out.println("Location: " + college.getState());
@@ -31,7 +31,7 @@ public class Main extends Application {
             System.out.println("Acceptance rate: " + college.getAcceptanecRate());
             System.out.println("Midpoint ACT: " + college.getMidpointACT());
             System.out.println();
-        }
+        }*/
         launch(args);
     }
 }

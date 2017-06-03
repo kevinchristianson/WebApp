@@ -8,10 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Kevin Christianson and Isaac Haseley
@@ -48,7 +45,11 @@ public class AllColleges {
      * Ranks (sorts) all colleges using user's weights
      * @param userWeights - Dictionary with key for each metric and value for user's weight
      */
-    public void rankByUserMetrics(HashMap userWeights) {
+    public void rankByUserMetrics(Map<String, Double> userWeights) {
+        for (College college : this.collegeList) {
+            college.calcTotalWeightedOutcome(userWeights);
+        }
+        Collections.sort(collegeList);
     }
 
     public List<College> getCollegeList() {

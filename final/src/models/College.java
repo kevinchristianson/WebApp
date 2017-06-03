@@ -7,7 +7,7 @@ import java.util.Map;
  *
  * Handles data on a single college or university from our API
  */
-public class College {
+public class College implements Comparable<College> {
 
     /**
      * How well this institution performs given the user's metrics
@@ -28,6 +28,7 @@ public class College {
      * @param college - Dictionary returned from our API
      */
     public College(Map<String, String> college) {
+        this.totalWeightedOutcome = 0;
         this.name = college.get("name");
         this.state = college.get("state");
         if (college.get("designation").equals("1")) {
@@ -81,6 +82,30 @@ public class College {
      * @param userWeights - Dictionary with key for each metric and value for user's weight
      */
     public void calcTotalWeightedOutcome(Map<String, Double> userWeights) {
+        this.totalWeightedOutcome = 0;
+        if (this.acceptanceRate > 0 && userWeights.get("acceptanceRate") > 0) {
+            this.totalWeightedOutcome += (104 - this.acceptanceRate) * userWeights.get("acceptanceRate");
+        }
+        if (this.midpointACT > 0 && userWeights.get("midpointACT") > 0) {
+            this.totalWeightedOutcome += ((double)this.midpointACT / 36) * 100 * userWeights.get("midpointACT");
+        }
+        if (this.inStateTuition > 0 && userWeights.get("inStateTuition") > 0) {
+            this.totalWeightedOutcome += ((double)(51008 - this.inStateTuition) / 51008) * 100
+                    * userWeights.get("inStateTuition");
+        }
+        if (this.outStateTuition > 0 && userWeights.get("outStateTuition") > 0) {
+            this.totalWeightedOutcome += ((double)(51008 - this.outStateTuition) / 51008) * 100
+                    * userWeights.get("outStateTuition");
+        }
+    }
+
+    @Override
+    /**
+     * @param college2 - The college we're comparing this college to
+     * @return -1 if this college is higher-ranked than college2, 1 otherwise
+     */
+    public int compareTo(College college2) {
+        return -1 * (new Double(this.totalWeightedOutcome).compareTo(college2.getTotalWeightedOutcome()));
     }
 
     public double getTotalWeightedOutcome() {

@@ -7,7 +7,9 @@ import models.AllColleges;
 import models.College;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main extends Application {
 
@@ -21,7 +23,17 @@ public class Main extends Application {
 
     public static void main(String[] args) throws IOException {
         /*List<College> collegeList = new AllColleges().getCollegeList();
-        for (College college : collegeList) {
+        AllColleges allColleges = new AllColleges();
+        Map<String, Double> userMetrics = new HashMap<>();
+        userMetrics.put("acceptanceRate", 20.0);
+        userMetrics.put("midpointACT", 80.0);
+        userMetrics.put("inStateTuition", 0.0);
+        userMetrics.put("outStateTuition", 0.0);
+        allColleges.rankByUserMetrics(userMetrics);
+        List<College> collegeList = allColleges.getCollegeList();
+
+        for (int i = 0; i < 20; i++) {
+            College college = collegeList.get(i);
             System.out.println(college.getName());
             System.out.println("Location: " + college.getState());
             System.out.println("Designation: " + college.getDesignation());

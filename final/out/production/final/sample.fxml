@@ -20,17 +20,17 @@
         <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="15" style="-fx-font-size: 150%" text="Filters" />
         <!-- DESIGNATION TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="45" style="-fx-font-size: 115%" text="Type:" />
-        <ToggleButton fx:id="public_button" text="Public" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="40" onAction="#unSelectButtonsPublic"/>
-        <ToggleButton fx:id="private_button" text="Private" AnchorPane.leftAnchor="130" AnchorPane.topAnchor="40" onAction="#unSelectButtonsPrivate"/>
-        <ToggleButton fx:id="any_designation_button" text="Any" AnchorPane.leftAnchor="195" AnchorPane.topAnchor="40" onAction="#unSelectButtonsAnyDesignation"/>
+        <ToggleButton fx:id="publicButton" text="Public" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="40" onAction="#unselectButtonsPublic"/>
+        <ToggleButton fx:id="privateButton" text="Private" AnchorPane.leftAnchor="130" AnchorPane.topAnchor="40" onAction="#unselectButtonsPrivate"/>
+        <ToggleButton fx:id="anyDesignationButton" text="Any" AnchorPane.leftAnchor="195" AnchorPane.topAnchor="40" onAction="#unselectButtonsAnyDesignation"/>
         <!-- STATE TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="85" style="-fx-font-size: 115%" text="State:" />
-        <TextField fx:id="state_field" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="70" />
+        <TextField fx:id="stateField" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="70" />
         <!-- ENROLLMENT TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="125" style="-fx-font-size: 115%" text="Size:" />
-        <ToggleButton fx:id="under_button" text="Under 5,000" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="120" onAction="#unSelectButtonsUnderEnroll"/>
-        <ToggleButton fx:id="over_button" text="Over   5,000" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="155" onAction="#unSelectButtonsOverEnroll"/>
-        <ToggleButton fx:id="any_enrollment_button" text="Any" AnchorPane.leftAnchor="175" AnchorPane.topAnchor="155" onAction="#unSelectButtonsAnyEnroll"/>
+        <ToggleButton fx:id="underButton" text="Under 5,000" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="120" onAction="#unselectButtonsUnderEnroll"/>
+        <ToggleButton fx:id="overButton" text="Over   5,000" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="155" onAction="#unselectButtonsOverEnroll"/>
+        <ToggleButton fx:id="anyEnrollmentButton" text="Any" AnchorPane.leftAnchor="175" AnchorPane.topAnchor="155" onAction="#unSelectButtonsAnyEnroll"/>
     </AnchorPane>
     <AnchorPane fx:id="metrics"
                 AnchorPane.topAnchor="320" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="600" AnchorPane.bottomAnchor="50"
@@ -44,14 +44,14 @@
         <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="85" AnchorPane.rightAnchor="20" />
         <!-- MIDPOINT ACT TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="135" style="-fx-font-size: 115%" text="Midpoint ACT:" />
-        <TextField fx:id="ACT" AnchorPane.topAnchor="130" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
+        <TextField fx:id="act" AnchorPane.topAnchor="130" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
         <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="135" AnchorPane.rightAnchor="20" />
         <!-- ACCEPTANCE RATE TEXT AND BUTTONS -->
         <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="185" style="-fx-font-size: 115%" text="Acceptance Rate:" />
-        <TextField fx:id="acceptance_rate" AnchorPane.topAnchor="180" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
+        <TextField fx:id="acceptanceRate" AnchorPane.topAnchor="180" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160" AnchorPane.rightAnchor="40" />
         <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="185" AnchorPane.rightAnchor="20" />
 
-        <Label fx:id="error_text" style="-fx-font-size: 115%" AnchorPane.topAnchor="230" AnchorPane.leftAnchor="30" textFill="red" />
+        <Label fx:id="errorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="230" AnchorPane.leftAnchor="30" textFill="red" />
     </AnchorPane>
     <ScrollPane style="-fx-background:#c7ad88;"
                 AnchorPane.topAnchor="100" AnchorPane.leftAnchor="250" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" >

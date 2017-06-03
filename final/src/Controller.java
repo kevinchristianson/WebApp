@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
-import javafx.scene.control.ScrollPane;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,27 +14,27 @@ import java.util.List;
 
 public class Controller {
     @FXML
-    private ToggleButton private_button;
+    private ToggleButton privateButton;
     @FXML
-    private ToggleButton public_button;
+    private ToggleButton publicButton;
     @FXML
-    private ToggleButton any_designation_button;
+    private ToggleButton anyDesignationButton;
     @FXML
-    private TextField state_field;
+    private TextField stateField;
     @FXML
-    private ToggleButton under_button;
+    private ToggleButton underButton;
     @FXML
-    private ToggleButton over_button;
+    private ToggleButton overButton;
     @FXML
-    private ToggleButton any_enrollment_button;
+    private ToggleButton anyEnrollmentButton;
     @FXML
     private TextField tuition;
     @FXML
-    private TextField ACT;
+    private TextField act;
     @FXML
-    private TextField acceptance_rate;
+    private TextField acceptanceRate;
     @FXML
-    private Label error_text;
+    private Label errorText;
     @FXML
     private AnchorPane results;
 
@@ -43,18 +42,18 @@ public class Controller {
 
 
     public void onStartOverButton(ActionEvent actionEvent) {
-        private_button.setSelected(false);
-        public_button.setSelected(false);
-        any_designation_button.setSelected(false);
-        state_field.setText("");
-        under_button.setSelected(false);
-        over_button.setSelected(false);
-        any_designation_button.setSelected(false);
+        privateButton.setSelected(false);
+        publicButton.setSelected(false);
+        anyDesignationButton.setSelected(false);
+        stateField.setText("");
+        underButton.setSelected(false);
+        overButton.setSelected(false);
+        anyDesignationButton.setSelected(false);
         tuition.setText("00");
-        ACT.setText("00");
-        acceptance_rate.setText("00");
+        act.setText("00");
+        acceptanceRate.setText("00");
         percentage = 0.0;
-        error_text.setText("");
+        errorText.setText("");
         results.getChildren().clear();
     }
 
@@ -79,15 +78,15 @@ public class Controller {
         double acceptance_rate_value;
         try {
             tuition_value = Double.parseDouble(tuition.getText());
-            ACT_value = Double.parseDouble(ACT.getText());
-            acceptance_rate_value = Double.parseDouble(acceptance_rate.getText());
+            ACT_value = Double.parseDouble(act.getText());
+            acceptance_rate_value = Double.parseDouble(acceptanceRate.getText());
             percentage =  tuition_value + ACT_value + acceptance_rate_value;
         } catch (NumberFormatException e) {
-            error_text.setText("Metric value not a number");
+            errorText.setText("Metric value not a number");
             return;
         }
         if (percentage < 0 || percentage > 100) {
-            error_text.setText("Invalid percentage");
+            errorText.setText("Invalid percentage");
             return;
         }
         if (0 < percentage && percentage < 100) {
@@ -96,7 +95,7 @@ public class Controller {
             ACT_value = rate * ACT_value;
             acceptance_rate_value = rate * acceptance_rate_value;
         }
-        error_text.setText("");
+        errorText.setText("");
         try {
             getResults(tuition_value, ACT_value, acceptance_rate_value);
         }catch (IOException e){
@@ -105,32 +104,32 @@ public class Controller {
         return;
     }
 
-    public void unSelectButtons(ToggleButton button1, ToggleButton button2) {
+    public void unselectButtons(ToggleButton button1, ToggleButton button2) {
         button1.setSelected(false);
         button2.setSelected(false);
     }
 
-    public void unSelectButtonsPrivate(ActionEvent actionEvent) {
-        unSelectButtons(public_button, any_designation_button);
+    public void unselectButtonsPrivate(ActionEvent actionEvent) {
+        unselectButtons(publicButton, anyDesignationButton);
     }
 
-    public void unSelectButtonsPublic(ActionEvent actionEvent) {
-        unSelectButtons(private_button, any_designation_button);
+    public void unselectButtonsPublic(ActionEvent actionEvent) {
+        unselectButtons(privateButton, anyDesignationButton);
     }
 
-    public void unSelectButtonsAnyDesignation(ActionEvent actionEvent) {
-        unSelectButtons(public_button, private_button);
+    public void unselectButtonsAnyDesignation(ActionEvent actionEvent) {
+        unselectButtons(publicButton, privateButton);
     }
 
-    public void unSelectButtonsUnderEnroll(ActionEvent actionEvent) {
-        unSelectButtons(over_button, any_enrollment_button);
+    public void unselectButtonsUnderEnroll(ActionEvent actionEvent) {
+        unselectButtons(overButton, anyEnrollmentButton);
     }
 
-    public void unSelectButtonsOverEnroll(ActionEvent actionEvent) {
-        unSelectButtons(under_button, any_enrollment_button);
+    public void unselectButtonsOverEnroll(ActionEvent actionEvent) {
+        unselectButtons(underButton, anyEnrollmentButton);
     }
 
     public void unSelectButtonsAnyEnroll(ActionEvent actionEvent) {
-        unSelectButtons(over_button, under_button);
+        unselectButtons(overButton, underButton);
     }
 }

@@ -158,16 +158,31 @@ public class Controller {
             if(tuition.getText().equals("")){
                 tuitionValue = 0;
             }else{
-                tuitionValue = Double.parseDouble(tuition.getText());
+                try {
+                    tuitionValue = Double.parseDouble(tuition.getText());
+                } catch (NumberFormatException e) {
+                    errorText.setText("Metric value not a number");
+                    return;
+                }
             }
             if(act.getText().equals("")){
                 actValue = 0;
             }else{
-                actValue = Double.parseDouble(act.getText());
+                try {
+                    actValue = Double.parseDouble(act.getText());
+                } catch (NumberFormatException e) {
+                    errorText.setText("Metric value not a number");
+                    return;
+                }
             }if(acceptanceRate.getText().equals("")){
                 acceptanceRateValue = 0;
             }else{
-                acceptanceRateValue = Double.parseDouble(acceptanceRate.getText());
+                try {
+                    acceptanceRateValue = Double.parseDouble(acceptanceRate.getText());
+                } catch (NumberFormatException e) {
+                    errorText.setText("Metric value not a number");
+                    return;
+                }
             }
         }else {
             try {

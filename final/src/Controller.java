@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 
 public class Controller {
@@ -30,15 +29,24 @@ public class Controller {
     @FXML
     private ToggleButton anyEnrollmentButton;
     @FXML
-    private TextField tuition;
+    private TextField tuitionWeight;
     @FXML
-    private TextField act;
+    private TextField actWeight;
     @FXML
-    private TextField acceptanceRate;
+    private TextField acceptanceRateWeight;
     @FXML
-    private Label errorText;
+    private Label metricErrorText;
     @FXML
     private AnchorPane results;
+    @FXML
+    private TextField tuitionValue;
+    @FXML
+    private TextField actValue;
+    @FXML
+    private TextField acceptanceRateValue;
+    @FXML
+    private Label valueErrorText;
+    @FXML
 
 
     public void onStartOverButton(ActionEvent actionEvent) {
@@ -49,10 +57,10 @@ public class Controller {
         underButton.setSelected(false);
         overButton.setSelected(false);
         anyDesignationButton.setSelected(false);
-        tuition.setText("");
-        act.setText("");
-        acceptanceRate.setText("");
-        errorText.setText("");
+        tuitionWeight.setText("");
+        actWeight.setText("");
+        acceptanceRateWeight.setText("");
+        metricErrorText.setText("");
         results.getChildren().clear();
     }
 
@@ -194,36 +202,36 @@ public class Controller {
         double actValue = 0;
         double acceptanceRateValue = 0;
         double percentage = 0;
-        if (!tuition.getText().equals("")) {
+        if (!tuitionWeight.getText().equals("")) {
             try {
-                tuitionValue = Double.parseDouble(tuition.getText());
+                tuitionValue = Double.parseDouble(tuitionWeight.getText());
             } catch (NumberFormatException e) {
-                errorText.setText("Metric value not a number");
+                metricErrorText.setText("Metric value not a number");
                 return;
             }
         }
-        if (!act.getText().equals("")) {
+        if (!actWeight.getText().equals("")) {
             try {
-                actValue = Double.parseDouble(act.getText());
+                actValue = Double.parseDouble(actWeight.getText());
             } catch (NumberFormatException e) {
-                errorText.setText("Metric value not a number");
+                metricErrorText.setText("Metric value not a number");
                 return;
             }
         }
-        if (!acceptanceRate.getText().equals("")) {
+        if (!acceptanceRateWeight.getText().equals("")) {
             try {
-                acceptanceRateValue = Double.parseDouble(acceptanceRate.getText());
+                acceptanceRateValue = Double.parseDouble(acceptanceRateWeight.getText());
             } catch (NumberFormatException e) {
-                errorText.setText("Metric value not a number");
+                metricErrorText.setText("Metric value not a number");
                 return;
             }
         }
         percentage =  tuitionValue + actValue + acceptanceRateValue;
         if (percentage < 0) {
-            errorText.setText("Weights must not be negative");
+            metricErrorText.setText("Weights must not be negative");
             return;
         }
-        errorText.setText("");
+        metricErrorText.setText("");
         try {
             getResults(tuitionValue, actValue, acceptanceRateValue);
         } catch (IOException e) {

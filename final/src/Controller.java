@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
+
+import java.awt.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +48,6 @@ public class Controller {
     private TextField acceptanceRateValue;
     @FXML
     private Label valueErrorText;
-    @FXML
 
 
     public void onStartOverButton(ActionEvent actionEvent) {
@@ -185,14 +186,28 @@ public class Controller {
         List<College> collegeList = allColleges.getCollegeList();
         int rank = 1;
         for (College college : collegeList) {
-            Hyperlink link = new Hyperlink(rank + ". " + college.getName());
-            link.setStyle("-fx-font-size: 110%");
-            //   link.setOnAction(college.getName());
-            AnchorPane.setTopAnchor(link, topAnchor);
-            AnchorPane.setLeftAnchor(link, 30.0);
-            results.getChildren().add(link);
-            topAnchor += 20.0;
-            rank++;
+            if (college.getDesignation().contains(designation)
+                    && college.getState().toLowerCase().contains(state.toLowerCase())) {
+                if (sizeDecision.equals("") || (sizeDecision.equals("Over") && college.getEnrollment() > 5000)
+                        || (sizeDecision.equals("Under") && college.getEnrollment() < 5000)) {
+                    Hyperlink link = new Hyperlink(rank + ". " + college.getName());
+                    link.setStyle("-fx-font-size: 110%");
+                    //   link.setOnAction(college.getName());
+                    AnchorPane.setTopAnchor(link, topAnchor);
+                    AnchorPane.setLeftAnchor(link, 30.0);
+                    results.getChildren().add(link);
+                    topAnchor += 20.0;
+                    rank++;
+                }
+            }
+        }
+        if(results.getChildren().isEmpty()){
+            Label text = new Label();
+            text.setText("No results found");
+            text.setStyle("-fx-font-size: 150%");
+            AnchorPane.setTopAnchor(text, 75.0);
+            AnchorPane.setLeftAnchor(text, 225.0);
+            results.getChildren().add(text);
         }
     }
 

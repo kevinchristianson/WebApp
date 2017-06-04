@@ -6,7 +6,7 @@
 '''
 
 # Change these values as appropriate for your setup.
-kevin = False
+kevin = True
 thacker = False
 if kevin:
     database = 'kevinchristianson'

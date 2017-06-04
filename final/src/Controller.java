@@ -8,8 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
 import javafx.scene.control.Hyperlink;
-
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -109,14 +107,15 @@ public class Controller {
                     && college.getState().toLowerCase().contains(stateDecision.toLowerCase())) {
                 if (sizeDecision.equals("") || (sizeDecision.equals("Over") && college.getEnrollment() > 5000)
                         || (sizeDecision.equals("Under") && college.getEnrollment() < 5000)) {
-                    Hyperlink name = new Hyperlink(rank + ". " + college.getName());
+                    Label name = new Label(rank + ". " + college.getName());
                     name.setStyle("-fx-font-size: 150%");
-                    name.setOnAction(new EventHandler<ActionEvent>() {
+                    /*name.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
                             try {
-                                java.awt.Desktop.getDesktop().browse(new URI(college.getURL()));
-                            }catch (URISyntaxException | IOException e){
+                                java.awt.Desktop.getDesktop().browse(URI.create(college.getURL()));
+                            }catch (IOException e){
+                                System.out.println(e);
                                 results.getChildren().clear();
                                 Label text = new Label();
                                 text.setText("Error in URL: cannot be opened");
@@ -126,7 +125,7 @@ public class Controller {
                                 results.getChildren().add(text);
                             }
                         }
-                    });
+                    });*/
                     Label state = new Label("State: " + college.getState());
                     state.setStyle("-fx-font-size: 120%");
                     Label enrollment = new Label("Enrollment: " + college.getEnrollment());

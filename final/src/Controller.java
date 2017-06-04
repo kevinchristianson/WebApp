@@ -1,4 +1,5 @@
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -7,9 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
 import javafx.scene.control.Hyperlink;
-
-import java.awt.*;
+import java.net.URI;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -267,29 +268,29 @@ public class Controller {
         button2.setSelected(false);
     }
 
-    public void unselectButtonsPrivate(ActionEvent actionEvent) {
+    public void unselectButtonsPrivate() {
         unselectButtons(publicButton, profitButton, anyDesignationButton);
     }
 
-    public void unselectButtonsPublic(ActionEvent actionEvent) {
+    public void unselectButtonsPublic() {
         unselectButtons(privateButton, profitButton, anyDesignationButton);
     }
 
-    public void unselectButtonsProfit(ActionEvent actionEvent){
+    public void unselectButtonsProfit(){
         unselectButtons(publicButton, privateButton, anyDesignationButton);
     }
 
-    public void unselectButtonsAnyDesignation(ActionEvent actionEvent) {
+    public void unselectButtonsAnyDesignation() {
         unselectButtons(publicButton, privateButton, profitButton);
     }
 
-    public void unselectButtonsUnderEnroll(ActionEvent actionEvent) {
+    public void unselectButtonsUnderEnroll() {
         unselectButtons(overButton, anyEnrollmentButton);
     }
-    public void unselectButtonsOverEnroll(ActionEvent actionEvent) {
+    public void unselectButtonsOverEnroll() {
         unselectButtons(underButton, anyEnrollmentButton);
     }
-    public void unSelectButtonsAnyEnroll(ActionEvent actionEvent) {
+    public void unSelectButtonsAnyEnroll() {
         unselectButtons(overButton, underButton);
     }
 }

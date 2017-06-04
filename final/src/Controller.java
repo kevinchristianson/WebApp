@@ -59,21 +59,23 @@ public class Controller {
         List<College> collegeList = new AllColleges().getCollegeList();
         double topAnchor = 20.0;
         String designation = "";
-        if(publicButton.isSelected()){
+        if (publicButton.isSelected()) {
             designation = "Public";
-        }else if(privateButton.isSelected()){
+        } else if (privateButton.isSelected()) {
             designation = "Private";
         }
         String state = stateField.getText();
         int sizeDecision = 0;
-        if(overButton.isSelected()){
+        if (overButton.isSelected()) {
             sizeDecision = 1;
-        }else if (underButton.isSelected()){
+        } else if (underButton.isSelected()) {
             sizeDecision = 2;
         }
         for (College college : collegeList) {
-            if(college.getDesignation().contains(designation) && college.getState().contains(state)){
-                if(sizeDecision == 0 || (sizeDecision == 1 && college.getEnrollment() > 5000) || (sizeDecision == 2 && college.getEnrollment() < 5000)){
+            if (college.getDesignation().contains(designation)
+                    && college.getState().toLowerCase().contains(state.toLowerCase())) {
+                if (sizeDecision == 0 || (sizeDecision == 1 && college.getEnrollment() >= 5000)
+                        || (sizeDecision == 2 && college.getEnrollment() < 5000)) {
                     Hyperlink link = new Hyperlink(college.getName());
                     link.setStyle("-fx-font-size: 110%");
                     //   link.setOnAction(college.getName());
@@ -92,33 +94,35 @@ public class Controller {
         PriorityQueue<Double> ranks = new PriorityQueue<>();
         HashMap<Double, College> dict = new HashMap<>();
         String designation = "";
-        if(publicButton.isSelected()){
+        if (publicButton.isSelected()) {
             designation = "Public";
-        }else if(privateButton.isSelected()){
+        } else if (privateButton.isSelected()) {
             designation = "Private";
         }
         String state = stateField.getText();
         int sizeDecision = 0;
-        if(overButton.isSelected()){
+        if (overButton.isSelected()) {
             sizeDecision = 1;
-        }else if (underButton.isSelected()){
+        } else if (underButton.isSelected()) {
             sizeDecision = 2;
         }
         for (College college : collegeList) {
-            if(college.getDesignation().contains(designation) && college.getState().contains(state)){
-                if(sizeDecision == 0 || (sizeDecision == 1 && college.getEnrollment() > 5000) || (sizeDecision == 2 && college.getEnrollment() < 5000)){
+            if (college.getDesignation().contains(designation)
+                    && college.getState().toLowerCase().contains(state.toLowerCase())) {
+                if (sizeDecision == 0 || (sizeDecision == 1 && college.getEnrollment() > 5000)
+                        || (sizeDecision == 2 && college.getEnrollment() < 5000)) {
                     Double rank = 0.0;
-                    if(college.getInStateTuition() != -1) {
-                        rank += (((5300 - college.getInStateTuition()) / 53000) * 100) * weightTuition;
+                    if (college.getInStateTuition() != -1) {
+                        rank += (((53000 - (double)college.getInStateTuition()) / 53000) * 100) * weightTuition;
                     }
-                    if(college.getMidpointACT() != -1) {
+                    if (college.getMidpointACT() != -1) {
                         rank += ((college.getMidpointACT() / 36) * 100) * weightACT;
                     }
                     if(college.getAcceptanecRate() != -1) {
                         rank += (100 - college.getAcceptanecRate()) * weightAcceptanceRate;
                     }
-                    if(rank != 0.0) {
-                        while(dict.get(rank) != null && !dict.isEmpty()){
+                    if (rank != 0.0) {
+                        while (dict.get(rank) != null && !dict.isEmpty()) {
                             rank -= 1;
                         }
                         dict.put(rank, college);
@@ -146,18 +150,16 @@ public class Controller {
         double actValue = 0;
         double acceptanceRateValue = 0;
         double percentage = 0;
-        if(tuition.getText().equals("") && act.getText().equals("") && acceptanceRate.getText().equals("")){
+        if (tuition.getText().equals("") && act.getText().equals("") && acceptanceRate.getText().equals("")) {
             errorText.setText("");
             try {
                 getResults();
                 return;
-            }catch (IOException e){
+            } catch (IOException e) {
                 results.getChildren().add(new Label("Error getting information"));
             }
-        }else if(tuition.getText().equals("") || act.getText().equals("") || acceptanceRate.getText().equals("")){
-            if(tuition.getText().equals("")){
-                tuitionValue = 0;
-            }else{
+        } else if (tuition.getText().equals("") || act.getText().equals("") || acceptanceRate.getText().equals("")) {
+            if (!tuition.getText().equals("")) {
                 try {
                     tuitionValue = Double.parseDouble(tuition.getText());
                 } catch (NumberFormatException e) {
@@ -165,18 +167,15 @@ public class Controller {
                     return;
                 }
             }
-            if(act.getText().equals("")){
-                actValue = 0;
-            }else{
+            if (!act.getText().equals("")) {
                 try {
                     actValue = Double.parseDouble(act.getText());
                 } catch (NumberFormatException e) {
                     errorText.setText("Metric value not a number");
                     return;
                 }
-            }if(acceptanceRate.getText().equals("")){
-                acceptanceRateValue = 0;
-            }else{
+            }
+            if (!acceptanceRate.getText().equals("")) {
                 try {
                     acceptanceRateValue = Double.parseDouble(acceptanceRate.getText());
                 } catch (NumberFormatException e) {
@@ -184,7 +183,7 @@ public class Controller {
                     return;
                 }
             }
-        }else {
+        } else {
             try {
                 tuitionValue = Double.parseDouble(tuition.getText());
                 actValue = Double.parseDouble(act.getText());
@@ -195,16 +194,14 @@ public class Controller {
             }
         }
         percentage =  tuitionValue + actValue + acceptanceRateValue;
-        if (percentage < 0 || percentage > 100) {
-            errorText.setText("Invalid percentage");
+        if (percentage < 0) {
+            errorText.setText("Weights must not be negative");
             return;
-        }
-        if(percentage == 0){
+        } else if (percentage == 0) {
             tuitionValue = 1/3;
             actValue = 1/3;
             acceptanceRateValue = 1/3;
-        }
-        else if (0 < percentage && percentage < 100) {
+        } else {
             double rate = 1 / (percentage / 100);
             tuitionValue = rate * tuitionValue;
             actValue = rate * actValue;
@@ -213,10 +210,9 @@ public class Controller {
         errorText.setText("");
         try {
             getResults(tuitionValue, actValue, acceptanceRateValue);
-        }catch (IOException e){
+        } catch (IOException e) {
             results.getChildren().add(new Label("Error getting information"));
         }
-        return;
     }
 
     public void unselectButtons(ToggleButton button1, ToggleButton button2) {

@@ -102,7 +102,7 @@ public class College implements Comparable<College> {
     @Override
     /**
      * @param college2 - The college we're comparing this college to
-     * @return -1 if this college is higher-ranked than college2, 1 otherwise
+     * @return -1 if this college is higher-ranked than college2, 1 if lower-ranked, 0 if equal
      */
     public int compareTo(College college2) {
         return -1 * (new Double(this.totalWeightedOutcome).compareTo(college2.getTotalWeightedOutcome()));

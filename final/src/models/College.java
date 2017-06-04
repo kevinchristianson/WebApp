@@ -21,7 +21,7 @@ public class College implements Comparable<College> {
 
     private double acceptanceRate;
     private int inStateTuition, outStateTuition, midpointACT, enrollment;
-    private String state, name;
+    private String state, name, url;
 
     /**
      * Constructs College with API data
@@ -31,6 +31,7 @@ public class College implements Comparable<College> {
         this.totalWeightedOutcome = 0;
         this.name = college.get("name");
         this.state = college.get("state");
+        this.url = college.get("school_site");
         if (college.get("designation").equals("1")) {
             this.designation = "Public";
         } else if (college.get("designation").equals("2")) {
@@ -141,4 +142,6 @@ public class College implements Comparable<College> {
     }
 
     public String getName() { return this.name; }
+
+    public String getURL() { return this.url; }
 }

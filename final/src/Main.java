@@ -22,11 +22,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        /*List<College> collegeList = new AllColleges().getCollegeList();
-        AllColleges allColleges = new AllColleges();
+        //List<College> collegeList = new AllColleges().getCollegeList();
+        /*AllColleges allColleges = new AllColleges();
         Map<String, Double> userMetrics = new HashMap<>();
-        userMetrics.put("acceptanceRate", 20.0);
-        userMetrics.put("midpointACT", 80.0);
+        userMetrics.put("acceptanceRate", 100.0);
+        userMetrics.put("midpointACT", 00.0);
         userMetrics.put("inStateTuition", 0.0);
         userMetrics.put("outStateTuition", 0.0);
         allColleges.rankByUserMetrics(userMetrics);

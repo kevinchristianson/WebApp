@@ -85,7 +85,7 @@
                    AnchorPane.rightAnchor="40" />
         <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="420" AnchorPane.rightAnchor="20" />
         <!-- ERROR TEXT -->
-        <Label fx:id="valueErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="455" AnchorPane.leftAnchor="30"
+        <Label fx:id="targetErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="455" AnchorPane.leftAnchor="30"
                textFill="red" />
     </AnchorPane>
 

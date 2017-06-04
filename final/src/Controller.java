@@ -1,12 +1,12 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
+import javafx.scene.control.Hyperlink;
 
 import java.awt.*;
 import java.io.IOException;
@@ -156,13 +156,13 @@ public class Controller {
 
     private void getResults(double weightTuition, double weightACT, double weightAcceptanceRate) throws IOException {
         double topAnchor = 20.0;
-        String designation = "";
+        String designationDecision = "";
         if (publicButton.isSelected()) {
-            designation = "Public";
+            designationDecision = "Public";
         } else if (privateButton.isSelected()) {
-            designation = "Private";
+            designationDecision = "Private";
         }
-        String state = stateField.getText();
+        String stateDecision = stateField.getText();
         String sizeDecision = "";
         if (overButton.isSelected()) {
             sizeDecision = "Over";
@@ -174,7 +174,7 @@ public class Controller {
         Map<String, Double> userMetrics = new HashMap<>();
         userMetrics.put("acceptanceRate", weightAcceptanceRate);
         userMetrics.put("midpointACT", weightACT);
-        if (!state.equals("")) {
+        if (!stateDecision.equals("")) {
             userMetrics.put("inStateTuition", weightTuition);
             userMetrics.put("outStateTuition", 0.0);
         } else {
@@ -186,17 +186,58 @@ public class Controller {
         List<College> collegeList = allColleges.getCollegeList();
         int rank = 1;
         for (College college : collegeList) {
-            if (college.getDesignation().contains(designation)
-                    && college.getState().toLowerCase().contains(state.toLowerCase())) {
+            if (college.getDesignation().contains(designationDecision)
+                    && college.getState().toLowerCase().contains(stateDecision.toLowerCase())) {
                 if (sizeDecision.equals("") || (sizeDecision.equals("Over") && college.getEnrollment() > 5000)
                         || (sizeDecision.equals("Under") && college.getEnrollment() < 5000)) {
-                    Hyperlink link = new Hyperlink(rank + ". " + college.getName());
-                    link.setStyle("-fx-font-size: 110%");
+                    Hyperlink name = new Hyperlink(rank + ". " + college.getName());
+                    name.setStyle("-fx-font-size: 110%");
+                  //  name.setOnAction(college.getURL());
+                    Label state = new Label("State: " + college.getState());
+                    state.setStyle("-fx-font-size: 90%");
+                    Label enrollment = new Label("Enrollment: " + college.getEnrollment());
+                    state.setStyle("-fx-font-size: 90%");
+                    Label designation = new Label("Designation: " + college.getDesignation());
+                    state.setStyle("-fx-font-size: 90%");
+                    Label tuition = new Label();
+                    state.setStyle("-fx-font-size: 90%");
+                    if(stateDecision.equals("")) state.setText("Tuition: " + college.getInStateTuition());
+                    else state.setText("Tuition: " + college.getOutStateTuition());
+                    Label acceptance = new Label("Acceptance Rate: " + college.getAcceptanecRate());
+                    state.setStyle("-fx-font-size: 90%");
+                    Label act = new Label("Midpoint ACT: " + college.getMidpointACT());
+                    state.setStyle("-fx-font-size: 90%");
+
                     //   link.setOnAction(college.getName());
-                    AnchorPane.setTopAnchor(link, topAnchor);
-                    AnchorPane.setLeftAnchor(link, 30.0);
-                    results.getChildren().add(link);
+                    AnchorPane.setTopAnchor(name, topAnchor);
                     topAnchor += 20.0;
+                    AnchorPane.setLeftAnchor(name, 30.0);
+                    results.getChildren().add(name);
+                    AnchorPane.setTopAnchor(state, topAnchor);
+                    topAnchor += 15;
+                    AnchorPane.setLeftAnchor(state, 40.0);
+                    results.getChildren().add(state);
+                    AnchorPane.setTopAnchor(enrollment, topAnchor);
+                    topAnchor += 15;
+                    AnchorPane.setLeftAnchor(enrollment, 40.0);
+                    results.getChildren().add(enrollment);
+                    AnchorPane.setTopAnchor(designation, topAnchor);
+                    topAnchor += 15;
+                    AnchorPane.setLeftAnchor(designation, 40.0);
+                    results.getChildren().add(designation);
+                    AnchorPane.setTopAnchor(tuition, topAnchor);
+                    topAnchor += 15;
+                    AnchorPane.setLeftAnchor(tuition, 40.0);
+                    results.getChildren().add(tuition);
+                    AnchorPane.setTopAnchor(acceptance, topAnchor);
+                    topAnchor += 15;
+                    AnchorPane.setLeftAnchor(acceptance, 40.0);
+                    results.getChildren().add(acceptance);
+                    AnchorPane.setTopAnchor(act, topAnchor);
+                    topAnchor += 15;
+                    AnchorPane.setLeftAnchor(act, 40.0);
+                    results.getChildren().add(act);
+                    topAnchor += 30.0;
                     rank++;
                 }
             }

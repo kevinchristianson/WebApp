@@ -84,19 +84,19 @@ public class College implements Comparable<College> {
      */
     public void calcTotalWeightedOutcome(Map<String, Double> userWeights) {
         this.totalWeightedOutcome = 0;
-        if (this.acceptanceRate > 0 && userWeights.get("acceptanceRate") > 0) {
-            this.totalWeightedOutcome += (104 - this.acceptanceRate) * userWeights.get("acceptanceRate");
+        if (this.acceptanceRate > 0 && userWeights.get("acceptanceRateW") > 0) {
+            this.totalWeightedOutcome += (104 - this.acceptanceRate) * userWeights.get("acceptanceRateW");
         }
-        if (this.midpointACT > 0 && userWeights.get("midpointACT") > 0) {
-            this.totalWeightedOutcome += ((double)this.midpointACT / 36) * 100 * userWeights.get("midpointACT");
+        if (this.midpointACT > 0 && userWeights.get("actW") > 0) {
+            this.totalWeightedOutcome += ((double)this.midpointACT / 36) * 100 * userWeights.get("actW");
         }
-        if (this.inStateTuition > 0 && userWeights.get("inStateTuition") > 0) {
+        if (this.inStateTuition > 0 && userWeights.get("inStateTuitionW") > 0) {
             this.totalWeightedOutcome += ((double)(51008 - this.inStateTuition) / 51008) * 100
-                    * userWeights.get("inStateTuition");
+                    * userWeights.get("inStateTuitionW");
         }
-        if (this.outStateTuition > 0 && userWeights.get("outStateTuition") > 0) {
+        if (this.outStateTuition > 0 && userWeights.get("outStateTuitionW") > 0) {
             this.totalWeightedOutcome += ((double)(51008 - this.outStateTuition) / 51008) * 100
-                    * userWeights.get("outStateTuition");
+                    * userWeights.get("outStateTuitionW");
         }
     }
 
@@ -113,9 +113,7 @@ public class College implements Comparable<College> {
         return this.totalWeightedOutcome;
     }
 
-    public double getAcceptanecRate() {
-        return this.acceptanceRate;
-    }
+    public double getAcceptanecRate() { return this.acceptanceRate; }
 
     public int getInStateTuition() {
         return this.inStateTuition;

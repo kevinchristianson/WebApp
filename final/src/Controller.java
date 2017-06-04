@@ -43,16 +43,16 @@ public class Controller {
     @FXML
     private AnchorPane results;
     @FXML
-    private TextField tuitionValue;
+    private TextField tuitionTarget;
     @FXML
-    private TextField actValue;
+    private TextField actTarget;
     @FXML
-    private TextField acceptanceRateValue;
+    private TextField acceptanceRateTarget;
     @FXML
     private Label valueErrorText;
 
 
-    public void onStartOverButton(ActionEvent actionEvent) {
+    public void onStartOverButton() {
         privateButton.setSelected(false);
         publicButton.setSelected(false);
         anyDesignationButton.setSelected(false);
@@ -65,17 +65,40 @@ public class Controller {
         acceptanceRateWeight.setText("");
         metricErrorText.setText("");
         valueErrorText.setText("");
+        tuitionTarget.setText("");
+        actTarget.setText("");
+        acceptanceRateTarget.setText("");
         results.getChildren().clear();
     }
 
-    private void getResults(double weightTuition, double weightACT, double weightAcceptanceRate) throws IOException {
-        double topAnchor = 20.0;
+    public void onRankCollegesButton() {
+        results.getChildren().clear();
+        metricErrorText.setText("");
+        valueErrorText.setText("");
+        double tuitionW;
+        double actW;
+        double acceptanceRateW;
+        double tuitionT;
+        double actT;
+        double acceptanceRateT;
+        try {
+            tuitionW = getTuitionWeight();
+            actW = getACTWeight();
+            acceptanceRateW = getAcceptanceRateWeight();
+            tuitionT = getTuitionTarget();
+            actT = getACTTarget();
+            acceptanceRateT = getAcceptanceRateTarget();
+        } catch (NumberFormatException e) {
+            metricErrorText.setText("Input value not a positive number");
+            return;
+        }
+        metricErrorText.setText("");
         String designationDecision = "";
         if (publicButton.isSelected()) {
             designationDecision = "Public";
         } else if (privateButton.isSelected()) {
             designationDecision = "Private";
-        }else if(profitButton.isSelected()){
+        } else if (profitButton.isSelected()) {
             designationDecision = "For-profit";
         }
         String stateDecision = stateField.getText();
@@ -85,76 +108,103 @@ public class Controller {
         } else if (underButton.isSelected()) {
             sizeDecision = "Under";
         }
+        try {
+            getResults(designationDecision, stateDecision, sizeDecision, tuitionW, actW, acceptanceRateW,
+                    tuitionT, actT, acceptanceRateT);
+        } catch (IOException e) {
+            results.getChildren().add(new Label("Error getting information"));
+        }
+    }
 
+    private void getResults(String designationDecision, String stateDecision, String sizeDecision, double tuitionW,
+                            double actW, double acceptanceRateW, double tuitionT, double actT, double acceptanceRateT)
+                            throws IOException {
         AllColleges allColleges = new AllColleges();
         Map<String, Double> userMetrics = new HashMap<>();
-        userMetrics.put("acceptanceRate", weightAcceptanceRate);
-        userMetrics.put("midpointACT", weightACT);
+        userMetrics.put("acceptanceRateW", acceptanceRateW);
+        userMetrics.put("actW", actW);
+        userMetrics.put("acceptanceRateT", acceptanceRateT);
+        userMetrics.put("actT", actT);
         if (!stateDecision.equals("")) {
-            userMetrics.put("inStateTuition", weightTuition);
-            userMetrics.put("outStateTuition", 0.0);
+            userMetrics.put("inStateTuitionW", tuitionW);
+            userMetrics.put("outStateTuitionW", 0.0);
+            userMetrics.put("inStateTuitionT", tuitionT);
+            userMetrics.put("outStateTuitionT", 0.0);
         } else {
-            userMetrics.put("inStateTuition", 0.0);
-            userMetrics.put("outStateTuition", weightTuition);
+            userMetrics.put("inStateTuitionW", 0.0);
+            userMetrics.put("outStateTuitionW", tuitionW);
+            userMetrics.put("inStateTuitionT", 0.0);
+            userMetrics.put("outStateTuitionT", tuitionT);
         }
         allColleges.rankByUserMetrics(userMetrics);
+        displayResults(allColleges, designationDecision, stateDecision, sizeDecision);
+    }
 
+    public void displayResults(AllColleges allColleges, String designationDecision, String stateDecision,
+                               String sizeDecision) {
+        double topAnchor = 20.0;
         List<College> collegeList = allColleges.getCollegeList();
         int rank = 1;
         for (College college : collegeList) {
             if (college.getDesignation().contains(designationDecision)
-                    && college.getState().toLowerCase().contains(stateDecision.toLowerCase())) {
-                if (sizeDecision.equals("") || (sizeDecision.equals("Over") && college.getEnrollment() > 5000)
-                        || (sizeDecision.equals("Under") && college.getEnrollment() < 5000)) {
-                    Hyperlink name = new Hyperlink(rank + ". " + college.getName());
-                    name.setStyle("-fx-font-size: 150%");
-                    Label state = new Label("State: " + college.getState());
-                    state.setStyle("-fx-font-size: 120%");
-                    Label enrollment = new Label("Enrollment: " + college.getEnrollment());
-                    enrollment.setStyle("-fx-font-size: 120%");
-                    Label designation = new Label("Designation: " + college.getDesignation());
-                    designation.setStyle("-fx-font-size: 120%");
-                    Label tuition = new Label();
-                    tuition.setStyle("-fx-font-size: 120%");
-                    if(stateDecision.equals("")) tuition.setText("Out-of-state tuition: " + college.getOutStateTuition());
-                    else tuition.setText("In-state tuition: " + college.getInStateTuition());
-                    Label acceptance = new Label("Acceptance Rate: " + college.getAcceptanecRate());
-                    acceptance.setStyle("-fx-font-size: 120%");
-                    Label act = new Label("Midpoint ACT: " + college.getMidpointACT());
-                    act.setStyle("-fx-font-size: 120%");
-                    AnchorPane.setTopAnchor(name, topAnchor);
-                    topAnchor += 28.0;
-                    AnchorPane.setLeftAnchor(name, 30.0);
-                    results.getChildren().add(name);
-                    AnchorPane.setTopAnchor(state, topAnchor);
-                    topAnchor += 15;
-                    AnchorPane.setLeftAnchor(state, 60.0);
-                    results.getChildren().add(state);
-                    AnchorPane.setTopAnchor(enrollment, topAnchor);
-                    topAnchor += 15;
-                    AnchorPane.setLeftAnchor(enrollment, 60.0);
-                    results.getChildren().add(enrollment);
-                    AnchorPane.setTopAnchor(designation, topAnchor);
-                    topAnchor += 15;
-                    AnchorPane.setLeftAnchor(designation, 60.0);
-                    results.getChildren().add(designation);
-                    AnchorPane.setTopAnchor(tuition, topAnchor);
-                    topAnchor += 15;
-                    AnchorPane.setLeftAnchor(tuition, 60.0);
-                    results.getChildren().add(tuition);
-                    AnchorPane.setTopAnchor(acceptance, topAnchor);
-                    topAnchor += 15;
-                    AnchorPane.setLeftAnchor(acceptance, 60.0);
-                    results.getChildren().add(acceptance);
-                    AnchorPane.setTopAnchor(act, topAnchor);
-                    topAnchor += 30;
-                    AnchorPane.setLeftAnchor(act, 60.0);
-                    results.getChildren().add(act);
-                    rank++;
+                    && college.getState().toLowerCase().contains(stateDecision.toLowerCase())
+                    && (sizeDecision.equals("") || ((sizeDecision.equals("Over") && college.getEnrollment() >= 5000))
+                    || ((sizeDecision.equals("Under") && college.getEnrollment() < 5000)))) {
+                Hyperlink name = new Hyperlink(rank + ". " + college.getName());
+                name.setStyle("-fx-font-size: 150%");
+                Label state = new Label("State: " + college.getState());
+                state.setStyle("-fx-font-size: 120%");
+                Label enrollment = new Label("Enrollment: " + college.getEnrollment());
+                enrollment.setStyle("-fx-font-size: 120%");
+                Label designation = new Label("Designation: " + college.getDesignation());
+                designation.setStyle("-fx-font-size: 120%");
+                Label tuition = new Label();
+                tuition.setStyle("-fx-font-size: 120%");
+                if (stateDecision.equals("")) {
+                    tuition.setText("Out-of-state tuition: " + college.getOutStateTuition());
+                } else {
+                    tuition.setText("In-state tuition: " + college.getInStateTuition());
                 }
+                Label acceptance = new Label("Acceptance Rate: " + college.getAcceptanecRate());
+                acceptance.setStyle("-fx-font-size: 120%");
+                Label act = new Label("Midpoint ACT: " + college.getMidpointACT());
+                act.setStyle("-fx-font-size: 120%");
+                AnchorPane.setTopAnchor(name, topAnchor);
+                topAnchor += 28.0;
+                AnchorPane.setLeftAnchor(name, 30.0);
+                results.getChildren().add(name);
+                AnchorPane.setTopAnchor(state, topAnchor);
+                topAnchor += 15;
+                AnchorPane.setLeftAnchor(state, 60.0);
+                results.getChildren().add(state);
+                AnchorPane.setTopAnchor(enrollment, topAnchor);
+                topAnchor += 15;
+                AnchorPane.setLeftAnchor(enrollment, 60.0);
+                results.getChildren().add(enrollment);
+                AnchorPane.setTopAnchor(designation, topAnchor);
+                topAnchor += 15;
+                AnchorPane.setLeftAnchor(designation, 60.0);
+                results.getChildren().add(designation);
+                AnchorPane.setTopAnchor(tuition, topAnchor);
+                topAnchor += 15;
+                AnchorPane.setLeftAnchor(tuition, 60.0);
+                results.getChildren().add(tuition);
+                AnchorPane.setTopAnchor(acceptance, topAnchor);
+                topAnchor += 15;
+                AnchorPane.setLeftAnchor(acceptance, 60.0);
+                results.getChildren().add(acceptance);
+                AnchorPane.setTopAnchor(act, topAnchor);
+                topAnchor += 30;
+                AnchorPane.setLeftAnchor(act, 60.0);
+                results.getChildren().add(act);
+                rank++;
             }
         }
-        if(results.getChildren().isEmpty()){
+        checkForNoResults();
+    }
+
+    public void checkForNoResults() {
+        if (results.getChildren().isEmpty()){
             Label text = new Label();
             text.setText("No results found");
             text.setStyle("-fx-font-size: 150%");
@@ -164,49 +214,46 @@ public class Controller {
         }
     }
 
-    public void onRankCollegesButton(ActionEvent actionEvent) {
-        results.getChildren().clear();
-        metricErrorText.setText("");
-        valueErrorText.setText("");
-        double tuitionValue = 0;
-        double actValue = 0;
-        double acceptanceRateValue = 0;
-        double percentage = 0;
-        if (!tuitionWeight.getText().equals("")) {
-            try {
-                tuitionValue = Double.parseDouble(tuitionWeight.getText());
-            } catch (NumberFormatException e) {
-                metricErrorText.setText("Metric value not a number");
-                return;
-            }
-        }
+    public double getACTWeight() throws  NumberFormatException {
         if (!actWeight.getText().equals("")) {
-            try {
-                actValue = Double.parseDouble(actWeight.getText());
-            } catch (NumberFormatException e) {
-                metricErrorText.setText("Metric value not a number");
-                return;
-            }
+            return Double.parseDouble(actWeight.getText());
         }
+        return 0;
+    }
+
+    public double getAcceptanceRateWeight() throws  NumberFormatException {
         if (!acceptanceRateWeight.getText().equals("")) {
-            try {
-                acceptanceRateValue = Double.parseDouble(acceptanceRateWeight.getText());
-            } catch (NumberFormatException e) {
-                metricErrorText.setText("Metric value not a number");
-                return;
-            }
+            return Double.parseDouble(acceptanceRateWeight.getText());
         }
-        percentage =  tuitionValue + actValue + acceptanceRateValue;
-        if (percentage < 0) {
-            metricErrorText.setText("Weights must not be negative");
-            return;
+        return 0;
+    }
+
+    public double getTuitionWeight() throws  NumberFormatException {
+        if (!tuitionWeight.getText().equals("")) {
+            return Double.parseDouble(tuitionWeight.getText());
         }
-        metricErrorText.setText("");
-        try {
-            getResults(tuitionValue, actValue, acceptanceRateValue);
-        } catch (IOException e) {
-            results.getChildren().add(new Label("Error getting information"));
+        return 0;
+    }
+
+    public double getACTTarget() throws  NumberFormatException {
+        if (!actTarget.getText().equals("")) {
+            return Double.parseDouble(actTarget.getText());
         }
+        return 0;
+    }
+
+    public double getAcceptanceRateTarget() throws  NumberFormatException {
+        if (!acceptanceRateTarget.getText().equals("")) {
+            return Double.parseDouble(acceptanceRateTarget.getText());
+        }
+        return 0;
+    }
+
+    public double getTuitionTarget() throws  NumberFormatException {
+        if (!tuitionTarget.getText().equals("")) {
+            return Double.parseDouble(tuitionTarget.getText());
+        }
+        return 0;
     }
 
     public void unselectButtons(ToggleButton button1, ToggleButton button2, ToggleButton button3) {

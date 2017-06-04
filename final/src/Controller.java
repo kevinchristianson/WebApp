@@ -10,6 +10,7 @@ import models.College;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 
@@ -55,7 +56,7 @@ public class Controller {
         results.getChildren().clear();
     }
 
-    private void getResults() throws IOException{
+    /*private void getResults() throws IOException{
         List<College> collegeList = new AllColleges().getCollegeList();
         double topAnchor = 20.0;
         String designation = "";
@@ -142,6 +143,49 @@ public class Controller {
             results.getChildren().add(link);
             topAnchor += 20.0;
         }
+    }*/
+
+    private void getResults(double weightTuition, double weightACT, double weightAcceptanceRate) throws IOException {
+        double topAnchor = 20.0;
+        String designation = "";
+        if (publicButton.isSelected()) {
+            designation = "Public";
+        } else if (privateButton.isSelected()) {
+            designation = "Private";
+        }
+        String state = stateField.getText();
+        String sizeDecision = "";
+        if (overButton.isSelected()) {
+            sizeDecision = "Over";
+        } else if (underButton.isSelected()) {
+            sizeDecision = "Under";
+        }
+
+        AllColleges allColleges = new AllColleges();
+        Map<String, Double> userMetrics = new HashMap<>();
+        userMetrics.put("acceptanceRate", weightAcceptanceRate);
+        userMetrics.put("midpointACT", weightACT);
+        if (!state.equals("")) {
+            userMetrics.put("inStateTuition", weightTuition);
+            userMetrics.put("outStateTuition", 0.0);
+        } else {
+            userMetrics.put("inStateTuition", 0.0);
+            userMetrics.put("outStateTuition", weightTuition);
+        }
+        allColleges.rankByUserMetrics(userMetrics);
+
+        List<College> collegeList = allColleges.getCollegeList();
+        int rank = 1;
+        for (College college : collegeList) {
+            Hyperlink link = new Hyperlink(rank + ". " + college.getName());
+            link.setStyle("-fx-font-size: 110%");
+            //   link.setOnAction(college.getName());
+            AnchorPane.setTopAnchor(link, topAnchor);
+            AnchorPane.setLeftAnchor(link, 30.0);
+            results.getChildren().add(link);
+            topAnchor += 20.0;
+            rank++;
+        }
     }
 
     public void onRankCollegesButton(ActionEvent actionEvent) {
@@ -150,43 +194,24 @@ public class Controller {
         double actValue = 0;
         double acceptanceRateValue = 0;
         double percentage = 0;
-        if (tuition.getText().equals("") && act.getText().equals("") && acceptanceRate.getText().equals("")) {
-            errorText.setText("");
-            try {
-                getResults();
-                return;
-            } catch (IOException e) {
-                results.getChildren().add(new Label("Error getting information"));
-            }
-        } else if (tuition.getText().equals("") || act.getText().equals("") || acceptanceRate.getText().equals("")) {
-            if (!tuition.getText().equals("")) {
-                try {
-                    tuitionValue = Double.parseDouble(tuition.getText());
-                } catch (NumberFormatException e) {
-                    errorText.setText("Metric value not a number");
-                    return;
-                }
-            }
-            if (!act.getText().equals("")) {
-                try {
-                    actValue = Double.parseDouble(act.getText());
-                } catch (NumberFormatException e) {
-                    errorText.setText("Metric value not a number");
-                    return;
-                }
-            }
-            if (!acceptanceRate.getText().equals("")) {
-                try {
-                    acceptanceRateValue = Double.parseDouble(acceptanceRate.getText());
-                } catch (NumberFormatException e) {
-                    errorText.setText("Metric value not a number");
-                    return;
-                }
-            }
-        } else {
+        if (!tuition.getText().equals("")) {
             try {
                 tuitionValue = Double.parseDouble(tuition.getText());
+            } catch (NumberFormatException e) {
+                errorText.setText("Metric value not a number");
+                return;
+            }
+        }
+        if (!act.getText().equals("")) {
+            try {
                 actValue = Double.parseDouble(act.getText());
+            } catch (NumberFormatException e) {
+                errorText.setText("Metric value not a number");
+                return;
+            }
+        }
+        if (!acceptanceRate.getText().equals("")) {
+            try {
                 acceptanceRateValue = Double.parseDouble(acceptanceRate.getText());
             } catch (NumberFormatException e) {
                 errorText.setText("Metric value not a number");
@@ -197,15 +222,6 @@ public class Controller {
         if (percentage < 0) {
             errorText.setText("Weights must not be negative");
             return;
-        } else if (percentage == 0) {
-            tuitionValue = 1/3;
-            actValue = 1/3;
-            acceptanceRateValue = 1/3;
-        } else {
-            double rate = 1 / (percentage / 100);
-            tuitionValue = rate * tuitionValue;
-            actValue = rate * actValue;
-            acceptanceRateValue = rate * acceptanceRateValue;
         }
         errorText.setText("");
         try {

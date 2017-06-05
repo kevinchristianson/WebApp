@@ -10,7 +10,7 @@
                 AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="575"
                 style="-fx-background-color: #f4f4f4; -fx-border-color: black; -fx-border-width: 0px 0px 5px 0px;">
         <Label fx:id="title_text" AnchorPane.leftAnchor="20" AnchorPane.bottomAnchor="-20" style="-fx-font-size: 450%"
-               text="College Ranker"/>
+               text="College Ranker" textFill="black"/>
     </AnchorPane>
 
     <!--<AnchorPane fx:id="filters"-->

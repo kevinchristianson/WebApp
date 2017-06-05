@@ -67,7 +67,7 @@
         <!--<Label fx:id="metricErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="215" AnchorPane.leftAnchor="30"-->
                <!--textFill="red" />-->
 
-        <!--&lt;!&ndash; TARGET VALUES &ndash;&gt;-->
+        <!-- TARGET VALUES -->
         <!--<Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="250" style="-fx-font-size: 150%" text="Target Values" />-->
         <!--<Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="275" style="-fx-font-size: 100%" text="Find your fit (optional):" />-->
         <!--<Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="290" style="-fx-font-size: 100%" text="ideal values for each metric" />-->
@@ -85,7 +85,7 @@
                    <!--AnchorPane.rightAnchor="40" />-->
         <!--<Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="420" AnchorPane.rightAnchor="20" />-->
         <!--&lt;!&ndash; ERROR TEXT &ndash;&gt;-->
-        <!--<Label fx:id="valueErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="455" AnchorPane.leftAnchor="30"-->
+        <!--<Label fx:id="targetErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="455" AnchorPane.leftAnchor="30"-->
                <!--textFill="red" />-->
     <!--</AnchorPane>-->
 

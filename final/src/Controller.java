@@ -1,4 +1,3 @@
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -7,9 +6,8 @@ import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
 import javafx.scene.control.Hyperlink;
-import java.net.URI;
+
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +47,7 @@ public class Controller {
     @FXML
     private TextField acceptanceRateTarget;
     @FXML
-    private Label valueErrorText;
+    private Label targetErrorText;
 
 
     public void onStartOverButton() {
@@ -64,7 +62,7 @@ public class Controller {
         actWeight.setText("");
         acceptanceRateWeight.setText("");
         metricErrorText.setText("");
-        valueErrorText.setText("");
+        targetErrorText.setText("");
         tuitionTarget.setText("");
         actTarget.setText("");
         acceptanceRateTarget.setText("");
@@ -74,7 +72,7 @@ public class Controller {
     public void onRankCollegesButton() {
         results.getChildren().clear();
         metricErrorText.setText("");
-        valueErrorText.setText("");
+        targetErrorText.setText("");
         double tuitionW;
         double actW;
         double acceptanceRateW;
@@ -85,11 +83,24 @@ public class Controller {
             tuitionW = getTuitionWeight();
             actW = getACTWeight();
             acceptanceRateW = getAcceptanceRateWeight();
+        } catch (NumberFormatException e) {
+            metricErrorText.setText("Input not a positive number");
+            return;
+        }
+        if (tuitionW < 0 || actW < 0 || acceptanceRateW < 0) {
+            metricErrorText.setText("Input not a positive number");
+            return;
+        }
+        try {
             tuitionT = getTuitionTarget();
             actT = getACTTarget();
             acceptanceRateT = getAcceptanceRateTarget();
         } catch (NumberFormatException e) {
-            metricErrorText.setText("Input value not a positive number");
+            targetErrorText.setText("Input not a positive number");
+            return;
+        }
+        if (tuitionT < 0 || actT < 0 || acceptanceRateT < 0) {
+            metricErrorText.setText("Input not a positive number");
             return;
         }
         metricErrorText.setText("");

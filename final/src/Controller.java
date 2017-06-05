@@ -259,6 +259,7 @@ public class Controller {
             if (size.length() == 4) {
                 size = size.substring(0, 1) + "," + size.substring(1, 4);
             } else if (size.length() == 5) {
+                size = size.substring(0, 2) + "," + size.substring(2, 5);
             }
             enrollment.setText("Enrollment: " + size);
         }

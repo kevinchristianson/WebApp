@@ -165,6 +165,16 @@ public class Controller {
                 name.setStyle("-fx-font-size: 150%");
                 Label state = new Label("State: " + college.getState());
                 state.setStyle("-fx-font-size: 120%");
+                /*
+                public void setAttributeLabel(College college, String attribute) {
+                    if (attribute.equals("Enrollment") {
+                        Label enrollment = new Label("Enrollment: " + college.getEnrollment());
+                        enrollment.setStyle("-fx-font-size: 120%");
+                    } else if (attribute.equals("Tuition") {
+
+                    }
+                }
+                */
                 Label enrollment = new Label("Enrollment: " + college.getEnrollment());
                 enrollment.setStyle("-fx-font-size: 120%");
                 Label designation = new Label("Designation: " + college.getDesignation());

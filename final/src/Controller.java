@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Kevin Christianson and Isaac Haseley
+ *
+ * Controller for our College Ranker application
+ */
 public class Controller {
     @FXML
     private ToggleButton privateButton;
@@ -45,6 +50,9 @@ public class Controller {
     @FXML
     private TextField acceptanceRateTarget;
 
+    /**
+     * Clears user input and button selections
+     */
     public void onStartOverButton() {
         privateButton.setSelected(false);
         publicButton.setSelected(false);
@@ -64,10 +72,14 @@ public class Controller {
         results.getChildren().clear();
     }
 
+    /**
+     * Reads user input and button selections
+     * Calls helpers to rank and display colleges
+     */
     public void onRankCollegesButton() {
         errorText.setText("");
         results.getChildren().clear();
-        errorText.setText("");
+        // "W" for "weight," "T" for "target"
         double tuitionW;
         double actW;
         double acceptanceRateW;
@@ -83,7 +95,7 @@ public class Controller {
             acceptanceRateT = getAcceptanceRateTarget();
             if (tuitionT == College.NO_TARGET_INPUT && actT == College.NO_TARGET_INPUT
                     && acceptanceRateT == College.NO_TARGET_INPUT && tuitionW == 0 && actW == 0 && acceptanceRateW == 0) {
-                errorText.setText("Sorting alphabetically");
+                errorText.setText("Alert: Sorting alphabetically");
             }
             if ((tuitionT >= 0 && tuitionT != College.NO_TARGET_INPUT && tuitionW <= 0)
                     || (actT >= 0 && actT != College.NO_TARGET_INPUT && actW <= 0)
@@ -126,6 +138,19 @@ public class Controller {
         }
     }
 
+    /**
+     * Gets colleges from API and ranks them using user input
+     * @param inState - Did the user enter something in the "State" field? This determines whether we'll use in-state
+     *                or out-of-state tuition when ranking
+     * @param tuitionW - Weight for tuition metric
+     * @param actW - Weight for midpoint ACT metric
+     * @param acceptanceRateW - Weight for acceptance rate metric
+     * @param tuitionT - Target value for tuition
+     * @param actT - Target value for midpoint ACT
+     * @param acceptanceRateT - Target value for acceptance rate
+     * @return AllColleges object with a stored list of ranked Colleges
+     * @throws IOException - If connection to database failed
+     */
     private AllColleges getRankedColleges(boolean inState, double tuitionW, double actW, double acceptanceRateW,
                                           double tuitionT, double actT, double acceptanceRateT) throws IOException {
         Map<String, Double> userMetrics = new HashMap<>();
@@ -146,6 +171,14 @@ public class Controller {
         return allColleges;
     }
 
+    /**
+     * Filters Colleges based on user input
+     * Displays top 100 based on user input
+     * @param allColleges - A previously-ranked AllColleges object
+     * @param designationDecision - Public, Private, For-profit, or "" for Any
+     * @param stateDecision - User's input in state field
+     * @param sizeDecision - Over, Under, or "" for Any
+     */
     public void filterAndDisplayResults(AllColleges allColleges, String designationDecision, String stateDecision,
                                         String sizeDecision) {
         double topAnchor = 20.0;
@@ -176,6 +209,9 @@ public class Controller {
         checkForNoResults();
     }
 
+    /**
+     * Displays a "no results" message if none are found
+     */
     public void checkForNoResults() {
         if (results.getChildren().isEmpty()){
             Label text = new Label();
@@ -186,6 +222,8 @@ public class Controller {
             results.getChildren().add(text);
         }
     }
+
+    // ===== RETURN USER INPUT =====
 
     public double getACTWeight() throws  NumberFormatException {
         if (!actWeight.getText().equals("")) {
@@ -229,17 +267,10 @@ public class Controller {
         return College.NO_TARGET_INPUT;
     }
 
+    // ===== FORMAT AND DISPLAY A COLLEGE'S ATTRIBUTES =====
+
     public void displayName(College college, double topAnchor, int rank) {
         Label name = new Label(rank + ". " + college.getName());
-//        Hyperlink name = new Hyperlink(rank + ". " + college.getName());
-//        HostServices hostServices = (HostServices)this.results.getScene().getWindow().getProperties().get("hostServices");
-//        name.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                System.out.println(college.getURL());
-//                hostServices.showDocument(college.getURL());
-//            }
-//        });
         name.setStyle("-fx-font-size: 150%");
         AnchorPane.setTopAnchor(name, topAnchor);
         AnchorPane.setLeftAnchor(name, 30.0);
@@ -349,6 +380,8 @@ public class Controller {
         button2.setSelected(false);
     }
 
+    // ===== BUTTONS =====
+
     public void unselectButtonsPrivate() {
         unselectButtons(publicButton, profitButton, anyDesignationButton);
     }
@@ -368,9 +401,11 @@ public class Controller {
     public void unselectButtonsUnderEnroll() {
         unselectButtons(overButton, anyEnrollmentButton);
     }
+
     public void unselectButtonsOverEnroll() {
         unselectButtons(underButton, anyEnrollmentButton);
     }
+
     public void unSelectButtonsAnyEnroll() {
         unselectButtons(overButton, underButton);
     }

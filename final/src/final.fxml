@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.HBox?>
 <BorderPane fx:controller="Controller" xmlns:fx="http://javafx.com/fxml">
     <top>
         <AnchorPane fx:id="title" style="-fx-background-color: #f4f4f4; -fx-border-color: black; -fx-border-width: 0px 0px 5px 0px;">
@@ -19,72 +18,72 @@
                     style="-fx-background-color: #dcd0c0; -fx-border-color:black; -fx-border-width:1px 0px 1px 0px;">
             <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="15" style="-fx-font-size: 150%" text="Filters" />
             <!-- DESIGNATION TEXT AND BUTTONS -->
-            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="45" style="-fx-font-size: 115%" text="Type:" />
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="45" style="-fx-font-size: 120%" text="Type:" />
             <ToggleButton fx:id="publicButton" text="Public" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="40"
                           onAction="#unselectButtonsPublic"/>
             <ToggleButton fx:id="privateButton" text="Private" AnchorPane.leftAnchor="130" AnchorPane.topAnchor="40"
                           onAction="#unselectButtonsPrivate"/>
-            <ToggleButton fx:id="profitButton" text="For-Profit" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="75"
+            <ToggleButton fx:id="profitButton" text="For-Profit" AnchorPane.leftAnchor="195" AnchorPane.topAnchor="40"
                           onAction="#unselectButtonsProfit" />
-            <ToggleButton fx:id="anyDesignationButton" text="Any" AnchorPane.leftAnchor="150" AnchorPane.topAnchor="75"
+            <ToggleButton fx:id="anyDesignationButton" text="Any" AnchorPane.leftAnchor="276.5" AnchorPane.topAnchor="40"
                           onAction="#unselectButtonsAnyDesignation"/>
             <!-- STATE TEXT AND BUTTONS -->
-            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="120" style="-fx-font-size: 115%" text="State:" />
-            <TextField fx:id="stateField" AnchorPane.topAnchor="115" AnchorPane.leftAnchor="70" />
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="85" style="-fx-font-size: 120%" text="State:" />
+            <TextField fx:id="stateField" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="70" />
             <!-- ENROLLMENT TEXT AND BUTTONS -->
-            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="155" style="-fx-font-size: 115%" text="Size:" />
-            <ToggleButton fx:id="underButton" text="Under 5,000" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="150"
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="125" style="-fx-font-size: 120%" text="Size:" />
+            <ToggleButton fx:id="underButton" text="Under 5,000" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="120"
                           onAction="#unselectButtonsUnderEnroll"/>
-            <ToggleButton fx:id="overButton" text="Over   5,000" AnchorPane.leftAnchor="70" AnchorPane.topAnchor="185"
+            <ToggleButton fx:id="overButton" text="Over   5,000" AnchorPane.leftAnchor="170" AnchorPane.topAnchor="120"
                           onAction="#unselectButtonsOverEnroll"/>
-            <ToggleButton fx:id="anyEnrollmentButton" text="Any" AnchorPane.leftAnchor="175" AnchorPane.topAnchor="185"
+            <ToggleButton fx:id="anyEnrollmentButton" text="Any" AnchorPane.leftAnchor="270" AnchorPane.topAnchor="120"
                           onAction="#unSelectButtonsAnyEnroll"/>
-            <!--&lt;!&ndash; METRIC WEIGHTS &ndash;&gt;-->
-            <!--<Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="15" style="-fx-font-size: 150%" text="Metrics" />-->
-            <!--<Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="40" style="-fx-font-size: 100%" text="Weigh each factor for your" />-->
-            <!--<Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="55" style="-fx-font-size: 100%" text="college rankings" />-->
-            <!--&lt;!&ndash; TUITION TEXT &ndash;&gt;-->
-            <!--<Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="85" style="-fx-font-size: 115%" text="Tuition:" />-->
-            <!--<TextField fx:id="tuitionWeight" AnchorPane.topAnchor="80" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160"-->
-                       <!--AnchorPane.rightAnchor="40" />-->
-            <!--<Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="85" AnchorPane.rightAnchor="20" />-->
-            <!--&lt;!&ndash; MIDPOINT ACT TEXT &ndash;&gt;-->
-            <!--<Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="135" style="-fx-font-size: 115%" text="Midpoint ACT:" />-->
-            <!--<TextField fx:id="actWeight" AnchorPane.topAnchor="130" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160"-->
-                       <!--AnchorPane.rightAnchor="40" />-->
-            <!--<Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="135" AnchorPane.rightAnchor="20" />-->
-            <!--&lt;!&ndash; ACCEPTANCE RATE TEXT &ndash;&gt;-->
-            <!--<Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="185" style="-fx-font-size: 115%" text="Acceptance Rate:" />-->
-            <!--<TextField fx:id="acceptanceRateWeight" AnchorPane.topAnchor="180" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160"-->
-                       <!--AnchorPane.rightAnchor="40" />-->
-            <!--<Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="185" AnchorPane.rightAnchor="20" />-->
+            <!-- METRIC WEIGHTS -->
+            <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="165" style="-fx-font-size: 150%" text="Metrics" />
+            <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="190" style="-fx-font-size: 100%"
+                   text="Weigh each factor for your college rankings" />
+            <!-- TUITION TEXT -->
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="220" style="-fx-font-size: 120%" text="Tuition:" />
+            <TextField fx:id="tuitionWeight" AnchorPane.topAnchor="215" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
+                       maxWidth="40"/>
+            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="220" AnchorPane.rightAnchor="100" />
+            <!-- MIDPOINT ACT TEXT -->
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="255" style="-fx-font-size: 120%" text="Midpoint ACT:" />
+            <TextField fx:id="actWeight" AnchorPane.topAnchor="250" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
+                       maxWidth="40"/>
+            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="255" AnchorPane.rightAnchor="100" />
+            <!-- ACCEPTANCE RATE TEXT -->
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="290" style="-fx-font-size: 120%" text="Acceptance Rate:" />
+            <TextField fx:id="acceptanceRateWeight" AnchorPane.topAnchor="285" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
+                       maxWidth="40" />
+            <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="290" AnchorPane.rightAnchor="100" />
             <!--&lt;!&ndash; ERROR TEXT &ndash;&gt;-->
             <!--<Label fx:id="metricErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="215" AnchorPane.leftAnchor="30"-->
                    <!--textFill="red" />-->
 
             <!--TARGET VALUES-->
-            <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="250" style="-fx-font-size: 150%" text="Target Values" />
-            <Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="275" style="-fx-font-size: 100%" text="Find your fit (optional):" />
-            <Label AnchorPane.leftAnchor="15" AnchorPane.topAnchor="290" style="-fx-font-size: 100%" text="ideal values for each metric" />
+            <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="330" style="-fx-font-size: 150%" text="Target Values" />
+            <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="355" style="-fx-font-size: 100%"
+                   text="Find your fit (optional): ideal values for each metric" />
             <!-- TUITION TEXT -->
-            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="320" style="-fx-font-size: 115%" text="Tuition:" />
-            <TextField fx:id="tuitionTarget" AnchorPane.topAnchor="315" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160"
-                       AnchorPane.rightAnchor="40" />
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="385" style="-fx-font-size: 120%" text="Tuition:" />
+            <TextField fx:id="tuitionTarget" AnchorPane.topAnchor="380" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
+                       maxWidth="40"/>
             <!-- MIDPOINT ACT TEXT -->
-            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="370" style="-fx-font-size: 115%" text="Midpoint ACT:" />
-            <TextField fx:id="actTarget" AnchorPane.topAnchor="365" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160"
-                       AnchorPane.rightAnchor="40" />
-            <!-- ACCEPTANCE RATE TEXT -->
-            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="420" style="-fx-font-size: 115%" text="Acceptance Rate:" />
-            <TextField fx:id="acceptanceRateTarget" AnchorPane.topAnchor="415" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160"
-                       AnchorPane.rightAnchor="40" />
-            <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="420" AnchorPane.rightAnchor="20" />
-            <!-- ERROR TEXT -->
-            <Label fx:id="targetErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="455" AnchorPane.leftAnchor="30"
-                   textFill="red" />
+            <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="420" style="-fx-font-size: 120%" text="Midpoint ACT:" />
+            <TextField fx:id="actTarget" AnchorPane.topAnchor="415" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
+                       maxWidth="40" />
+            <!--&lt;!&ndash; ACCEPTANCE RATE TEXT &ndash;&gt;-->
+            <!--<Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="420" style="-fx-font-size: 115%" text="Acceptance Rate:" />-->
+            <!--<TextField fx:id="acceptanceRateTarget" AnchorPane.topAnchor="415" style="-fx-font-size: 115%" AnchorPane.leftAnchor="160"-->
+                       <!--AnchorPane.rightAnchor="40" />-->
+            <!--<Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="420" AnchorPane.rightAnchor="20" />-->
+            <!--&lt;!&ndash; ERROR TEXT &ndash;&gt;-->
+            <!--<Label fx:id="targetErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="455" AnchorPane.leftAnchor="30"-->
+                   <!--textFill="red" />-->
 
-            <Button text="Start Over" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="510" onAction="#onStartOverButton"/>
-            <Button text="Rank Colleges" AnchorPane.leftAnchor="115" AnchorPane.topAnchor="510" onAction="#onRankCollegesButton"/>
+            <!--<Button text="Start Over" AnchorPane.leftAnchor="15" AnchorPane.topAnchor="510" onAction="#onStartOverButton"/>-->
+            <!--<Button text="Rank Colleges" AnchorPane.leftAnchor="115" AnchorPane.topAnchor="510" onAction="#onRankCollegesButton"/>-->
         </AnchorPane>
     </left>
     <bottom>

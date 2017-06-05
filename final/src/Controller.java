@@ -114,7 +114,11 @@ public class Controller {
                     tuitionT, actT, acceptanceRateT);
             filterAndDisplayResults(allColleges, designationDecision, stateDecision, sizeDecision);
         } catch (IOException e) {
-            results.getChildren().add(new Label("Database not properly configured"));
+            Label message = new Label("Database not properly configured");
+            message.setStyle("-fx-font-size: 150%");
+            AnchorPane.setLeftAnchor(message, 100.0);
+            AnchorPane.setTopAnchor(message, 30.0);
+            results.getChildren().add(message);
         }
     }
 
@@ -173,8 +177,8 @@ public class Controller {
             Label text = new Label();
             text.setText("No results found");
             text.setStyle("-fx-font-size: 150%");
-            AnchorPane.setTopAnchor(text, 75.0);
-            AnchorPane.setLeftAnchor(text, 225.0);
+            AnchorPane.setTopAnchor(text, 30.0);
+            AnchorPane.setLeftAnchor(text, 175.0);
             results.getChildren().add(text);
         }
     }

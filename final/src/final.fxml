@@ -60,7 +60,7 @@
             <!--&lt;!&ndash; ERROR TEXT &ndash;&gt;-->
             <!--<Label fx:id="metricErrorText" style="-fx-font-size: 115%" AnchorPane.topAnchor="215" AnchorPane.leftAnchor="30"-->
                    <!--textFill="red" />-->
-
+            
             <!--TARGET VALUES-->
             <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="330" style="-fx-font-size: 150%" text="Target Values" />
             <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="355" style="-fx-font-size: 100%"

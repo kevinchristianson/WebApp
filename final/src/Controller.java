@@ -161,63 +161,20 @@ public class Controller {
                     && college.getState().toLowerCase().contains(stateDecision.toLowerCase())
                     && (sizeDecision.equals("") || ((sizeDecision.equals("Over") && college.getEnrollment() >= 5000))
                     || ((sizeDecision.equals("Under") && college.getEnrollment() < 5000)))) {
-                Hyperlink name = new Hyperlink(rank + ". " + college.getName());
-                name.setStyle("-fx-font-size: 150%");
-                Label state = new Label("State: " + college.getState());
-                state.setStyle("-fx-font-size: 120%");
-                /*
-                public void setAttributeLabel(College college, String attribute) {
-                    if (attribute.equals("Enrollment") {
-                        Label enrollment = new Label("Enrollment: " + college.getEnrollment());
-                        enrollment.setStyle("-fx-font-size: 120%");
-                    } else if (attribute.equals("Tuition") {
-
-                    }
-                }
-                */
-                Label enrollment = new Label("Enrollment: " + college.getEnrollment());
-                enrollment.setStyle("-fx-font-size: 120%");
-                Label designation = new Label("Designation: " + college.getDesignation());
-                designation.setStyle("-fx-font-size: 120%");
-                Label tuition = new Label();
-                tuition.setStyle("-fx-font-size: 120%");
-                if (stateDecision.equals("")) {
-                    tuition.setText("Out-of-state tuition: " + college.getOutStateTuition());
-                } else {
-                    tuition.setText("In-state tuition: " + college.getInStateTuition());
-                }
-                Label acceptance = new Label("Acceptance Rate: " + college.getAcceptanecRate());
-                acceptance.setStyle("-fx-font-size: 120%");
-                Label act = new Label("Midpoint ACT: " + college.getMidpointACT());
-                act.setStyle("-fx-font-size: 120%");
-                AnchorPane.setTopAnchor(name, topAnchor);
+                displayName(college, topAnchor, rank);
                 topAnchor += 28.0;
-                AnchorPane.setLeftAnchor(name, 30.0);
-                results.getChildren().add(name);
-                AnchorPane.setTopAnchor(state, topAnchor);
+                displayState(college, topAnchor);
                 topAnchor += 15;
-                AnchorPane.setLeftAnchor(state, 60.0);
-                results.getChildren().add(state);
-                AnchorPane.setTopAnchor(enrollment, topAnchor);
+                displayEnrollment(college, topAnchor);
                 topAnchor += 15;
-                AnchorPane.setLeftAnchor(enrollment, 60.0);
-                results.getChildren().add(enrollment);
-                AnchorPane.setTopAnchor(designation, topAnchor);
+                displayDesignation(college, topAnchor);
                 topAnchor += 15;
-                AnchorPane.setLeftAnchor(designation, 60.0);
-                results.getChildren().add(designation);
-                AnchorPane.setTopAnchor(tuition, topAnchor);
+                displayTuition(college, topAnchor, !stateDecision.equals(""));
                 topAnchor += 15;
-                AnchorPane.setLeftAnchor(tuition, 60.0);
-                results.getChildren().add(tuition);
-                AnchorPane.setTopAnchor(acceptance, topAnchor);
+                displayAcceptance(college, topAnchor);
                 topAnchor += 15;
-                AnchorPane.setLeftAnchor(acceptance, 60.0);
-                results.getChildren().add(acceptance);
-                AnchorPane.setTopAnchor(act, topAnchor);
+                displayACT(college, topAnchor);
                 topAnchor += 30;
-                AnchorPane.setLeftAnchor(act, 60.0);
-                results.getChildren().add(act);
                 rank++;
             }
         }
@@ -275,6 +232,106 @@ public class Controller {
             return Double.parseDouble(tuitionTarget.getText());
         }
         return 0;
+    }
+
+    public void displayName(College college, double topAnchor, int rank) {
+        Hyperlink name = new Hyperlink(rank + ". " + college.getName());
+        name.setStyle("-fx-font-size: 150%");
+        AnchorPane.setTopAnchor(name, topAnchor);
+        AnchorPane.setLeftAnchor(name, 30.0);
+        results.getChildren().add(name);
+    }
+
+    public void displayState(College college, double topAnchor) {
+        Label state = new Label("State: " + college.getState());
+        state.setStyle("-fx-font-size: 120%");
+        AnchorPane.setTopAnchor(state, topAnchor);
+        AnchorPane.setLeftAnchor(state, 60.0);
+        results.getChildren().add(state);
+    }
+
+    public void displayEnrollment(College college, double topAnchor) {
+        Label enrollment = new Label();
+        if (college.getEnrollment() == -1) {
+            enrollment.setText("Enrollment: Data not available");
+        } else {
+            String size = Integer.toString(college.getEnrollment());
+            if (size.length() == 4) {
+                size = size.substring(0, 1) + "," + size.substring(1, 4);
+            } else if (size.length() == 5) {
+                size = size.substring(0, 2) + "," + size.substring(2, 5);
+            }
+            enrollment.setText("Enrollment: " + size);
+        }
+        enrollment.setStyle("-fx-font-size: 120%");
+        AnchorPane.setTopAnchor(enrollment, topAnchor);
+        AnchorPane.setLeftAnchor(enrollment, 60.0);
+        results.getChildren().add(enrollment);
+    }
+
+    public void displayDesignation(College college, double topAnchor) {
+        Label designation = new Label("Designation: " + college.getDesignation());
+        designation.setStyle("-fx-font-size: 120%");
+        AnchorPane.setTopAnchor(designation, topAnchor);
+        AnchorPane.setLeftAnchor(designation, 60.0);
+        results.getChildren().add(designation);
+    }
+
+    public String formatTuition(int tuition) {
+        String formattedTuition = Integer.toString(tuition);
+        if (formattedTuition.length() == 4) {
+            formattedTuition = formattedTuition.substring(0, 1) + "," + formattedTuition.substring(1, 4);
+        } else if (formattedTuition.length() == 5) {
+            formattedTuition = formattedTuition.substring(0, 2) + "," + formattedTuition.substring(2, 5);
+        }
+        return formattedTuition;
+    }
+
+    public void displayTuition(College college, double topAnchor, boolean inState) {
+        Label tuition = new Label();
+        if (college.getOutStateTuition() == -1 || college.getInStateTuition() == -1) {
+            if (inState) {
+                tuition.setText("In-state tuition: Data not available");
+            } else {
+                tuition.setText("Out-of-state tuition: Data not available");
+            }
+        } else {
+            if (inState) {
+                tuition.setText("In-state tuition: $" + formatTuition(college.getInStateTuition()));
+            } else {
+                tuition.setText("Out-of-state tuition: $" + formatTuition(college.getOutStateTuition()));
+            }
+        }
+        tuition.setStyle("-fx-font-size: 120%");
+        AnchorPane.setTopAnchor(tuition, topAnchor);
+        AnchorPane.setLeftAnchor(tuition, 60.0);
+        results.getChildren().add(tuition);
+    }
+
+    public void displayAcceptance(College college, double topAnchor) {
+        Label acceptance = new Label();
+        if (college.getAcceptanecRate() == -1) {
+            acceptance.setText("Acceptance rate: Data not available");
+        } else {
+            acceptance.setText("Acceptance rate: " + college.getAcceptanecRate() + "%");
+        }
+        acceptance.setStyle("-fx-font-size: 120%");
+        AnchorPane.setTopAnchor(acceptance, topAnchor);
+        AnchorPane.setLeftAnchor(acceptance, 60.0);
+        results.getChildren().add(acceptance);
+    }
+
+    public void displayACT(College college, double topAnchor) {
+        Label act = new Label();
+        if (college.getMidpointACT() == -1) {
+            act.setText("Midpoint ACT: Data not available");
+        } else {
+            act.setText("Midpoint ACT: " + college.getMidpointACT());
+        }
+        act.setStyle("-fx-font-size: 120%");
+        AnchorPane.setTopAnchor(act, topAnchor);
+        AnchorPane.setLeftAnchor(act, 60.0);
+        results.getChildren().add(act);
     }
 
     public void unselectButtons(ToggleButton button1, ToggleButton button2, ToggleButton button3) {

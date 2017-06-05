@@ -24,7 +24,7 @@ public class AllColleges {
      * Sticks them all in CollegeList
      */
     public AllColleges() throws IOException {
-        URL url = new URL("http://localhost:8080/schools/all");
+        URL url = new URL("http://thacker.mathcs.carleton.edu:5107/schools/all");
         BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
         String apiOutput = in.readLine();
         JsonParser myParser = new JsonParser();

@@ -37,7 +37,7 @@ public class Controller {
     @FXML
     private TextField acceptanceRateWeight;
     @FXML
-    private Label metricErrorText;
+    private Label errorText;
     @FXML
     private AnchorPane results;
     @FXML
@@ -46,13 +46,12 @@ public class Controller {
     private TextField actTarget;
     @FXML
     private TextField acceptanceRateTarget;
-    @FXML
-    private Label targetErrorText;
 
 
     public void onStartOverButton() {
         privateButton.setSelected(false);
         publicButton.setSelected(false);
+        profitButton.setSelected(false);
         anyDesignationButton.setSelected(false);
         stateField.setText("");
         underButton.setSelected(false);
@@ -61,8 +60,7 @@ public class Controller {
         tuitionWeight.setText("");
         actWeight.setText("");
         acceptanceRateWeight.setText("");
-        metricErrorText.setText("");
-        targetErrorText.setText("");
+        errorText.setText("");
         tuitionTarget.setText("");
         actTarget.setText("");
         acceptanceRateTarget.setText("");
@@ -71,8 +69,7 @@ public class Controller {
 
     public void onRankCollegesButton() {
         results.getChildren().clear();
-        metricErrorText.setText("");
-        targetErrorText.setText("");
+        errorText.setText("");
         double tuitionW;
         double actW;
         double acceptanceRateW;
@@ -84,11 +81,11 @@ public class Controller {
             actW = getACTWeight();
             acceptanceRateW = getAcceptanceRateWeight();
         } catch (NumberFormatException e) {
-            metricErrorText.setText("Input not a positive number");
+            errorText.setText("Input not a positive number");
             return;
         }
         if (tuitionW < 0 || actW < 0 || acceptanceRateW < 0) {
-            metricErrorText.setText("Input not a positive number");
+            errorText.setText("Input not a positive number");
             return;
         }
         try {
@@ -96,14 +93,14 @@ public class Controller {
             actT = getACTTarget();
             acceptanceRateT = getAcceptanceRateTarget();
         } catch (NumberFormatException e) {
-            targetErrorText.setText("Input not a positive number");
+            errorText.setText("Input not a positive number");
             return;
         }
         if (tuitionT < 0 || actT < 0 || acceptanceRateT < 0) {
-            metricErrorText.setText("Input not a positive number");
+            errorText.setText("Input not a positive number");
             return;
         }
-        metricErrorText.setText("");
+        errorText.setText("");
         String designationDecision = "";
         if (publicButton.isSelected()) {
             designationDecision = "Public";

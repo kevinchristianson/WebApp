@@ -1,3 +1,5 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -6,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
 import javafx.scene.control.Hyperlink;
-
+import javafx.application.HostServices;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +58,7 @@ public class Controller {
         stateField.setText("");
         underButton.setSelected(false);
         overButton.setSelected(false);
-        anyDesignationButton.setSelected(false);
+        anyEnrollmentButton.setSelected(false);
         tuitionWeight.setText("");
         actWeight.setText("");
         acceptanceRateWeight.setText("");
@@ -232,7 +234,16 @@ public class Controller {
     }
 
     public void displayName(College college, double topAnchor, int rank) {
-        Hyperlink name = new Hyperlink(rank + ". " + college.getName());
+        Label name = new Label(rank + ". " + college.getName());
+//        Hyperlink name = new Hyperlink(rank + ". " + college.getName());
+//        HostServices hostServices = (HostServices)this.results.getScene().getWindow().getProperties().get("hostServices");
+//        name.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                System.out.println(college.getURL());
+//                hostServices.showDocument(college.getURL());
+//            }
+//        });
         name.setStyle("-fx-font-size: 150%");
         AnchorPane.setTopAnchor(name, topAnchor);
         AnchorPane.setLeftAnchor(name, 30.0);

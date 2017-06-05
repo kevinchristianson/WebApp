@@ -45,18 +45,18 @@
             <!-- TUITION TEXT -->
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="220" style="-fx-font-size: 120%" text="Tuition:" />
             <TextField fx:id="tuitionWeight" AnchorPane.topAnchor="215" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
-                       maxWidth="40"/>
-            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="220" AnchorPane.rightAnchor="100" />
+                       maxWidth="50"/>
+            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="220" AnchorPane.rightAnchor="90" />
             <!-- MIDPOINT ACT TEXT -->
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="255" style="-fx-font-size: 120%" text="Midpoint ACT:" />
             <TextField fx:id="actWeight" AnchorPane.topAnchor="250" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
-                       maxWidth="40"/>
-            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="255" AnchorPane.rightAnchor="100" />
+                       maxWidth="50"/>
+            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="255" AnchorPane.rightAnchor="90" />
             <!-- ACCEPTANCE RATE TEXT -->
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="290" style="-fx-font-size: 120%" text="Acceptance Rate:" />
             <TextField fx:id="acceptanceRateWeight" AnchorPane.topAnchor="285" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
-                       maxWidth="40" />
-            <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="290" AnchorPane.rightAnchor="100" />
+                       maxWidth="50" />
+            <Label text="\%" style="-fx-font-size: 115%" AnchorPane.topAnchor="290" AnchorPane.rightAnchor="90" />
             <!--&lt;!&ndash; ERROR TEXT &ndash;&gt;-->
             <!--<Label fx:errorTextText" style="-fx-font-size: 115%" AnchorPane.topAnchor="215" AnchorPane.leftAnchor="30"-->
                    <!--textFill="red" />-->
@@ -68,16 +68,17 @@
             <!-- TUITION TEXT -->
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="385" style="-fx-font-size: 120%" text="Tuition:" />
             <TextField fx:id="tuitionTarget" AnchorPane.topAnchor="380" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
-                       maxWidth="40"/>
+                       maxWidth="100"/>
+            <Label AnchorPane.leftAnchor="135" AnchorPane.topAnchor="385" text="\$" style="-fx-font-size: 120%" />
             <!-- MIDPOINT ACT TEXT -->
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="420" style="-fx-font-size: 120%" text="Midpoint ACT:" />
             <TextField fx:id="actTarget" AnchorPane.topAnchor="415" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
-                       maxWidth="40" />
+                       maxWidth="50" />
             <!-- ACCEPTANCE RATE TEXT -->
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="455" style="-fx-font-size: 120%" text="Acceptance Rate:" />
             <TextField fx:id="acceptanceRateTarget" AnchorPane.topAnchor="450" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
-                       maxWidth="40" />
-            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="455" AnchorPane.rightAnchor="100" />
+                       maxWidth="50" />
+            <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="455" AnchorPane.rightAnchor="90" />
             <!-- ERROR TEXT -->
             <Label fx:id="errorText" style="-fx-font-size: 125%" AnchorPane.topAnchor="495" AnchorPane.leftAnchor="60"
                    textFill="red"/>

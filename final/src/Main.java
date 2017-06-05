@@ -11,6 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("final.fxml"));
+        primaryStage.getProperties().put("hostServices", this.getHostServices());
         primaryStage.setTitle("College Ranker");
         primaryStage.setScene(new Scene(root, 850, 650));
         primaryStage.show();

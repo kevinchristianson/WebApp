@@ -255,7 +255,12 @@ public class Controller {
         if (college.getEnrollment() == -1) {
             enrollment.setText("Enrollment: Data not available");
         } else {
-            enrollment.setText("Enrollment: " + college.getEnrollment());
+            String size = Integer.toString(college.getEnrollment());
+            if (size.length() == 4) {
+                size = size.substring(0, 1) + "," + size.substring(1, 4);
+            } else if (size.length() == 5) {
+            }
+            enrollment.setText("Enrollment: " + size);
         }
         enrollment.setStyle("-fx-font-size: 120%");
         AnchorPane.setTopAnchor(enrollment, topAnchor);
@@ -271,19 +276,29 @@ public class Controller {
         results.getChildren().add(designation);
     }
 
+    public String formatTuition(int tuition) {
+        String formattedTuition = Integer.toString(tuition);
+        if (formattedTuition.length() == 4) {
+            formattedTuition = formattedTuition.substring(0, 1) + "," + formattedTuition.substring(1, 4);
+        } else if (formattedTuition.length() == 5) {
+            formattedTuition = formattedTuition.substring(0, 2) + "," + formattedTuition.substring(2, 5);
+        }
+        return formattedTuition;
+    }
+
     public void displayTuition(College college, double topAnchor, boolean inState) {
         Label tuition = new Label();
         if (college.getOutStateTuition() == -1 || college.getInStateTuition() == -1) {
-            if (!inState) {
-                tuition.setText("Out-of-state tuition: Data not available");
-            } else {
+            if (inState) {
                 tuition.setText("In-state tuition: Data not available");
+            } else {
+                tuition.setText("Out-of-state tuition: Data not available");
             }
         } else {
-            if (!inState) {
-                tuition.setText("Out-of-state tuition: " + college.getOutStateTuition());
+            if (inState) {
+                tuition.setText("In-state tuition: $" + formatTuition(college.getInStateTuition()));
             } else {
-                tuition.setText("In-state tuition: " + college.getInStateTuition());
+                tuition.setText("Out-of-state tuition: $" + formatTuition(college.getOutStateTuition()));
             }
         }
         tuition.setStyle("-fx-font-size: 120%");
@@ -297,7 +312,7 @@ public class Controller {
         if (college.getAcceptanecRate() == -1) {
             acceptance.setText("Acceptance rate: Data not available");
         } else {
-            acceptance.setText("Acceptance rate: " + college.getAcceptanecRate());
+            acceptance.setText("Acceptance rate: " + college.getAcceptanecRate() + "%");
         }
         acceptance.setStyle("-fx-font-size: 120%");
         AnchorPane.setTopAnchor(acceptance, topAnchor);

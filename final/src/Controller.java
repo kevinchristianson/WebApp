@@ -120,23 +120,22 @@ public class Controller {
             sizeDecision = "Under";
         }
         try {
-            getResults(designationDecision, stateDecision, sizeDecision, tuitionW, actW, acceptanceRateW,
+            AllColleges allColleges = getRankedColleges(!stateDecision.equals(""), tuitionW, actW, acceptanceRateW,
                     tuitionT, actT, acceptanceRateT);
+            filterAndDisplayResults(allColleges, designationDecision, stateDecision, sizeDecision);
         } catch (IOException e) {
             results.getChildren().add(new Label("Error getting information"));
         }
     }
 
-    private void getResults(String designationDecision, String stateDecision, String sizeDecision, double tuitionW,
-                            double actW, double acceptanceRateW, double tuitionT, double actT, double acceptanceRateT)
-                            throws IOException {
-        AllColleges allColleges = new AllColleges();
+    private AllColleges getRankedColleges(boolean inState, double tuitionW, double actW, double acceptanceRateW,
+                                          double tuitionT, double actT, double acceptanceRateT) throws IOException {
         Map<String, Double> userMetrics = new HashMap<>();
         userMetrics.put("acceptanceRateW", acceptanceRateW);
         userMetrics.put("actW", actW);
         userMetrics.put("acceptanceRateT", acceptanceRateT);
         userMetrics.put("actT", actT);
-        if (!stateDecision.equals("")) {
+        if (inState) {
             userMetrics.put("inStateTuitionW", tuitionW);
             userMetrics.put("outStateTuitionW", 0.0);
             userMetrics.put("inStateTuitionT", tuitionT);
@@ -147,11 +146,12 @@ public class Controller {
             userMetrics.put("inStateTuitionT", 0.0);
             userMetrics.put("outStateTuitionT", tuitionT);
         }
+        AllColleges allColleges = new AllColleges();
         allColleges.rankByUserMetrics(userMetrics);
-        displayResults(allColleges, designationDecision, stateDecision, sizeDecision);
+        return allColleges;
     }
 
-    public void displayResults(AllColleges allColleges, String designationDecision, String stateDecision,
+    public void filterAndDisplayResults(AllColleges allColleges, String designationDecision, String stateDecision,
                                String sizeDecision) {
         double topAnchor = 20.0;
         List<College> collegeList = allColleges.getCollegeList();

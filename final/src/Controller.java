@@ -81,6 +81,10 @@ public class Controller {
             tuitionT = getTuitionTarget();
             actT = getACTTarget();
             acceptanceRateT = getAcceptanceRateTarget();
+            if (tuitionT == College.NO_TARGET_INPUT && actT == College.NO_TARGET_INPUT
+                    && acceptanceRateT == College.NO_TARGET_INPUT && tuitionW == 0 && actW == 0 && acceptanceRateW == 0) {
+                errorText.setText("Sorting alphabetically");
+            }
             if ((tuitionT >= 0 && tuitionT != College.NO_TARGET_INPUT && tuitionW <= 0)
                     || (actT >= 0 && actT != College.NO_TARGET_INPUT && actW <= 0)
                     || (acceptanceRateT >= 0 && acceptanceRateT != College.NO_TARGET_INPUT && acceptanceRateW <= 0)) {

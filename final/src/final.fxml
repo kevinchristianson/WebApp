@@ -39,7 +39,7 @@
             <ToggleButton fx:id="anyEnrollmentButton" text="Any" AnchorPane.leftAnchor="270" AnchorPane.topAnchor="120"
                           onAction="#unSelectButtonsAnyEnroll"/>
             <!-- METRIC WEIGHTS -->
-            <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="165" style="-fx-font-size: 150%" text="Metrics" />
+            <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="165" style="-fx-font-size: 150%" text="Metric Weights" />
             <Label AnchorPane.leftAnchor="10" AnchorPane.topAnchor="190" style="-fx-font-size: 100%"
                    text="Weigh each factor for your college rankings" />
             <!-- TUITION TEXT -->
@@ -69,7 +69,7 @@
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="385" style="-fx-font-size: 120%" text="Tuition:" />
             <TextField fx:id="tuitionTarget" AnchorPane.topAnchor="380" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
                        maxWidth="100"/>
-            <Label AnchorPane.leftAnchor="135" AnchorPane.topAnchor="385" text="\$" style="-fx-font-size: 120%" />
+            <Label AnchorPane.leftAnchor="150" AnchorPane.topAnchor="385" text="\$" style="-fx-font-size: 120%" />
             <!-- MIDPOINT ACT TEXT -->
             <Label AnchorPane.leftAnchor="20" AnchorPane.topAnchor="420" style="-fx-font-size: 120%" text="Midpoint ACT:" />
             <TextField fx:id="actTarget" AnchorPane.topAnchor="415" style="-fx-font-size: 120%" AnchorPane.leftAnchor="160"
@@ -80,11 +80,13 @@
                        maxWidth="50" />
             <Label text="\%" style="-fx-font-size: 120%" AnchorPane.topAnchor="455" AnchorPane.rightAnchor="90" />
             <!-- ERROR TEXT -->
-            <Label fx:id="errorText" style="-fx-font-size: 125%" AnchorPane.topAnchor="495" AnchorPane.leftAnchor="60"
-                   textFill="red"/>
-            <AnchorPane style="-fx-background-color: #373737;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" >
-                <Button text="Start Over" AnchorPane.leftAnchor="35" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" onAction="#onStartOverButton"/>
-                <Button text="Rank Colleges" AnchorPane.rightAnchor="35" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" onAction="#onRankCollegesButton"/>
+            <Label fx:id="errorText" style="-fx-font-size: 125%" AnchorPane.topAnchor="495" AnchorPane.leftAnchor="60" />
+            <AnchorPane style="-fx-background-color: #373737;" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+                        AnchorPane.rightAnchor="0" >
+                <Button text="Start Over" AnchorPane.leftAnchor="35" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10"
+                        onAction="#onStartOverButton"/>
+                <Button text="Rank Colleges" AnchorPane.rightAnchor="35" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10"
+                        onAction="#onRankCollegesButton"/>
             </AnchorPane>
         </AnchorPane>
     </left>

@@ -1,19 +1,15 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import models.AllColleges;
 import models.College;
-import javafx.scene.control.Hyperlink;
-import javafx.application.HostServices;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 public class Controller {
     @FXML
@@ -49,7 +45,6 @@ public class Controller {
     @FXML
     private TextField acceptanceRateTarget;
 
-
     public void onStartOverButton() {
         privateButton.setSelected(false);
         publicButton.setSelected(false);
@@ -70,6 +65,7 @@ public class Controller {
     }
 
     public void onRankCollegesButton() {
+        errorText.setText("");
         results.getChildren().clear();
         errorText.setText("");
         double tuitionW;
@@ -82,27 +78,22 @@ public class Controller {
             tuitionW = getTuitionWeight();
             actW = getACTWeight();
             acceptanceRateW = getAcceptanceRateWeight();
-        } catch (NumberFormatException e) {
-            errorText.setText("Input not a positive number");
-            return;
-        }
-        if (tuitionW < 0 || actW < 0 || acceptanceRateW < 0) {
-            errorText.setText("Input not a positive number");
-            return;
-        }
-        try {
             tuitionT = getTuitionTarget();
             actT = getACTTarget();
             acceptanceRateT = getAcceptanceRateTarget();
+            if ((tuitionT >= 0 && tuitionT != College.NO_TARGET_INPUT && tuitionW <= 0)
+                    || (actT >= 0 && actT != College.NO_TARGET_INPUT && actW <= 0)
+                    || (acceptanceRateT >= 0 && acceptanceRateT != College.NO_TARGET_INPUT && acceptanceRateW <= 0)) {
+                errorText.setText("Alert: Target has zero weight");
+            }
         } catch (NumberFormatException e) {
-            errorText.setText("Input not a positive number");
+            errorText.setText("Please input positive numbers");
             return;
         }
-        if (tuitionT < 0 || actT < 0 || acceptanceRateT < 0) {
-            errorText.setText("Input not a positive number");
+        if (tuitionW < 0 || actW < 0 || acceptanceRateW < 0 || tuitionT < 0 || actT < 0 || acceptanceRateT < 0) {
+            errorText.setText("Please input positive numbers");
             return;
         }
-        errorText.setText("");
         String designationDecision = "";
         if (publicButton.isSelected()) {
             designationDecision = "Public";
@@ -123,7 +114,7 @@ public class Controller {
                     tuitionT, actT, acceptanceRateT);
             filterAndDisplayResults(allColleges, designationDecision, stateDecision, sizeDecision);
         } catch (IOException e) {
-            results.getChildren().add(new Label("Error getting information"));
+            results.getChildren().add(new Label("Database not properly configured"));
         }
     }
 
@@ -134,16 +125,13 @@ public class Controller {
         userMetrics.put("actW", actW);
         userMetrics.put("acceptanceRateT", acceptanceRateT);
         userMetrics.put("actT", actT);
+        userMetrics.put("tuitionT", tuitionT);
         if (inState) {
             userMetrics.put("inStateTuitionW", tuitionW);
             userMetrics.put("outStateTuitionW", 0.0);
-            userMetrics.put("inStateTuitionT", tuitionT);
-            userMetrics.put("outStateTuitionT", 0.0);
         } else {
             userMetrics.put("inStateTuitionW", 0.0);
             userMetrics.put("outStateTuitionW", tuitionW);
-            userMetrics.put("inStateTuitionT", 0.0);
-            userMetrics.put("outStateTuitionT", tuitionT);
         }
         AllColleges allColleges = new AllColleges();
         allColleges.rankByUserMetrics(userMetrics);
@@ -156,7 +144,7 @@ public class Controller {
         List<College> collegeList = allColleges.getCollegeList();
         int rank = 1;
         for (College college : collegeList) {
-            if (college.getDesignation().contains(designationDecision)
+            if (rank <= 100 && college.getDesignation().contains(designationDecision)
                     && college.getState().toLowerCase().contains(stateDecision.toLowerCase())
                     && (sizeDecision.equals("") || ((sizeDecision.equals("Over") && college.getEnrollment() >= 5000))
                     || ((sizeDecision.equals("Under") && college.getEnrollment() < 5000)))) {
@@ -216,21 +204,21 @@ public class Controller {
         if (!actTarget.getText().equals("")) {
             return Double.parseDouble(actTarget.getText());
         }
-        return 0;
+        return College.NO_TARGET_INPUT;
     }
 
     public double getAcceptanceRateTarget() throws  NumberFormatException {
         if (!acceptanceRateTarget.getText().equals("")) {
             return Double.parseDouble(acceptanceRateTarget.getText());
         }
-        return 0;
+        return College.NO_TARGET_INPUT;
     }
 
     public double getTuitionTarget() throws  NumberFormatException {
         if (!tuitionTarget.getText().equals("")) {
-            return Double.parseDouble(tuitionTarget.getText());
+            return Double.parseDouble(tuitionTarget.getText().replace(",", ""));
         }
-        return 0;
+        return College.NO_TARGET_INPUT;
     }
 
     public void displayName(College college, double topAnchor, int rank) {

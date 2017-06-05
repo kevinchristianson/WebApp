@@ -152,7 +152,7 @@ public class Controller {
     }
 
     public void filterAndDisplayResults(AllColleges allColleges, String designationDecision, String stateDecision,
-                               String sizeDecision) {
+                                        String sizeDecision) {
         double topAnchor = 20.0;
         List<College> collegeList = allColleges.getCollegeList();
         int rank = 1;
